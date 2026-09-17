@@ -1,4 +1,5 @@
 import type { CosmeticCategory } from '../data/InventoryTypes';
+import { WorldManager } from '../data/worlds';
 
 export interface LevelRecord {
   completed: boolean;
@@ -97,6 +98,7 @@ export class StorageService {
 
   private constructor() {
     this.data = this.loadData();
+    this.refreshUnlockedLevel();
   }
 
   public static getInstance(): StorageService {
@@ -299,13 +301,32 @@ export class StorageService {
   /**
    * Determine if a specific level is unlocked.
    * Level 1 is always unlocked.
-   * Level N is unlocked only if Level N-1 has been COMPLETED.
-   * This is separate from stage unlocking (which requires all stars).
+   * Level N is unlocked only if its World is unlocked AND Level N-1 has been COMPLETED.
    */
   public isLevelUnlocked(levelId: number): boolean {
     if (levelId <= 1) return true;
+    const world = WorldManager.getWorldForLevel(levelId);
+    if (world && !WorldManager.isWorldUnlocked(world.id, this.data.levelRecords)) {
+      return false;
+    }
     const prevRecord = this.data.levelRecords[levelId - 1];
     return !!prevRecord && prevRecord.completed === true;
+  }
+
+  /**
+   * Refresh unlockedLevel by evaluating completion history and world requirements.
+   */
+  public refreshUnlockedLevel(): void {
+    let lvl = 1;
+    while (this.data.levelRecords[lvl]?.completed) {
+      const nextLvl = lvl + 1;
+      const nextWorld = WorldManager.getWorldForLevel(nextLvl);
+      if (nextWorld && !WorldManager.isWorldUnlocked(nextWorld.id, this.data.levelRecords)) {
+        break;
+      }
+      lvl = nextLvl;
+    }
+    this.data.unlockedLevel = Math.max(1, lvl);
   }
 
   public saveLevelCompletion(
@@ -350,9 +371,7 @@ export class StorageService {
       }
     }
 
-    if (levelId === this.data.unlockedLevel) {
-      this.data.unlockedLevel = levelId + 1;
-    }
+    this.refreshUnlockedLevel();
 
     this.saveData();
   }

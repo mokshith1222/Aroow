@@ -589,7 +589,7 @@ export class GameEngine {
       return this.startEndlessLevel(this.endlessLevel + 1);
     }
     const nextLvl = LevelLoader.getNextLevel(this.currentLevel.id);
-    if (nextLvl) {
+    if (nextLvl && this.storage.isLevelUnlocked(nextLvl.id)) {
       return this.startLevel(nextLvl.id);
     } else {
       this.goToLevelSelect();

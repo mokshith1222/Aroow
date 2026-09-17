@@ -22,7 +22,7 @@ export const routeOverrides: Record<number, LevelData> = {
       {x:2, y:3}, {x:3, y:3}, {x:4, y:3},
       {x:2, y:4}, {x:3, y:4}, {x:4, y:4}
     ],
-    longRouteMinMoves: 4,
+    longRouteMinMoves: 10,
     routes: [
       { pos: { x: 1, y: 3 }, text: "SHORT", description: "Risky but rewarding (3★)", maxStars: 3 },
       { pos: { x: 3, y: 1 }, text: "LONG", description: "Safer but slower (Max 2★)", maxStars: 2 }
@@ -46,12 +46,13 @@ export const routeOverrides: Record<number, LevelData> = {
       {x:3, y:4}, {x:4, y:4}, {x:5, y:4},
       {x:3, y:5}, {x:4, y:5}, {x:5, y:5},
       
+      {x:3, y:2}, {x:5, y:2},
       {x:2, y:7}, {x:6, y:7}
     ],
-    longRouteMinMoves: 6,
+    longRouteMinMoves: 12,
     routes: [
-      { pos: { x: 4, y: 6 }, text: "SHORT", description: "Tight turns (3★)", maxStars: 3 },
-      { pos: { x: 4, y: 2 }, text: "LONG", description: "Wide corridor (Max 2★)", maxStars: 2 }
+      { pos: { x: 4, y: 6 }, text: "SHORT", description: "Direct corridor (3★)", maxStars: 3 },
+      { pos: { x: 4, y: 1 }, text: "LONG", description: "Winding detour (Max 2★)", maxStars: 2 }
     ]
   },
   151: {
@@ -73,7 +74,7 @@ export const routeOverrides: Record<number, LevelData> = {
       {x:2, y:4}, {x:3, y:4}, {x:4, y:4}, {x:5, y:4}, {x:6, y:4},
       {x:2, y:6}, {x:5, y:6}, {x:6, y:6}
     ],
-    longRouteMinMoves: 7,
+    longRouteMinMoves: 14,
     routes: [
       { pos: { x: 1, y: 5 }, text: "SHORT", description: "Hidden path (3★)", maxStars: 3 },
       { pos: { x: 5, y: 1 }, text: "LONG", description: "Obvious path (Max 2★)", maxStars: 2 }
@@ -100,7 +101,7 @@ export const routeOverrides: Record<number, LevelData> = {
       
       {x:2, y:7}, {x:7, y:2}
     ],
-    longRouteMinMoves: 8,
+    longRouteMinMoves: 16,
     routes: [
       { pos: { x: 5, y: 8 }, text: "SHORT", description: "Precision required (3★)", maxStars: 3 },
       { pos: { x: 1, y: 5 }, text: "LONG", description: "Outer rim (Max 2★)", maxStars: 2 }

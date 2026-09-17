@@ -3,6 +3,7 @@ import type { LevelData } from '../game/types';
 import { AudioService } from '../services/AudioService';
 import { HapticService } from '../services/HapticService';
 import { AdService } from '../services/AdService';
+import { StorageService } from '../services/StorageService';
 
 interface LevelCompleteProps {
   level: LevelData | null;
@@ -45,6 +46,9 @@ export const LevelComplete: React.FC<LevelCompleteProps> = ({
   const haptics = HapticService.getInstance();
   const adService = AdService.getInstance();
   const [isTransitioning, setIsTransitioning] = React.useState(false);
+
+  const nextLevelId = level ? level.id + 1 : 1;
+  const isNextUnlocked = isEndless ? true : StorageService.getInstance().isLevelUnlocked(nextLevelId);
 
   // Play individual star sounds in sync with the visual pop-in animation
   useEffect(() => {
@@ -207,6 +211,12 @@ export const LevelComplete: React.FC<LevelCompleteProps> = ({
           </div>
         )}
 
+        {!isNextUnlocked && !isDaily && !isEndless && (
+          <div style={{ marginTop: '14px', padding: '8px 12px', background: 'rgba(245, 158, 11, 0.1)', border: '1px solid rgba(245, 158, 11, 0.3)', borderRadius: '8px', fontSize: '12px', color: '#f59e0b', textAlign: 'center', fontWeight: 600 }}>
+            Next World is Locked! Earn more stars to unlock it.
+          </div>
+        )}
+
         {/* Action Controls */}
         <div className="modal-actions completion-actions">
           {isTransitioning ? (
@@ -215,6 +225,17 @@ export const LevelComplete: React.FC<LevelCompleteProps> = ({
             <button className="btn-primary btn-next-level" onClick={handleLevels} autoFocus>
               BACK TO MENU
             </button>
+          ) : !isNextUnlocked ? (
+            <>
+              <button className="btn-primary btn-next-level" onClick={handleLevels} autoFocus>
+                SELECT LEVEL
+              </button>
+              <div className="btn-group-secondary">
+                <button className="btn-secondary" onClick={handleReplay}>
+                  Replay
+                </button>
+              </div>
+            </>
           ) : (
             <>
               <button className="btn-primary btn-next-level" onClick={handleNext} autoFocus>

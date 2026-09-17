@@ -55,7 +55,12 @@ export const LevelSelector: React.FC<LevelSelectorProps> = ({
     }
   };
 
-  const handleLevelClick = (levelId: number) => {
+  const handleLevelClick = (levelId: number, isUnlocked: boolean) => {
+    if (!isUnlocked) {
+      audio.playInvalid();
+      haptics.invalid();
+      return;
+    }
     audio.playButton();
     haptics.button();
     onSelectLevel(levelId);
@@ -133,9 +138,9 @@ export const LevelSelector: React.FC<LevelSelectorProps> = ({
                 if (isLocked) {
                   audio.playInvalid();
                   haptics.invalid();
-                  window.alert(`Complete Level ${lvl.levelId - 1} to unlock Level ${lvl.levelId}.`);
+                  window.alert(selectedStage?.unlockRequirement || `Complete Level ${lvl.levelId - 1} to unlock Level ${lvl.levelId}.`);
                 } else {
-                  handleLevelClick(lvl.levelId);
+                  handleLevelClick(lvl.levelId, lvl.isUnlocked);
                 }
               }}
               aria-label={`Level ${lvl.levelId}, ${lvl.completionStatus ? `${lvl.earnedStars} stars earned` : lvl.isUnlocked ? 'Unlocked' : 'Locked'}`}
