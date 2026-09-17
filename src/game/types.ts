@@ -169,6 +169,7 @@ export interface GameSnapshot {
   gateAnimationState: 'idle' | 'activating' | 'entering' | 'completed';
   /** True if the current level is the daily puzzle */
   isDailyMode: boolean;
+  justUnlockedStage?: boolean;
   /** Points awarded specifically for completing the daily puzzle */
   dailyBonusPoints?: number;
   /** True if the current level is endless mode */

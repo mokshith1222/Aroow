@@ -59,6 +59,8 @@ export class GameEngine {
   private gateAnimationState: 'idle' | 'activating' | 'entering' | 'completed' = 'idle';
   private gateAnimTimers: Array<ReturnType<typeof setTimeout>> = [];
 
+  private justUnlockedStage: boolean = false;
+  
   // --- Mechanic state ---
   /** Set of key indices currently held by the player */
   private collectedKeys: Set<number> = new Set();
@@ -195,6 +197,7 @@ export class GameEngine {
     this.clearGateTimers();
     this.gateAnimationState = 'idle';
     this.collectedKeys = new Set();
+    this.justUnlockedStage = false;
 
     // Calculate optimal moves via solver
     const solution = LevelSolver.solve(level);
@@ -722,6 +725,14 @@ export class GameEngine {
         rewardBreakdown.totalPoints
       );
     } else {
+      // Track unlock status BEFORE saving
+      const currentWorld = WorldManager.getWorldForLevel(this.currentLevel.id);
+      const nextWorld = WorldManager.getWorld(currentWorld.id + 1);
+      let wasNextWorldUnlocked = false;
+      if (nextWorld) {
+        wasNextWorldUnlocked = WorldManager.isWorldUnlocked(nextWorld.id, this.storage.getAllLevelRecords());
+      }
+
       this.storage.saveLevelCompletion(
         this.currentLevel.id,
         this.moves,
@@ -729,6 +740,12 @@ export class GameEngine {
         stars,
         rewardBreakdown.totalPoints // We just pass the base level completion points to the record
       );
+
+      // Track unlock status AFTER saving
+      if (nextWorld && !wasNextWorldUnlocked) {
+        const isNextWorldUnlockedNow = WorldManager.isWorldUnlocked(nextWorld.id, this.storage.getAllLevelRecords());
+        this.justUnlockedStage = isNextWorldUnlockedNow;
+      }
     }
 
     // Evaluate achievements
@@ -969,6 +986,7 @@ export class GameEngine {
       equippedBackground: StorageService.getInstance().getEquippedBackground(),
       gateAnimationState: this.gateAnimationState,
       isDailyMode: this.isDailyMode,
+      justUnlockedStage: this.justUnlockedStage,
       dailyBonusPoints: this.dailyBonusPoints,
       isEndlessMode: this.isEndlessMode,
       endlessLevel: this.endlessLevel,

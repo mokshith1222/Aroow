@@ -155,14 +155,21 @@ export class WorldManager {
   }
 
   /**
-   * Checks if a world is unlocked given player's highest unlocked level.
+   * Checks if a world is unlocked given the player's level records.
    * World 1 is unlocked initially (startLevel: 1).
-   * Subsequent worlds unlock when the player has unlocked or completed the final level of the preceding world.
+   * Subsequent worlds unlock only when the player has earned ALL available stars from the previous world.
    */
-  public static isWorldUnlocked(worldId: number, unlockedLevel: number): boolean {
-    const world = this.getWorld(worldId);
-    if (!world) return false;
-    return unlockedLevel >= world.startLevel;
+  public static isWorldUnlocked(worldId: number, levelRecords: Record<number, { stars: number }>): boolean {
+    if (worldId === 1) return true;
+    
+    // Check previous world's completion
+    const prevWorldId = worldId - 1;
+    const prevWorld = this.getWorld(prevWorldId);
+    if (!prevWorld) return false;
+
+    // We pass 0 for unlockedLevel because we aren't using it for stats anymore
+    const stats = this.getWorldStats(prevWorldId, levelRecords);
+    return stats.totalStars >= stats.maxPossibleStars;
   }
 
   /**
@@ -170,7 +177,6 @@ export class WorldManager {
    */
   public static getWorldStats(
     worldId: number,
-    unlockedLevel: number,
     levelRecords: Record<number, { stars: number }>
   ): {
     totalLevels: number;
@@ -178,7 +184,6 @@ export class WorldManager {
     totalStars: number;
     maxPossibleStars: number;
     isCompleted: boolean;
-    isUnlocked: boolean;
   } {
     const world = this.getWorld(worldId);
     if (!world) {
@@ -188,7 +193,6 @@ export class WorldManager {
         totalStars: 0,
         maxPossibleStars: 0,
         isCompleted: false,
-        isUnlocked: false
       };
     }
 
@@ -210,7 +214,6 @@ export class WorldManager {
       totalStars: stars,
       maxPossibleStars: total * 3,
       isCompleted: completed === total,
-      isUnlocked: unlockedLevel >= world.startLevel
     };
   }
 }

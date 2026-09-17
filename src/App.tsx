@@ -297,6 +297,7 @@ function App() {
                 dailyBonusPoints={snapshot.dailyBonusPoints}
                 isEndless={snapshot.isEndlessMode}
                 endlessLevel={snapshot.endlessLevel}
+                justUnlockedStage={snapshot.justUnlockedStage}
                 onNextLevel={handleNextLevel}
                 onReplay={handleRestart}
                 onLevelSelect={handleGoToLevelSelect}

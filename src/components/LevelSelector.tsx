@@ -41,7 +41,7 @@ export const LevelSelector: React.FC<LevelSelectorProps> = ({
     onBack();
   };
 
-  const handleStageSelect = (stageId: number, isUnlocked: boolean) => {
+  const handleStageSelect = (stageId: number, isUnlocked: boolean, requirement: string | null) => {
     if (isUnlocked) {
       audio.playButton();
       haptics.button();
@@ -49,6 +49,9 @@ export const LevelSelector: React.FC<LevelSelectorProps> = ({
     } else {
       audio.playInvalid();
       haptics.invalid();
+      if (requirement) {
+        window.alert(requirement);
+      }
     }
   };
 
@@ -88,7 +91,7 @@ export const LevelSelector: React.FC<LevelSelectorProps> = ({
               role="tab"
               aria-selected={isSelected}
               className={`world-tab ${isSelected ? 'active' : ''} ${!stage.unlockedStatus ? 'world-locked' : ''}`}
-              onClick={() => handleStageSelect(stage.stageId, stage.unlockedStatus)}
+              onClick={() => handleStageSelect(stage.stageId, stage.unlockedStatus, stage.unlockRequirement)}
               title={stage.unlockedStatus ? stage.stageName : stage.unlockRequirement || 'Locked'}
             >
               <div className="world-tab-content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>

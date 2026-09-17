@@ -36,7 +36,7 @@ export class ProgressionManager {
   public static getProgressionTree(): Stage[] {
     const storage = StorageService.getInstance();
     const allWorlds = WorldManager.getAllWorlds(LevelLoader.MAX_LEVELS);
-    const unlockedLevel = storage.getUnlockedLevel();
+    const levelRecords = storage.getAllLevelRecords();
 
     const stages: Stage[] = [];
 
@@ -74,9 +74,15 @@ export class ProgressionManager {
       
       // Calculate unlock requirement text
       let unlockRequirement = null;
-      const isUnlocked = WorldManager.isWorldUnlocked(world.id, unlockedLevel);
+      const isUnlocked = WorldManager.isWorldUnlocked(world.id, levelRecords);
       if (!isUnlocked) {
-        unlockRequirement = `Reach Level ${world.startLevel} to unlock`;
+        const prevWorld = WorldManager.getWorld(world.id - 1);
+        if (prevWorld) {
+          const stats = WorldManager.getWorldStats(prevWorld.id, levelRecords);
+          unlockRequirement = `Requires: ${stats.maxPossibleStars} / ${stats.maxPossibleStars} stars from ${prevWorld.name}`;
+        } else {
+          unlockRequirement = `Locked`;
+        }
       }
 
       stages.push({

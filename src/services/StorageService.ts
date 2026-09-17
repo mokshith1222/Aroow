@@ -290,6 +290,10 @@ export class StorageService {
     return this.data.levelRecords[levelId] || null;
   }
 
+  public getAllLevelRecords(): Record<number, LevelRecord> {
+    return this.data.levelRecords;
+  }
+
   public saveLevelCompletion(
     levelId: number,
     moves: number,

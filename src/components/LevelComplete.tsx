@@ -17,6 +17,7 @@ interface LevelCompleteProps {
   isEndless?: boolean;
   endlessLevel?: number;
   hintsUsedLevel?: 0 | 1 | 2 | 3;
+  justUnlockedStage?: boolean;
   onNextLevel: () => void;
   onReplay: () => void;
   onLevelSelect: () => void;
@@ -35,6 +36,7 @@ export const LevelComplete: React.FC<LevelCompleteProps> = ({
   isEndless,
   endlessLevel,
   hintsUsedLevel = 0,
+  justUnlockedStage = false,
   onNextLevel,
   onReplay,
   onLevelSelect
@@ -150,6 +152,13 @@ export const LevelComplete: React.FC<LevelCompleteProps> = ({
             );
           })}
         </div>
+
+        {/* Unlock Notification */}
+        {justUnlockedStage && (
+          <div className="stage-unlocked-banner" style={{ animationDelay: `${0.3 + stars * 0.25 + 0.5}s` }}>
+            <span>🎉 STAGE UNLOCKED! 🎉</span>
+          </div>
+        )}
 
         {/* Stats Summary: Moves, Time, Remaining Lives */}
         <div className="completion-stats-grid">

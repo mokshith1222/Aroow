@@ -58,47 +58,42 @@ describe('Progression — unlock next level', () => {
 
 describe('Progression — unlock world', () => {
   it('World 1 is unlocked initially', () => {
-    expect(WorldManager.isWorldUnlocked(1, storage().getUnlockedLevel())).toBe(true);
+    expect(WorldManager.isWorldUnlocked(1, storage().getAllLevelRecords())).toBe(true);
   });
 
   it('World 2 is locked initially', () => {
-    expect(WorldManager.isWorldUnlocked(2, storage().getUnlockedLevel())).toBe(false);
+    expect(WorldManager.isWorldUnlocked(2, storage().getAllLevelRecords())).toBe(false);
   });
 
   it('completing World 1 final level (25) unlocks World 2', () => {
-    for (let i = 1; i < 25; i++) storage().saveLevelCompletion(i, 5, 10, 3);
-    storage().saveLevelCompletion(25, 5, 12, 3);
-    const unlocked = storage().getUnlockedLevel();
-    expect(unlocked).toBe(26);
-    expect(WorldManager.isWorldUnlocked(2, unlocked)).toBe(true);
-    expect(WorldManager.isWorldUnlocked(3, unlocked)).toBe(false);
+    for (let i = 1; i <= 25; i++) storage().saveLevelCompletion(i, 5, 10, 3);
+    const levelRecords = storage().getAllLevelRecords();
+    expect(WorldManager.isWorldUnlocked(1, levelRecords)).toBe(true);
+    expect(WorldManager.isWorldUnlocked(2, levelRecords)).toBe(true);
   });
 
   it('completing World 2 final level (75) unlocks World 3', () => {
-    for (let i = 1; i < 75; i++) storage().saveLevelCompletion(i, 5, 10, 3);
-    storage().saveLevelCompletion(75, 8, 20, 2);
-    const unlocked = storage().getUnlockedLevel();
-    expect(WorldManager.isWorldUnlocked(3, unlocked)).toBe(true);
+    for (let i = 1; i <= 75; i++) storage().saveLevelCompletion(i, 5, 10, 3);
+    expect(WorldManager.isWorldUnlocked(3, storage().getAllLevelRecords())).toBe(true);
   });
 
   it('completing World 3 final level (150) unlocks World 4', () => {
-    for (let i = 1; i < 150; i++) storage().saveLevelCompletion(i, 5, 10, 3);
-    storage().saveLevelCompletion(150, 10, 30, 2);
-    expect(WorldManager.isWorldUnlocked(4, storage().getUnlockedLevel())).toBe(true);
+    for (let i = 1; i <= 150; i++) storage().saveLevelCompletion(i, 5, 10, 3);
+    expect(WorldManager.isWorldUnlocked(4, storage().getAllLevelRecords())).toBe(true);
   });
 
   it('completing all 7 worlds sequentially unlocks them all', () => {
-    const worldEnds = [25, 75, 150, 250, 350, 450, 500];
+    const worldEnds = [25, 75, 150, 225, 300, 375, 450];
     let prev = 1;
     for (const endLevel of worldEnds) {
       for (let i = prev; i <= endLevel; i++) {
-        storage().saveLevelCompletion(i, 10, 25, 2);
+        storage().saveLevelCompletion(i, 5, 10, 3);
       }
       prev = endLevel + 1;
     }
     for (let w = 1; w <= 7; w++) {
       expect(
-        WorldManager.isWorldUnlocked(w, storage().getUnlockedLevel()),
+        WorldManager.isWorldUnlocked(w, storage().getAllLevelRecords()),
         `World ${w} should be unlocked`
       ).toBe(true);
     }
