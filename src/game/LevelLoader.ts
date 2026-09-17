@@ -2,6 +2,7 @@ import type { LevelData } from './types';
 import levelsDb from '../data/levels_db.json';
 import { LevelSolver } from './LevelSolver';
 import { DifficultyManager } from './DifficultyManager';
+import { getPresetForLevelId } from './LevelGeneratorPresets';
 import { WorldManager } from '../data/worlds';
 import { routeOverrides } from './routeOverrides';
 
@@ -56,6 +57,14 @@ export class LevelLoader {
       const base = level.targetMoves * 3;
       const diffFactor = 1 + (level.difficulty ?? 1) * 0.06;
       level.targetTime = Math.ceil(base * diffFactor);
+    }
+
+    const challenge = getPresetForLevelId(level.id).challenge;
+    if (level.challenge == null) {
+      level.challenge = { ...challenge };
+    }
+    if (level.timeLimit == null && level.targetTime != null && challenge.timeLimitMultiplier !== undefined) {
+      level.timeLimit = Math.ceil(level.targetTime * challenge.timeLimitMultiplier);
     }
 
     // Ensure parMoves is set

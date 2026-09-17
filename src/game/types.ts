@@ -62,6 +62,21 @@ export interface RouteInfo {
   maxStars: number;
 }
 
+export interface ChallengePolicy {
+  /** Number of collision/hazard failures allowed before game over. */
+  maxLives: number;
+  /** Whether the player can undo a successful move. */
+  allowUndo: boolean;
+  /** Maximum successful moves that can be undone in this level. */
+  maxUndoUses?: number;
+  /** Multiplier applied to moving-hazard cadence. */
+  hazardSpeedMultiplier?: number;
+  /** Multiplier applied to the solver-derived target time. */
+  timeLimitMultiplier?: number;
+  /** Whether hints reduce the maximum star rating. */
+  hintsReduceMastery: boolean;
+}
+
 export interface LevelData {
   id: number;
   worldId: number;
@@ -84,6 +99,8 @@ export interface LevelData {
   targetTime?: number;
   difficulty?: number;        // 1–100 scale
   optimalSolutionLength?: number;  // BFS shortest path length
+  /** Optional execution rules; omitted levels use the classic rules. */
+  challenge?: ChallengePolicy;
   
   /** Route specific properties for Phase 3 */
   routes?: RouteInfo[];

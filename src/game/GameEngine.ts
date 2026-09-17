@@ -39,6 +39,7 @@ export class GameEngine {
   private levelStartTime: number = 0;
   private lives: number = 3;
   private readonly MAX_LIVES = 3;
+  private undoUses: number = 0;
   private timerInterval: number | null = null;
   private hazardInterval: number | null = null;
   private undoStack: UndoState[] = [];
@@ -153,7 +154,15 @@ export class GameEngine {
   }
 
   public canUndo(): boolean {
-    return this.stateMachine.isPlaying() && this.undoStack.length > 0;
+    if (!this.stateMachine.isPlaying() || this.undoStack.length === 0) return false;
+    const challenge = this.currentLevel?.challenge;
+    if (challenge && !challenge.allowUndo) return false;
+    if (!challenge) return true;
+    return challenge.maxUndoUses === undefined || this.undoUses < challenge.maxUndoUses;
+  }
+
+  private getMaxLives(): number {
+    return this.currentLevel?.challenge?.maxLives ?? this.MAX_LIVES;
   }
 
   public loadLevel(levelOrId: number | LevelData): boolean {
@@ -178,7 +187,8 @@ export class GameEngine {
     this.player.reset(level.start);
     this.lastPointsEarned = 0;
     this.moves = 0;
-    this.lives = this.MAX_LIVES;
+    this.lives = this.getMaxLives();
+    this.undoUses = 0;
     this.elapsedSeconds = 0;
     this.levelStartTime = Date.now();
     this.undoStack = [];
@@ -293,7 +303,8 @@ export class GameEngine {
 
     this.player.reset(this.currentLevel.start);
     this.moves = 0;
-    this.lives = this.MAX_LIVES;
+    this.lives = this.getMaxLives();
+    this.undoUses = 0;
     this.elapsedSeconds = 0;
     this.levelStartTime = Date.now();
     this.undoStack = [];
@@ -477,6 +488,7 @@ export class GameEngine {
 
     const previous = this.undoStack.pop();
     if (!previous) return false;
+    this.undoUses += 1;
 
     this.player.setPosition(previous.position);
     this.moves = previous.moves;
@@ -761,7 +773,7 @@ export class GameEngine {
       elapsedSeconds: this.elapsedSeconds,
       stars,
       livesRemaining: this.lives,
-      maxLives: this.MAX_LIVES,
+      maxLives: this.getMaxLives(),
       hintsUsed: this.hintsUsed,
       targetTime: this.currentLevel.targetTime,
       isDailyMode: this.isDailyMode
@@ -970,7 +982,7 @@ export class GameEngine {
       isWon: this.stateMachine.is('LEVEL_COMPLETE') || this.gateAnimationState !== 'idle',
       isLost: this.stateMachine.is('GAME_OVER'),
       lives: this.lives,
-      maxLives: this.MAX_LIVES,
+      maxLives: this.getMaxLives(),
       parMoves: par,
       stars,
       optimalMoves: this.optimalMoves,

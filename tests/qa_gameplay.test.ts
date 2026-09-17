@@ -89,6 +89,28 @@ const maxMovesLevel: LevelData = {
   maxMoves: 3, // Artificially low to trigger game-over
 };
 
+const extremeRulesLevel: LevelData = {
+  ...openLevel,
+  name: 'QA Extreme Rules',
+  challenge: {
+    maxLives: 1,
+    allowUndo: false,
+    maxUndoUses: 0,
+    hintsReduceMastery: true,
+  },
+};
+
+const limitedUndoLevel: LevelData = {
+  ...openLevel,
+  name: 'QA Limited Undo',
+  challenge: {
+    maxLives: 2,
+    allowUndo: true,
+    maxUndoUses: 1,
+    hintsReduceMastery: true,
+  },
+};
+
 function engine(): GameEngine {
   return GameEngine.getInstance();
 }
@@ -165,6 +187,29 @@ describe('Gameplay — movement', () => {
   it('move is ignored completely when not in PLAYING state', () => {
     // Engine is in MENU by default — no level loaded
     expect(engine().move('RIGHT')).toBe(false);
+  });
+});
+
+describe('Gameplay — challenge policies', () => {
+  it('applies one-life and no-undo extreme rules', () => {
+    engine().startLevel(extremeRulesLevel);
+
+    expect(engine().getSnapshot().lives).toBe(1);
+    expect(engine().getSnapshot().maxLives).toBe(1);
+    engine().move('RIGHT');
+    expect(engine().getSnapshot().canUndo).toBe(false);
+    expect(engine().undo()).toBe(false);
+  });
+
+  it('limits strict-level undo uses without affecting movement', () => {
+    engine().startLevel(limitedUndoLevel);
+    engine().move('RIGHT');
+    engine().move('DOWN');
+
+    expect(engine().getSnapshot().canUndo).toBe(true);
+    expect(engine().undo()).toBe(true);
+    expect(engine().getSnapshot().canUndo).toBe(false);
+    expect(engine().undo()).toBe(false);
   });
 });
 

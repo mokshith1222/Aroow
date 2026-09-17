@@ -140,6 +140,11 @@ describe('Level Validation & Procedural Generation', () => {
     expect(master.width).toBeGreaterThan(tutorial.width);
 
     expect(master.optimalSolutionLength!).toBeGreaterThan(tutorial.optimalSolutionLength!);
+    expect(tutorial.challenge?.maxLives).toBe(3);
+    expect(master.challenge?.maxLives).toBe(1);
+    expect(master.challenge?.allowUndo).toBe(false);
+    expect(master.timeLimit).toBeDefined();
+    expect(master.timeLimit!).toBeGreaterThan(master.targetTime!);
   });
 
   it('BFS solver finds the exact shortest move count', () => {

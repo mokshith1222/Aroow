@@ -1,4 +1,4 @@
-import type { TileType } from './types';
+import type { ChallengePolicy, TileType } from './types';
 
 export type DifficultyPresetName =
   | 'TUTORIAL'
@@ -34,8 +34,36 @@ export interface LevelPresetConfig {
   maxDifficultyScore: number;
   allowedMechanics: TileType[];
   maxMechanicTiles: number;
+  challenge: ChallengePolicy;
   uniquenessMode?: 'A' | 'B' | 'C' | 'D';
 }
+
+const CLASSIC_CHALLENGE: ChallengePolicy = {
+  maxLives: 3,
+  allowUndo: true,
+  maxUndoUses: undefined,
+  hazardSpeedMultiplier: 1,
+  timeLimitMultiplier: undefined,
+  hintsReduceMastery: true
+};
+
+const STRICT_CHALLENGE: ChallengePolicy = {
+  maxLives: 2,
+  allowUndo: true,
+  maxUndoUses: 3,
+  hazardSpeedMultiplier: 1.15,
+  timeLimitMultiplier: 2,
+  hintsReduceMastery: true
+};
+
+const EXTREME_CHALLENGE: ChallengePolicy = {
+  maxLives: 1,
+  allowUndo: false,
+  maxUndoUses: 0,
+  hazardSpeedMultiplier: 1.35,
+  timeLimitMultiplier: 1.35,
+  hintsReduceMastery: true
+};
 
 export const DIFFICULTY_PRESETS: Record<DifficultyPresetName, LevelPresetConfig> = {
   TUTORIAL: {
@@ -55,6 +83,7 @@ export const DIFFICULTY_PRESETS: Record<DifficultyPresetName, LevelPresetConfig>
     maxDifficultyScore: 30,
     allowedMechanics: ['ONE_WAY_UP', 'ONE_WAY_DOWN', 'ONE_WAY_LEFT', 'ONE_WAY_RIGHT', 'SPIKE_TRAP'],
     maxMechanicTiles: 2,
+    challenge: CLASSIC_CHALLENGE,
     uniquenessMode: 'A',
   },
   EASY: {
@@ -74,6 +103,7 @@ export const DIFFICULTY_PRESETS: Record<DifficultyPresetName, LevelPresetConfig>
     maxDifficultyScore: 45,
     allowedMechanics: ['ONE_WAY_UP', 'ONE_WAY_DOWN', 'ONE_WAY_LEFT', 'ONE_WAY_RIGHT', 'PORTAL', 'SPIKE_TRAP', 'ICE'],
     maxMechanicTiles: 3,
+    challenge: CLASSIC_CHALLENGE,
     uniquenessMode: 'A',
   },
   NORMAL: {
@@ -93,6 +123,7 @@ export const DIFFICULTY_PRESETS: Record<DifficultyPresetName, LevelPresetConfig>
     maxDifficultyScore: 70,
     allowedMechanics: ['ONE_WAY_UP', 'ONE_WAY_DOWN', 'ONE_WAY_LEFT', 'ONE_WAY_RIGHT', 'PORTAL', 'ICE', 'SPIKE_TRAP'],
     maxMechanicTiles: 4,
+    challenge: CLASSIC_CHALLENGE,
     uniquenessMode: 'A',
   },
   MEDIUM: {
@@ -112,6 +143,7 @@ export const DIFFICULTY_PRESETS: Record<DifficultyPresetName, LevelPresetConfig>
     maxDifficultyScore: 100,
     allowedMechanics: ['ONE_WAY_UP', 'ONE_WAY_DOWN', 'ONE_WAY_LEFT', 'ONE_WAY_RIGHT', 'PORTAL', 'ICE', 'SPIKE_TRAP', 'MOVING_SAW'],
     maxMechanicTiles: 5,
+    challenge: STRICT_CHALLENGE,
     uniquenessMode: 'B',
   },
   HARD: {
@@ -131,6 +163,7 @@ export const DIFFICULTY_PRESETS: Record<DifficultyPresetName, LevelPresetConfig>
     maxDifficultyScore: 115,
     allowedMechanics: ['ONE_WAY_UP', 'ONE_WAY_DOWN', 'ONE_WAY_LEFT', 'ONE_WAY_RIGHT', 'PORTAL', 'ICE', 'SPIKE_TRAP'],
     maxMechanicTiles: 6,
+    challenge: STRICT_CHALLENGE,
     uniquenessMode: 'B',
   },
   VERY_HARD: {
@@ -150,6 +183,7 @@ export const DIFFICULTY_PRESETS: Record<DifficultyPresetName, LevelPresetConfig>
     maxDifficultyScore: 145,
     allowedMechanics: ['ONE_WAY_UP', 'ONE_WAY_DOWN', 'ONE_WAY_LEFT', 'ONE_WAY_RIGHT', 'PORTAL', 'ICE', 'SPIKE_TRAP', 'MOVING_SAW'],
     maxMechanicTiles: 8,
+    challenge: STRICT_CHALLENGE,
     uniquenessMode: 'C',
   },
   EXPERT: {
@@ -169,6 +203,7 @@ export const DIFFICULTY_PRESETS: Record<DifficultyPresetName, LevelPresetConfig>
     maxDifficultyScore: 175,
     allowedMechanics: ['ONE_WAY_UP', 'ONE_WAY_DOWN', 'ONE_WAY_LEFT', 'ONE_WAY_RIGHT', 'PORTAL', 'ICE', 'SPIKE_TRAP', 'MOVING_SAW'],
     maxMechanicTiles: 10,
+    challenge: EXTREME_CHALLENGE,
     uniquenessMode: 'D',
   },
   MASTER: {
@@ -188,6 +223,7 @@ export const DIFFICULTY_PRESETS: Record<DifficultyPresetName, LevelPresetConfig>
     maxDifficultyScore: 210,
     allowedMechanics: ['ONE_WAY_UP', 'ONE_WAY_DOWN', 'ONE_WAY_LEFT', 'ONE_WAY_RIGHT', 'PORTAL', 'ICE', 'SPIKE_TRAP', 'MOVING_SAW'],
     maxMechanicTiles: 12,
+    challenge: EXTREME_CHALLENGE,
     uniquenessMode: 'D',
   }
 };

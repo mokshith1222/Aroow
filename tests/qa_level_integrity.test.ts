@@ -237,6 +237,13 @@ describe('Level Integrity — LevelLoader handcrafted levels', () => {
     expect(LevelLoader.getLevel(LevelLoader.MAX_LEVELS + 1)).toBeNull();
   });
 
+  it('LevelLoader enriches late campaign levels with extreme challenge rules', () => {
+    const level = LevelLoader.getLevel(500);
+    expect(level?.challenge?.maxLives).toBe(1);
+    expect(level?.challenge?.allowUndo).toBe(false);
+    expect(level?.timeLimit).toBeDefined();
+  });
+
   it('LevelLoader level ids are sequential and unique for world 1', () => {
     const world1Levels = LevelLoader.getLevelsByWorld(1);
     const ids = world1Levels.map(l => l.id);

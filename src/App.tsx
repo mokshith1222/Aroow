@@ -184,6 +184,8 @@ function App() {
               level={snapshot.level}
               lives={snapshot.lives}
               maxLives={snapshot.maxLives}
+              elapsedSeconds={snapshot.elapsedSeconds}
+              canUndo={snapshot.canUndo}
               isDailyMode={snapshot.isDailyMode}
               isEndlessMode={snapshot.isEndlessMode}
               endlessLevel={snapshot.endlessLevel}

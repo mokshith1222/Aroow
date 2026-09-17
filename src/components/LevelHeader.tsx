@@ -8,6 +8,8 @@ interface LevelHeaderProps {
   level: LevelData | null;
   lives: number;
   maxLives: number;
+  elapsedSeconds: number;
+  canUndo: boolean;
   isDailyMode?: boolean;
   isEndlessMode?: boolean;
   endlessLevel?: number;
@@ -19,6 +21,8 @@ export const LevelHeader: React.FC<LevelHeaderProps> = ({
   level,
   lives,
   maxLives,
+  elapsedSeconds,
+  canUndo,
   isDailyMode,
   isEndlessMode,
   endlessLevel,
@@ -65,6 +69,24 @@ export const LevelHeader: React.FC<LevelHeaderProps> = ({
           </span>
         )}
         <Lives lives={lives} maxLives={maxLives} />
+        <div className="challenge-strip" aria-label="Level challenge rules">
+          {level?.challenge && (
+            <span className="challenge-tag">
+              {level.challenge.maxLives === 1 ? 'EXTREME' : level.challenge.maxLives < 3 ? 'STRICT' : 'CLASSIC'}
+            </span>
+          )}
+          {level?.timeLimit && (
+            <span className={elapsedSeconds >= level.timeLimit * 0.8 ? 'challenge-value challenge-warning' : 'challenge-value'}>
+              {Math.max(0, level.timeLimit - elapsedSeconds)}s
+            </span>
+          )}
+          {level?.challenge && !level.challenge.allowUndo && (
+            <span className="challenge-value">NO UNDO</span>
+          )}
+          {level?.challenge?.maxUndoUses !== undefined && level.challenge.maxUndoUses > 0 && (
+            <span className="challenge-value">UNDO {canUndo ? 'READY' : 'USED'}</span>
+          )}
+        </div>
       </div>
 
       <div className="header-right">
