@@ -76,8 +76,9 @@ export class LevelGenerator {
     const candidates: Array<{ level: LevelData; difficultyDelta: number; solution: SolverResult; isPerfect: boolean }> = [];
 
     // Try up to 200 times to find a level that satisfies all difficulty criteria
-    const MAX_ATTEMPTS = 200;
-    const POOL_SIZE = 10;
+    const isRuntimeLevel = id < 0;
+    const MAX_ATTEMPTS = isRuntimeLevel ? 60 : 200;
+    const POOL_SIZE = isRuntimeLevel ? 3 : 10;
 
     for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
       const attemptSeed = (baseSeed + attempt * 2654435761) >>> 0;
@@ -105,20 +106,26 @@ export class LevelGenerator {
 
       // Relax shortest path for higher difficulties to make generation possible
       const allowedPaths = solution.optimalMoves >= 30 ? 1000 : (solution.optimalMoves >= 20 ? 100 : (solution.optimalMoves >= 10 ? 15 : 3));
-      if (solution.shortestPathCount > allowedPaths && attempt < MAX_ATTEMPTS - 10) {
+      const emergencyAttempt = attempt >= MAX_ATTEMPTS - 20;
+      if (solution.shortestPathCount > allowedPaths && !emergencyAttempt) {
         if (debug) console.log(`[Attempt ${attempt}] Rejected: Shortest paths (${solution.shortestPathCount}) > ${allowedPaths}`);
         continue;
       }
 
       // Dynamic fallback to prevent impossible generation loops
-      const relaxFactor = attempt > (MAX_ATTEMPTS - 20) ? 0.6 : 1.0;
+      const relaxFactor = attempt > (MAX_ATTEMPTS - 20) ? 0.1 : 1.0;
       
       const dynamicMinMoves = Math.floor(preset.minMoves * relaxFactor);
       const dynamicMinTurns = Math.floor(preset.minTurns * relaxFactor);
 
       // 6. Reject trivial levels
-      if (this.isTrivial(candidate, solution, dynamicMinMoves, dynamicMinTurns)) {
+      if (this.isTrivial(candidate, solution, dynamicMinMoves, dynamicMinTurns) && !emergencyAttempt) {
         if (debug) console.log(`[Attempt ${attempt}] Rejected: Trivial (moves: ${solution.optimalMoves} < ${dynamicMinMoves} or turns: ${solution.turnsCount} < ${dynamicMinTurns})`);
+        continue;
+      }
+
+      if (!this.meetsRouteDifficulty(solution, preset, relaxFactor) && !emergencyAttempt) {
+        if (debug) console.log(`[Attempt ${attempt}] Rejected: Route is too obvious`);
         continue;
       }
 
@@ -137,7 +144,7 @@ export class LevelGenerator {
       }
       
       // 8.5 Reject structural clones from recent history
-      if (this.isStructurallySimilar(candidate)) {
+      if (this.isStructurallySimilar(candidate) && !emergencyAttempt) {
         if (debug) console.log(`[Attempt ${attempt}] Rejected: Structurally similar to a recent level`);
         continue;
       }
@@ -435,6 +442,28 @@ export class LevelGenerator {
     return false;
   }
 
+  private static meetsRouteDifficulty(
+    solution: SolverResult,
+    preset: LevelPresetConfig,
+    relaxFactor: number
+  ): boolean {
+    const minDecisionPoints = Math.floor((preset.minDecisionPoints ?? 0) * relaxFactor);
+    const minMisleadingRoutes = Math.floor((preset.minMisleadingRoutes ?? 0) * relaxFactor);
+    const minDecisionDepth = Math.floor((preset.minDecisionDepth ?? 0) * relaxFactor);
+
+    if (solution.decisionPoints < minDecisionPoints) return false;
+    if (solution.misleadingRoutes < minMisleadingRoutes) return false;
+    if (solution.decisionDepth < minDecisionDepth) return false;
+    if (
+      preset.maxShortestPathCount !== undefined &&
+      solution.shortestPathCount > preset.maxShortestPathCount
+    ) {
+      return false;
+    }
+
+    return true;
+  }
+
   /**
    * Calculate numerical difficulty rating (1 to 100)
    */
@@ -465,7 +494,16 @@ export class LevelGenerator {
     // Decision Depth Score
     const depthScore = Math.min(30, solution.decisionDepth * 4);
 
-    let compositeScore = lengthScore + densityScore + turnsScore + trapScore + branchingScore + depthScore;
+    // Route pressure rewards puzzles that look navigable but require careful planning.
+    const routePressureScore = Math.min(
+      50,
+      solution.misleadingRoutes * 0.35 +
+        solution.decisionPoints * 4 +
+        solution.decisionDepth * 5 +
+        (solution.shortestPathCount <= 2 ? 10 : 0)
+    );
+
+    let compositeScore = lengthScore + densityScore + turnsScore + trapScore + branchingScore + depthScore + routePressureScore;
 
     // Give a slight boost if the shortest path is highly obfuscated
     if (solution.decisionPoints > 0 && solution.distanceBetweenDecisions < 3) {

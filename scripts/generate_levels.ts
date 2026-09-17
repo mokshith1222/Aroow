@@ -2,12 +2,14 @@ import { LevelGenerator } from '../src/game/LevelGenerator';
 import { levels as handcraftedLevels } from '../src/data/levels';
 import { getPresetForLevelId } from '../src/game/LevelGeneratorPresets';
 import { LevelSolver } from '../src/game/LevelSolver';
+import existingLevels from '../src/data/levels_db.json';
 import * as fs from 'fs';
 import * as path from 'path';
 
 function runGeneration() {
   console.log('Generating 500 levels for static Level DB...');
   LevelGenerator.clearRegistry();
+  const existingById = new Map(existingLevels.map(level => [level.id, level]));
   
   const allLevels = [];
   
@@ -28,8 +30,14 @@ function runGeneration() {
       allLevels.push(generated);
       if (i % 50 === 0) console.log(`Generated level ${i}...`);
     } catch (e) {
-      console.error(`Failed on level ${i}:`, e);
-      process.exit(1);
+      const fallback = existingById.get(i);
+      if (!fallback) {
+        console.error(`Failed on level ${i} and no fallback exists:`, e);
+        process.exit(1);
+      }
+
+      console.warn(`Using existing validated level ${i} after generation failure.`);
+      allLevels.push({ ...fallback });
     }
   }
 

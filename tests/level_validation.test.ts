@@ -6,6 +6,47 @@ import type { LevelData } from '../src/game/types';
 import { DIFFICULTY_PRESETS } from '../src/game/LevelGeneratorPresets';
 
 describe('Level Validation & Procedural Generation', () => {
+  const solverMetrics = {
+    solvable: true,
+    optimalMoves: 30,
+    shortestPath: [],
+    shortestPathCount: 1,
+    secondBestMoves: 32,
+    thirdBestMoves: 36,
+    solutionComplexity: 100,
+    branchingFactor: 2,
+    deadEndCount: 8,
+    pathEfficiency: 0.5,
+    directions: [],
+    turnsCount: 8,
+    visitedNodesCount: 100,
+    misleadingRoutes: 40,
+    decisionPoints: 6,
+    decisionDepth: 4,
+    meaningfulBranches: 6,
+    distanceBetweenDecisions: 3
+  } as const;
+
+  it('scores deceptive route pressure above a simple blocked route', () => {
+    const simple = LevelGenerator.calculateDifficulty(
+      { id: 1, worldId: 1, name: 'Simple', width: 12, height: 12, start: { x: 0, y: 0 }, goal: { x: 11, y: 11 }, walls: [] },
+      { ...solverMetrics, misleadingRoutes: 0, decisionPoints: 0, decisionDepth: 0, meaningfulBranches: 0 },
+      DIFFICULTY_PRESETS.MASTER
+    );
+    const deceptive = LevelGenerator.calculateDifficulty(
+      { id: 2, worldId: 7, name: 'Deceptive', width: 12, height: 12, start: { x: 0, y: 0 }, goal: { x: 11, y: 11 }, walls: [] },
+      solverMetrics,
+      DIFFICULTY_PRESETS.MASTER
+    );
+
+    expect(deceptive).toBeGreaterThan(simple);
+  });
+
+  it('keeps MASTER layouts solvable-friendly instead of relying on chamber walls', () => {
+    expect(DIFFICULTY_PRESETS.MASTER.allowedLayouts).not.toContain('CHAMBERS');
+    expect(DIFFICULTY_PRESETS.MASTER.wallDensityMax).toBeLessThanOrEqual(0.32);
+  });
+
   it('accepts a well-formed solvable level', () => {
     const validLevel: LevelData = {
       id: 100,

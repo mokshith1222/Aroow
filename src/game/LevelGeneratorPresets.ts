@@ -35,6 +35,10 @@ export interface LevelPresetConfig {
   allowedMechanics: TileType[];
   maxMechanicTiles: number;
   challenge: ChallengePolicy;
+  minDecisionPoints?: number;
+  minMisleadingRoutes?: number;
+  minDecisionDepth?: number;
+  maxShortestPathCount?: number;
   uniquenessMode?: 'A' | 'B' | 'C' | 'D';
 }
 
@@ -84,6 +88,7 @@ export const DIFFICULTY_PRESETS: Record<DifficultyPresetName, LevelPresetConfig>
     allowedMechanics: ['ONE_WAY_UP', 'ONE_WAY_DOWN', 'ONE_WAY_LEFT', 'ONE_WAY_RIGHT', 'SPIKE_TRAP'],
     maxMechanicTiles: 2,
     challenge: CLASSIC_CHALLENGE,
+    minDecisionPoints: 1,
     uniquenessMode: 'A',
   },
   EASY: {
@@ -104,6 +109,7 @@ export const DIFFICULTY_PRESETS: Record<DifficultyPresetName, LevelPresetConfig>
     allowedMechanics: ['ONE_WAY_UP', 'ONE_WAY_DOWN', 'ONE_WAY_LEFT', 'ONE_WAY_RIGHT', 'PORTAL', 'SPIKE_TRAP', 'ICE'],
     maxMechanicTiles: 3,
     challenge: CLASSIC_CHALLENGE,
+    minDecisionPoints: 1,
     uniquenessMode: 'A',
   },
   NORMAL: {
@@ -124,6 +130,7 @@ export const DIFFICULTY_PRESETS: Record<DifficultyPresetName, LevelPresetConfig>
     allowedMechanics: ['ONE_WAY_UP', 'ONE_WAY_DOWN', 'ONE_WAY_LEFT', 'ONE_WAY_RIGHT', 'PORTAL', 'ICE', 'SPIKE_TRAP'],
     maxMechanicTiles: 4,
     challenge: CLASSIC_CHALLENGE,
+    minDecisionPoints: 2,
     uniquenessMode: 'A',
   },
   MEDIUM: {
@@ -131,8 +138,8 @@ export const DIFFICULTY_PRESETS: Record<DifficultyPresetName, LevelPresetConfig>
     worldId: 3,
     gridWidth: 9,
     gridHeight: 9,
-    wallDensityMin: 0.32,
-    wallDensityMax: 0.42,
+    wallDensityMin: 0.22,
+    wallDensityMax: 0.32,
     minMoves: 14,
     maxMoves: 45,
     minTurns: 5,
@@ -144,6 +151,8 @@ export const DIFFICULTY_PRESETS: Record<DifficultyPresetName, LevelPresetConfig>
     allowedMechanics: ['ONE_WAY_UP', 'ONE_WAY_DOWN', 'ONE_WAY_LEFT', 'ONE_WAY_RIGHT', 'PORTAL', 'ICE', 'SPIKE_TRAP', 'MOVING_SAW'],
     maxMechanicTiles: 5,
     challenge: STRICT_CHALLENGE,
+    minDecisionPoints: 0,
+    minMisleadingRoutes: 0,
     uniquenessMode: 'B',
   },
   HARD: {
@@ -164,6 +173,8 @@ export const DIFFICULTY_PRESETS: Record<DifficultyPresetName, LevelPresetConfig>
     allowedMechanics: ['ONE_WAY_UP', 'ONE_WAY_DOWN', 'ONE_WAY_LEFT', 'ONE_WAY_RIGHT', 'PORTAL', 'ICE', 'SPIKE_TRAP'],
     maxMechanicTiles: 6,
     challenge: STRICT_CHALLENGE,
+    minDecisionPoints: 0,
+    minMisleadingRoutes: 0,
     uniquenessMode: 'B',
   },
   VERY_HARD: {
@@ -184,6 +195,10 @@ export const DIFFICULTY_PRESETS: Record<DifficultyPresetName, LevelPresetConfig>
     allowedMechanics: ['ONE_WAY_UP', 'ONE_WAY_DOWN', 'ONE_WAY_LEFT', 'ONE_WAY_RIGHT', 'PORTAL', 'ICE', 'SPIKE_TRAP', 'MOVING_SAW'],
     maxMechanicTiles: 8,
     challenge: STRICT_CHALLENGE,
+    minDecisionPoints: 1,
+    minMisleadingRoutes: 5,
+    minDecisionDepth: 0,
+    maxShortestPathCount: 8,
     uniquenessMode: 'C',
   },
   EXPERT: {
@@ -204,6 +219,8 @@ export const DIFFICULTY_PRESETS: Record<DifficultyPresetName, LevelPresetConfig>
     allowedMechanics: ['ONE_WAY_UP', 'ONE_WAY_DOWN', 'ONE_WAY_LEFT', 'ONE_WAY_RIGHT', 'PORTAL', 'ICE', 'SPIKE_TRAP', 'MOVING_SAW'],
     maxMechanicTiles: 10,
     challenge: EXTREME_CHALLENGE,
+    minDecisionPoints: 0,
+    minMisleadingRoutes: 0,
     uniquenessMode: 'D',
   },
   MASTER: {
@@ -211,19 +228,21 @@ export const DIFFICULTY_PRESETS: Record<DifficultyPresetName, LevelPresetConfig>
     worldId: 7,
     gridWidth: 12,
     gridHeight: 12,
-    wallDensityMin: 0.38,
-    wallDensityMax: 0.48,
+    wallDensityMin: 0.22,
+    wallDensityMax: 0.32,
     minMoves: 20,
     maxMoves: 85,
     minTurns: 7,
     minDeadEnds: 4,
     minBranching: 4,
-    allowedLayouts: ['ASYMMETRIC_MAZE', 'SERPENTINE', 'CHAMBERS', 'CENTRAL_PILLARS'],
+    allowedLayouts: ['ASYMMETRIC_MAZE', 'SERPENTINE', 'CENTRAL_PILLARS'],
     minDifficultyScore: 100,
     maxDifficultyScore: 210,
     allowedMechanics: ['ONE_WAY_UP', 'ONE_WAY_DOWN', 'ONE_WAY_LEFT', 'ONE_WAY_RIGHT', 'PORTAL', 'ICE', 'SPIKE_TRAP', 'MOVING_SAW'],
     maxMechanicTiles: 12,
     challenge: EXTREME_CHALLENGE,
+    minDecisionPoints: 0,
+    minMisleadingRoutes: 0,
     uniquenessMode: 'D',
   }
 };
