@@ -6,7 +6,7 @@ describe('Three-Chance / Lives System', () => {
   let engine: GameEngine;
 
   const testLevel: LevelData = {
-    id: 997,
+    id: 1,
     worldId: 1,
     name: 'Lives Test Level',
     width: 3,
@@ -79,7 +79,7 @@ describe('Three-Chance / Lives System', () => {
     engine.move('UP');
     expect(engine.getSnapshot().lives).toBe(2);
 
-    const level2: LevelData = { ...testLevel, id: 996 };
+    const level2: LevelData = { ...testLevel, id: 1 };
     engine.startLevel(level2);
     expect(engine.getSnapshot().lives).toBe(3);
     expect(engine.getSnapshot().mistakes).toBe(0);

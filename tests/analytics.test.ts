@@ -148,19 +148,37 @@ describe('AnalyticsService & Telemetry Metrics', () => {
   it('integrates seamlessly with GameEngine lifecycle', () => {
     const engine = GameEngine.getInstance();
     const analytics = AnalyticsService.getInstance();
+    
+    // Create a custom locked room test level to ensure LEFT hits a wall
+    const testLevel: import('../src/types/LevelData').LevelData = {
+      id: 1, // must be 1 to bypass lock guard
+      worldId: 1,
+      name: 'QA Test Level',
+      width: 5,
+      height: 5,
+      start: { x: 1, y: 1 },
+      goal: { x: 3, y: 3 },
+      walls: [
+        { x: 0, y: 1 } // Wall on the left of start
+      ],
+      parMoves: 8,
+      optimalSolutionLength: 8,
+      targetMoves: 8,
+      difficulty: 1
+    };
 
-    // Start Level 1
-    engine.startLevel(1);
+    // Start Level
+    engine.startLevel(testLevel);
     let events = analytics.getRecentEvents();
     expect(events.some(e => e.name === 'level_started' && e.params?.levelId === 1)).toBe(true);
 
-    // Restart Level 1
+    // Restart Level
     engine.restart();
     events = analytics.getRecentEvents();
     expect(events.some(e => e.name === 'retry' && e.params?.levelId === 1)).toBe(true);
 
-    // Invalid move generates life_lost
-    engine.move('LEFT'); // Wall or invalid
+    // Invalid move generates life_lost (moves left into wall at 0,1)
+    engine.move('LEFT');
     events = analytics.getRecentEvents();
     expect(events.some(e => e.name === 'life_lost')).toBe(true);
 

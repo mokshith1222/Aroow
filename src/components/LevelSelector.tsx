@@ -120,16 +120,25 @@ export const LevelSelector: React.FC<LevelSelectorProps> = ({
       <div className="level-grid" role="region" aria-label="Levels">
         {selectedStage?.levels.map(lvl => {
           const isCurrent = lvl.levelId === currentLevelId;
+          const isLocked = !lvl.isUnlocked;
 
           return (
             <button
               key={lvl.levelId}
-              className={`level-card ${selectedStage.unlockedStatus ? 'unlocked' : 'locked'} ${
+              className={`level-card ${lvl.isUnlocked ? 'unlocked' : 'locked'} ${
                 isCurrent ? 'current' : ''
               } ${lvl.completionStatus ? 'completed' : ''}`}
-              disabled={!selectedStage.unlockedStatus}
-              onClick={() => handleLevelClick(lvl.levelId)}
-              aria-label={`Level ${lvl.levelId}, ${lvl.completionStatus ? `${lvl.earnedStars} stars earned` : selectedStage.unlockedStatus ? 'Unlocked' : 'Locked'}`}
+              disabled={isLocked}
+              onClick={() => {
+                if (isLocked) {
+                  audio.playInvalid();
+                  haptics.invalid();
+                  window.alert(`Complete Level ${lvl.levelId - 1} to unlock Level ${lvl.levelId}.`);
+                } else {
+                  handleLevelClick(lvl.levelId);
+                }
+              }}
+              aria-label={`Level ${lvl.levelId}, ${lvl.completionStatus ? `${lvl.earnedStars} stars earned` : lvl.isUnlocked ? 'Unlocked' : 'Locked'}`}
             >
               {/* Completed Checkmark Indicator */}
               {lvl.completionStatus && (
@@ -138,30 +147,25 @@ export const LevelSelector: React.FC<LevelSelectorProps> = ({
                 </span>
               )}
 
+              {/* Lock Icon for locked levels */}
+              {isLocked && (
+                <span className="level-lock-badge" title="Locked">
+                  🔒
+                </span>
+              )}
+
               {/* Level Number */}
               <span className="level-number">{lvl.levelId}</span>
 
               {/* Status / Best Stars */}
-              {selectedStage.unlockedStatus ? (
+              {lvl.isUnlocked ? (
                 <div className="level-stars" aria-hidden="true">
                   <span className={lvl.earnedStars >= 1 ? 'star-filled' : 'star-empty'}>★</span>
                   <span className={lvl.earnedStars >= 2 ? 'star-filled' : 'star-empty'}>★</span>
                   <span className={lvl.earnedStars >= 3 ? 'star-filled' : 'star-empty'}>★</span>
                 </div>
               ) : (
-                <svg
-                  viewBox="0 0 24 24"
-                  width="14"
-                  height="14"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  className="lock-icon"
-                  aria-hidden="true"
-                >
-                  <rect x="5" y="11" width="14" height="10" rx="2" />
-                  <path d="M8 11V7a4 4 0 0 1 8 0v4" />
-                </svg>
+                <span className="level-locked-label">LOCKED</span>
               )}
             </button>
           );

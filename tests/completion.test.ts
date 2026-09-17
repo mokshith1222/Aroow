@@ -7,7 +7,7 @@ describe('Level Completion & Star System', () => {
   let engine: GameEngine;
 
   const simpleLevel: LevelData = {
-    id: 995,
+    id: 1,
     worldId: 1,
     name: 'Simple Completion Level',
     width: 3,

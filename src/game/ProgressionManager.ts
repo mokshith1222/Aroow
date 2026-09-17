@@ -11,6 +11,7 @@ export interface LevelState {
   earnedStars: number;
   routeInfo: string;
   obstacles: number;
+  isUnlocked: boolean;
 }
 
 export interface Stage {
@@ -46,26 +47,36 @@ export class ProgressionManager {
       let totalStarsEarned = 0;
       let totalStarsAvailable = 0;
       let completedLevelsCount = 0;
+      
+      // Determine if this stage itself is unlocked
+      const isStageUnlocked = WorldManager.isWorldUnlocked(world.id, levelRecords);
 
       for (let i = 0; i < worldLevels.length; i++) {
         const lvl = worldLevels[i];
         const record = storage.getLevelRecord(lvl.id);
         const earnedStars = record?.stars || 0;
+        const isCompleted = record?.completed === true;
+        
+        // A level is unlocked only if:
+        // 1. Its stage is unlocked, AND
+        // 2. It passes the individual sequential unlock check (Level N-1 completed)
+        const isLevelUnlocked = isStageUnlocked && storage.isLevelUnlocked(lvl.id);
         
         levels.push({
           levelId: lvl.id,
           levelNumber: i + 1,
           difficulty: lvl.difficulty || 1,
           maximumStars: 3,
-          completionStatus: earnedStars > 0,
+          completionStatus: isCompleted,
           earnedStars: earnedStars,
           routeInfo: `Grid: ${lvl.width}x${lvl.height}`,
-          obstacles: lvl.walls.length
+          obstacles: lvl.walls.length,
+          isUnlocked: isLevelUnlocked
         });
 
         totalStarsAvailable += 3;
         totalStarsEarned += earnedStars;
-        if (earnedStars > 0) {
+        if (isCompleted) {
           completedLevelsCount++;
         }
       }

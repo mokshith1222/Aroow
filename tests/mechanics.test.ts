@@ -54,7 +54,7 @@ describe('Mechanic — One-Way Tiles', () => {
 
   it('solver correctly navigates around one-way tiles', () => {
     const level: LevelData = {
-      id: 9001,
+      id: 1,
       worldId: 3,
       name: 'One-Way Test',
       width: 4,
@@ -75,7 +75,7 @@ describe('Mechanic — One-Way Tiles', () => {
   it('solver returns unsolvable if one-way tiles block ALL paths to goal', () => {
     // 3x3 grid: goal is only reachable from below (y=1→y=0), but block that direction
     const level: LevelData = {
-      id: 9002,
+      id: 1,
       worldId: 3,
       name: 'Unsolvable One-Way',
       width: 3,
@@ -135,7 +135,7 @@ describe('Mechanic — Portal Tiles', () => {
     // 4x4: start at (0,0), goal at (3,3)
     // Walls block direct path — portals provide the shortcut
     const level: LevelData = {
-      id: 9003,
+      id: 1,
       worldId: 4,
       name: 'Portal Test',
       width: 4,
@@ -194,7 +194,7 @@ describe('Mechanic — Ice / Sliding Tiles', () => {
 
   it('solver finds path through ice slide', () => {
     const level: LevelData = {
-      id: 9004,
+      id: 1,
       worldId: 5,
       name: 'Ice Test',
       width: 5,
@@ -254,7 +254,7 @@ describe('Mechanic — Keys and Gates', () => {
   it('solver navigates key-then-gate sequence', () => {
     // 5x1: start(0,0) → key(2,0) → gate(3,0) → goal(4,0)
     const level: LevelData = {
-      id: 9005,
+      id: 1,
       worldId: 6,
       name: 'Keys Test',
       width: 5,
@@ -273,7 +273,7 @@ describe('Mechanic — Keys and Gates', () => {
 
   it('solver returns unsolvable when gate blocks goal and key is unreachable', () => {
     const level: LevelData = {
-      id: 9006,
+      id: 1,
       worldId: 6,
       name: 'Impossible Keys Test',
       width: 3,

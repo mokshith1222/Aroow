@@ -6,7 +6,7 @@ describe('Collision System', () => {
   let engine: GameEngine;
 
   const wallLevel: LevelData = {
-    id: 998,
+    id: 1,
     worldId: 1,
     name: 'Collision Test Level',
     width: 5,

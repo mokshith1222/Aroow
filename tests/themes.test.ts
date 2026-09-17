@@ -114,7 +114,7 @@ describe('Phase 31 — Background and Theme System', () => {
 
       const engine = GameEngine.getInstance();
       const testLevel: LevelData = {
-        id: 997,
+        id: 1,
         width: 3,
         height: 3,
         start: { x: 0, y: 0 },

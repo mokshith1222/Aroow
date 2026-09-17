@@ -7,7 +7,7 @@ describe('Phase 37 — Intelligent Hint System', () => {
   let engine: GameEngine;
 
   const mockLevel: LevelData = {
-    id: 999,
+    id: 1,
     worldId: 1,
     name: 'Hint Test',
     difficulty: 1,

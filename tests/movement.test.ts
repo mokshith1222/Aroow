@@ -6,7 +6,7 @@ describe('Movement System', () => {
   let engine: GameEngine;
 
   const testLevel: LevelData = {
-    id: 999,
+    id: 1,
     worldId: 1,
     name: 'Movement Test Level',
     width: 5,

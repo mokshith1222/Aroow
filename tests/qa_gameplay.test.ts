@@ -27,7 +27,7 @@ import type { LevelData } from '../src/game/types';
 
 /** Open 5×5 grid, start (0,0), goal (4,4), no walls */
 const openLevel: LevelData = {
-  id: 8000,
+  id: 1,
   worldId: 1,
   name: 'QA Open Field',
   width: 5,
@@ -43,7 +43,7 @@ const openLevel: LevelData = {
 
 /** Level where start (1,1) is surrounded on all sides by walls except DOWN */
 const walledLevel: LevelData = {
-  id: 8001,
+  id: 1,
   worldId: 1,
   name: 'QA Walled Level',
   width: 5,
@@ -60,7 +60,7 @@ const walledLevel: LevelData = {
 
 /** Minimal 2-move level: (0,0) → (2,0), straight right */
 const quickWinLevel: LevelData = {
-  id: 8002,
+  id: 1,
   worldId: 1,
   name: 'QA Quick Win',
   width: 3,
@@ -77,7 +77,7 @@ const quickWinLevel: LevelData = {
 
 /** Level with maxMoves cap */
 const maxMovesLevel: LevelData = {
-  id: 8003,
+  id: 1,
   worldId: 1,
   name: 'QA MaxMoves',
   width: 5,
@@ -322,7 +322,7 @@ describe('Gameplay — game over', () => {
     // After going DOWN we can come back UP freely. Instead, engineer GAME_OVER
     // by boxing in with only the boundary wall available
     const boxedLevel: LevelData = {
-      id: 8099,
+      id: 1,
       worldId: 1,
       name: 'QA Undo Box',
       width: 3,

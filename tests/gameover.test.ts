@@ -6,7 +6,7 @@ describe('Game Over System', () => {
   let engine: GameEngine;
 
   const wallTrapLevel: LevelData = {
-    id: 994,
+    id: 1,
     worldId: 1,
     name: 'Game Over Test',
     width: 3,

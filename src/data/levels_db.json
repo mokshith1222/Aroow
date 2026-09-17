@@ -3,111 +3,317 @@
     "id": 1,
     "worldId": 1,
     "name": "TUTORIAL 1",
-    "width": 5,
-    "height": 5,
+    "width": 6,
+    "height": 6,
     "start": {
-      "x": 0,
-      "y": 0
+      "x": 4,
+      "y": 5
     },
     "goal": {
-      "x": 2,
-      "y": 4
+      "x": 0,
+      "y": 3
     },
     "walls": [
       {
-        "x": 1,
-        "y": 0
+        "x": 3,
+        "y": 3
       },
       {
-        "x": 1,
-        "y": 1
+        "x": 2,
+        "y": 3
       },
       {
-        "x": 1,
+        "x": 4,
+        "y": 3
+      },
+      {
+        "x": 3,
         "y": 2
       },
       {
-        "x": 1,
-        "y": 3
+        "x": 3,
+        "y": 4
+      },
+      {
+        "x": 0,
+        "y": 2
       },
       {
         "x": 3,
         "y": 0
       },
       {
-        "x": 3,
+        "x": 5,
         "y": 3
       },
       {
-        "x": 3,
+        "x": 0,
         "y": 4
       }
     ],
     "optimalSolutionLength": 6,
     "parMoves": 6,
     "targetMoves": 6,
-    "difficulty": 18,
-    "targetTime": 15,
-    "tiles": []
+    "difficulty": 25,
+    "targetTime": 17,
+    "tiles": [
+      {
+        "pos": {
+          "x": 1,
+          "y": 0
+        },
+        "type": "ONE_WAY_RIGHT"
+      },
+      {
+        "pos": {
+          "x": 0,
+          "y": 1
+        },
+        "type": "ONE_WAY_RIGHT"
+      }
+    ]
   },
   {
     "id": 2,
     "worldId": 1,
     "name": "TUTORIAL 2",
-    "width": 5,
-    "height": 5,
+    "width": 6,
+    "height": 6,
     "start": {
-      "x": 2,
-      "y": 2
+      "x": 3,
+      "y": 1
     },
     "goal": {
-      "x": 4,
-      "y": 4
+      "x": 5,
+      "y": 5
     },
     "walls": [
       {
-        "x": 2,
+        "x": 3,
         "y": 0
       },
       {
-        "x": 2,
-        "y": 1
+        "x": 3,
+        "y": 2
       },
       {
-        "x": 2,
+        "x": 3,
         "y": 3
+      },
+      {
+        "x": 3,
+        "y": 5
+      },
+      {
+        "x": 4,
+        "y": 5
+      },
+      {
+        "x": 4,
+        "y": 4
+      },
+      {
+        "x": 1,
+        "y": 1
       },
       {
         "x": 2,
         "y": 4
       },
       {
-        "x": 3,
-        "y": 1
+        "x": 1,
+        "y": 5
+      },
+      {
+        "x": 5,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 0
       }
     ],
-    "optimalSolutionLength": 4,
-    "parMoves": 4,
-    "targetMoves": 4,
-    "difficulty": 48,
-    "targetTime": 10,
+    "optimalSolutionLength": 6,
+    "parMoves": 6,
+    "targetMoves": 6,
+    "difficulty": 52,
+    "targetTime": 15,
     "tiles": []
   },
   {
     "id": 3,
     "worldId": 1,
     "name": "TUTORIAL 3",
-    "width": 5,
-    "height": 5,
+    "width": 6,
+    "height": 6,
     "start": {
-      "x": 2,
+      "x": 5,
       "y": 2
     },
     "goal": {
-      "x": 4,
-      "y": 4
+      "x": 1,
+      "y": 0
     },
     "walls": [
+      {
+        "x": 0,
+        "y": 1
+      },
+      {
+        "x": 1,
+        "y": 1
+      },
+      {
+        "x": 4,
+        "y": 1
+      },
+      {
+        "x": 5,
+        "y": 1
+      },
+      {
+        "x": 2,
+        "y": 3
+      },
+      {
+        "x": 3,
+        "y": 3
+      },
+      {
+        "x": 4,
+        "y": 3
+      },
+      {
+        "x": 5,
+        "y": 3
+      },
+      {
+        "x": 5,
+        "y": 4
+      },
+      {
+        "x": 3,
+        "y": 1
+      }
+    ],
+    "optimalSolutionLength": 6,
+    "parMoves": 6,
+    "targetMoves": 6,
+    "difficulty": 20,
+    "targetTime": 15,
+    "tiles": [
+      {
+        "pos": {
+          "x": 2,
+          "y": 2
+        },
+        "type": "SPIKE_TRAP",
+        "activeIntervalMs": 1500,
+        "idleIntervalMs": 2000,
+        "timeOffsetMs": 1500
+      },
+      {
+        "pos": {
+          "x": 0,
+          "y": 2
+        },
+        "type": "SPIKE_TRAP",
+        "activeIntervalMs": 2000,
+        "idleIntervalMs": 1500,
+        "timeOffsetMs": 0
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "worldId": 1,
+    "name": "TUTORIAL 4",
+    "width": 6,
+    "height": 6,
+    "start": {
+      "x": 0,
+      "y": 4
+    },
+    "goal": {
+      "x": 2,
+      "y": 0
+    },
+    "walls": [
+      {
+        "x": 1,
+        "y": 0
+      },
+      {
+        "x": 1,
+        "y": 3
+      },
+      {
+        "x": 1,
+        "y": 4
+      },
+      {
+        "x": 1,
+        "y": 5
+      },
+      {
+        "x": 3,
+        "y": 0
+      },
+      {
+        "x": 3,
+        "y": 1
+      },
+      {
+        "x": 3,
+        "y": 2
+      },
+      {
+        "x": 3,
+        "y": 3
+      },
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 1,
+        "y": 1
+      },
+      {
+        "x": 5,
+        "y": 4
+      }
+    ],
+    "optimalSolutionLength": 6,
+    "parMoves": 6,
+    "targetMoves": 6,
+    "difficulty": 31,
+    "targetTime": 15,
+    "tiles": []
+  },
+  {
+    "id": 5,
+    "worldId": 1,
+    "name": "TUTORIAL 5",
+    "width": 6,
+    "height": 6,
+    "start": {
+      "x": 2,
+      "y": 4
+    },
+    "goal": {
+      "x": 0,
+      "y": 0
+    },
+    "walls": [
+      {
+        "x": 1,
+        "y": 0
+      },
+      {
+        "x": 1,
+        "y": 1
+      },
       {
         "x": 1,
         "y": 2
@@ -135,110 +341,37 @@
       {
         "x": 3,
         "y": 3
-      }
-    ],
-    "optimalSolutionLength": 4,
-    "parMoves": 4,
-    "targetMoves": 4,
-    "difficulty": 16,
-    "targetTime": 10,
-    "tiles": []
-  },
-  {
-    "id": 4,
-    "worldId": 1,
-    "name": "TUTORIAL 4",
-    "width": 5,
-    "height": 5,
-    "start": {
-      "x": 1,
-      "y": 0
-    },
-    "goal": {
-      "x": 4,
-      "y": 4
-    },
-    "walls": [
-      {
-        "x": 2,
-        "y": 1
       },
       {
-        "x": 2,
-        "y": 2
-      },
-      {
-        "x": 2,
-        "y": 3
-      },
-      {
-        "x": 2,
+        "x": 3,
         "y": 4
-      },
-      {
-        "x": 3,
-        "y": 3
       }
     ],
-    "optimalSolutionLength": 7,
-    "parMoves": 7,
-    "targetMoves": 7,
-    "difficulty": 51,
-    "targetTime": 17,
-    "tiles": []
-  },
-  {
-    "id": 5,
-    "worldId": 1,
-    "name": "TUTORIAL 5",
-    "width": 5,
-    "height": 5,
-    "start": {
-      "x": 3,
-      "y": 0
-    },
-    "goal": {
-      "x": 0,
-      "y": 2
-    },
-    "walls": [
-      {
-        "x": 0,
-        "y": 1
-      },
-      {
-        "x": 3,
-        "y": 1
-      },
-      {
-        "x": 4,
-        "y": 1
-      },
-      {
-        "x": 0,
-        "y": 3
-      },
-      {
-        "x": 1,
-        "y": 3
-      },
-      {
-        "x": 4,
-        "y": 3
-      }
-    ],
-    "optimalSolutionLength": 5,
-    "parMoves": 5,
-    "targetMoves": 5,
-    "difficulty": 53,
-    "targetTime": 13,
+    "optimalSolutionLength": 8,
+    "parMoves": 8,
+    "targetMoves": 8,
+    "difficulty": 21,
+    "targetTime": 20,
     "tiles": [
       {
         "pos": {
           "x": 0,
-          "y": 4
+          "y": 2
         },
-        "type": "ONE_WAY_RIGHT"
+        "type": "SPIKE_TRAP",
+        "activeIntervalMs": 2000,
+        "idleIntervalMs": 1000,
+        "timeOffsetMs": 500
+      },
+      {
+        "pos": {
+          "x": 5,
+          "y": 1
+        },
+        "type": "SPIKE_TRAP",
+        "activeIntervalMs": 1500,
+        "idleIntervalMs": 1500,
+        "timeOffsetMs": 500
       }
     ]
   },
@@ -246,279 +379,24 @@
     "id": 6,
     "worldId": 1,
     "name": "TUTORIAL 6",
-    "width": 5,
-    "height": 5,
-    "start": {
-      "x": 4,
-      "y": 4
-    },
-    "goal": {
-      "x": 2,
-      "y": 0
-    },
-    "walls": [
-      {
-        "x": 1,
-        "y": 0
-      },
-      {
-        "x": 1,
-        "y": 3
-      },
-      {
-        "x": 1,
-        "y": 4
-      },
-      {
-        "x": 3,
-        "y": 2
-      },
-      {
-        "x": 3,
-        "y": 3
-      },
-      {
-        "x": 3,
-        "y": 4
-      }
-    ],
-    "optimalSolutionLength": 6,
-    "parMoves": 6,
-    "targetMoves": 6,
-    "difficulty": 40,
-    "targetTime": 15,
-    "tiles": [
-      {
-        "pos": {
-          "x": 2,
-          "y": 4
-        },
-        "type": "ONE_WAY_LEFT"
-      }
-    ]
-  },
-  {
-    "id": 7,
-    "worldId": 1,
-    "name": "TUTORIAL 7",
-    "width": 5,
-    "height": 5,
-    "start": {
-      "x": 4,
-      "y": 0
-    },
-    "goal": {
-      "x": 3,
-      "y": 4
-    },
-    "walls": [
-      {
-        "x": 1,
-        "y": 0
-      },
-      {
-        "x": 1,
-        "y": 1
-      },
-      {
-        "x": 1,
-        "y": 4
-      },
-      {
-        "x": 3,
-        "y": 0
-      },
-      {
-        "x": 3,
-        "y": 1
-      },
-      {
-        "x": 3,
-        "y": 2
-      }
-    ],
-    "optimalSolutionLength": 5,
-    "parMoves": 5,
-    "targetMoves": 5,
-    "difficulty": 39,
-    "targetTime": 12,
-    "tiles": [
-      {
-        "pos": {
-          "x": 2,
-          "y": 2
-        },
-        "type": "ONE_WAY_UP"
-      }
-    ]
-  },
-  {
-    "id": 8,
-    "worldId": 1,
-    "name": "TUTORIAL 8",
-    "width": 5,
-    "height": 5,
-    "start": {
-      "x": 2,
-      "y": 3
-    },
-    "goal": {
-      "x": 4,
-      "y": 0
-    },
-    "walls": [
-      {
-        "x": 1,
-        "y": 0
-      },
-      {
-        "x": 1,
-        "y": 3
-      },
-      {
-        "x": 1,
-        "y": 4
-      },
-      {
-        "x": 3,
-        "y": 0
-      },
-      {
-        "x": 3,
-        "y": 1
-      },
-      {
-        "x": 3,
-        "y": 4
-      }
-    ],
-    "optimalSolutionLength": 5,
-    "parMoves": 5,
-    "targetMoves": 5,
-    "difficulty": 53,
-    "targetTime": 13,
-    "tiles": [
-      {
-        "pos": {
-          "x": 1,
-          "y": 2
-        },
-        "type": "ONE_WAY_RIGHT"
-      }
-    ]
-  },
-  {
-    "id": 9,
-    "worldId": 1,
-    "name": "TUTORIAL 9",
-    "width": 5,
-    "height": 5,
+    "width": 6,
+    "height": 6,
     "start": {
       "x": 1,
-      "y": 2
+      "y": 5
     },
     "goal": {
-      "x": 4,
-      "y": 4
-    },
-    "walls": [
-      {
-        "x": 2,
-        "y": 1
-      },
-      {
-        "x": 3,
-        "y": 1
-      },
-      {
-        "x": 4,
-        "y": 1
-      },
-      {
-        "x": 0,
-        "y": 3
-      },
-      {
-        "x": 3,
-        "y": 3
-      },
-      {
-        "x": 4,
-        "y": 3
-      }
-    ],
-    "optimalSolutionLength": 5,
-    "parMoves": 5,
-    "targetMoves": 5,
-    "difficulty": 53,
-    "targetTime": 13,
-    "tiles": []
-  },
-  {
-    "id": 10,
-    "worldId": 1,
-    "name": "TUTORIAL 10",
-    "width": 5,
-    "height": 5,
-    "start": {
-      "x": 0,
-      "y": 1
-    },
-    "goal": {
-      "x": 3,
+      "x": 5,
       "y": 3
     },
     "walls": [
       {
-        "x": 1,
-        "y": 1
-      },
-      {
-        "x": 4,
-        "y": 1
-      },
-      {
         "x": 2,
         "y": 3
       },
       {
         "x": 4,
         "y": 3
-      },
-      {
-        "x": 1,
-        "y": 4
-      }
-    ],
-    "optimalSolutionLength": 5,
-    "parMoves": 5,
-    "targetMoves": 5,
-    "difficulty": 93,
-    "targetTime": 13,
-    "tiles": []
-  },
-  {
-    "id": 11,
-    "worldId": 1,
-    "name": "EASY 11",
-    "width": 6,
-    "height": 6,
-    "start": {
-      "x": 0,
-      "y": 4
-    },
-    "goal": {
-      "x": 4,
-      "y": 2
-    },
-    "walls": [
-      {
-        "x": 3,
-        "y": 0
-      },
-      {
-        "x": 3,
-        "y": 1
       },
       {
         "x": 3,
@@ -526,136 +404,18 @@
       },
       {
         "x": 3,
-        "y": 3
-      },
-      {
-        "x": 3,
-        "y": 5
-      },
-      {
-        "x": 0,
-        "y": 3
-      },
-      {
-        "x": 1,
-        "y": 5
-      },
-      {
-        "x": 2,
-        "y": 3
-      },
-      {
-        "x": 5,
-        "y": 3
-      }
-    ],
-    "optimalSolutionLength": 6,
-    "parMoves": 6,
-    "targetMoves": 6,
-    "difficulty": 28,
-    "targetTime": 15,
-    "tiles": []
-  },
-  {
-    "id": 12,
-    "worldId": 1,
-    "name": "EASY 12",
-    "width": 6,
-    "height": 6,
-    "start": {
-      "x": 0,
-      "y": 1
-    },
-    "goal": {
-      "x": 5,
-      "y": 0
-    },
-    "walls": [
-      {
-        "x": 1,
-        "y": 1
-      },
-      {
-        "x": 2,
-        "y": 1
-      },
-      {
-        "x": 5,
-        "y": 1
-      },
-      {
-        "x": 0,
-        "y": 3
-      },
-      {
-        "x": 1,
-        "y": 3
-      },
-      {
-        "x": 4,
-        "y": 3
-      },
-      {
-        "x": 5,
-        "y": 3
-      },
-      {
-        "x": 2,
-        "y": 5
-      },
-      {
-        "x": 4,
-        "y": 1
-      }
-    ],
-    "optimalSolutionLength": 6,
-    "parMoves": 6,
-    "targetMoves": 6,
-    "difficulty": 65,
-    "targetTime": 15,
-    "tiles": []
-  },
-  {
-    "id": 13,
-    "worldId": 1,
-    "name": "EASY 13",
-    "width": 6,
-    "height": 6,
-    "start": {
-      "x": 5,
-      "y": 0
-    },
-    "goal": {
-      "x": 2,
-      "y": 3
-    },
-    "walls": [
-      {
-        "x": 3,
-        "y": 0
-      },
-      {
-        "x": 3,
-        "y": 1
-      },
-      {
-        "x": 3,
-        "y": 3
-      },
-      {
-        "x": 3,
         "y": 4
       },
       {
-        "x": 3,
-        "y": 5
-      },
-      {
-        "x": 5,
-        "y": 2
+        "x": 2,
+        "y": 1
       },
       {
         "x": 1,
+        "y": 1
+      },
+      {
+        "x": 4,
         "y": 1
       },
       {
@@ -664,315 +424,7 @@
       },
       {
         "x": 0,
-        "y": 2
-      }
-    ],
-    "optimalSolutionLength": 6,
-    "parMoves": 6,
-    "targetMoves": 6,
-    "difficulty": 63,
-    "targetTime": 17,
-    "tiles": [
-      {
-        "pos": {
-          "x": 5,
-          "y": 1
-        },
-        "type": "ONE_WAY_UP"
-      },
-      {
-        "pos": {
-          "x": 1,
-          "y": 5
-        },
-        "type": "ONE_WAY_UP"
-      }
-    ]
-  },
-  {
-    "id": 14,
-    "worldId": 1,
-    "name": "EASY 14",
-    "width": 6,
-    "height": 6,
-    "start": {
-      "x": 0,
-      "y": 4
-    },
-    "goal": {
-      "x": 2,
-      "y": 0
-    },
-    "walls": [
-      {
-        "x": 1,
-        "y": 2
-      },
-      {
-        "x": 1,
         "y": 3
-      },
-      {
-        "x": 1,
-        "y": 4
-      },
-      {
-        "x": 1,
-        "y": 5
-      },
-      {
-        "x": 3,
-        "y": 0
-      },
-      {
-        "x": 3,
-        "y": 3
-      },
-      {
-        "x": 3,
-        "y": 4
-      },
-      {
-        "x": 3,
-        "y": 5
-      },
-      {
-        "x": 1,
-        "y": 0
-      }
-    ],
-    "optimalSolutionLength": 6,
-    "parMoves": 6,
-    "targetMoves": 6,
-    "difficulty": 30,
-    "targetTime": 15,
-    "tiles": [
-      {
-        "pos": {
-          "x": 4,
-          "y": 3
-        },
-        "type": "ONE_WAY_RIGHT"
-      },
-      {
-        "pos": {
-          "x": 5,
-          "y": 4
-        },
-        "type": "ONE_WAY_RIGHT"
-      }
-    ]
-  },
-  {
-    "id": 15,
-    "worldId": 1,
-    "name": "EASY 15",
-    "width": 6,
-    "height": 6,
-    "start": {
-      "x": 4,
-      "y": 4
-    },
-    "goal": {
-      "x": 1,
-      "y": 1
-    },
-    "walls": [
-      {
-        "x": 3,
-        "y": 3
-      },
-      {
-        "x": 4,
-        "y": 3
-      },
-      {
-        "x": 0,
-        "y": 0
-      },
-      {
-        "x": 1,
-        "y": 3
-      },
-      {
-        "x": 4,
-        "y": 2
-      },
-      {
-        "x": 2,
-        "y": 2
-      },
-      {
-        "x": 2,
-        "y": 4
-      },
-      {
-        "x": 5,
-        "y": 5
-      },
-      {
-        "x": 5,
-        "y": 1
-      }
-    ],
-    "optimalSolutionLength": 5,
-    "parMoves": 5,
-    "targetMoves": 5,
-    "difficulty": 52,
-    "targetTime": 26,
-    "tiles": [
-      {
-        "pos": {
-          "x": 5,
-          "y": 3
-        },
-        "type": "PORTAL",
-        "linkedPos": {
-          "x": 3,
-          "y": 0
-        }
-      },
-      {
-        "pos": {
-          "x": 3,
-          "y": 0
-        },
-        "type": "PORTAL",
-        "linkedPos": {
-          "x": 5,
-          "y": 3
-        }
-      }
-    ]
-  },
-  {
-    "id": 16,
-    "worldId": 1,
-    "name": "EASY 16",
-    "width": 6,
-    "height": 6,
-    "start": {
-      "x": 5,
-      "y": 3
-    },
-    "goal": {
-      "x": 0,
-      "y": 2
-    },
-    "walls": [
-      {
-        "x": 0,
-        "y": 1
-      },
-      {
-        "x": 1,
-        "y": 1
-      },
-      {
-        "x": 2,
-        "y": 1
-      },
-      {
-        "x": 3,
-        "y": 1
-      },
-      {
-        "x": 4,
-        "y": 1
-      },
-      {
-        "x": 0,
-        "y": 3
-      },
-      {
-        "x": 1,
-        "y": 3
-      },
-      {
-        "x": 2,
-        "y": 3
-      },
-      {
-        "x": 3,
-        "y": 3
-      },
-      {
-        "x": 4,
-        "y": 3
-      }
-    ],
-    "optimalSolutionLength": 6,
-    "parMoves": 6,
-    "targetMoves": 6,
-    "difficulty": 17,
-    "targetTime": 15,
-    "tiles": [
-      {
-        "pos": {
-          "x": 5,
-          "y": 1
-        },
-        "type": "ONE_WAY_RIGHT"
-      },
-      {
-        "pos": {
-          "x": 1,
-          "y": 4
-        },
-        "type": "ONE_WAY_RIGHT"
-      }
-    ]
-  },
-  {
-    "id": 17,
-    "worldId": 1,
-    "name": "EASY 17",
-    "width": 6,
-    "height": 6,
-    "start": {
-      "x": 5,
-      "y": 1
-    },
-    "goal": {
-      "x": 2,
-      "y": 4
-    },
-    "walls": [
-      {
-        "x": 3,
-        "y": 0
-      },
-      {
-        "x": 3,
-        "y": 1
-      },
-      {
-        "x": 3,
-        "y": 2
-      },
-      {
-        "x": 3,
-        "y": 3
-      },
-      {
-        "x": 3,
-        "y": 5
-      },
-      {
-        "x": 4,
-        "y": 2
-      },
-      {
-        "x": 2,
-        "y": 5
-      },
-      {
-        "x": 4,
-        "y": 1
-      },
-      {
-        "x": 5,
-        "y": 4
       }
     ],
     "optimalSolutionLength": 6,
@@ -983,17 +435,946 @@
     "tiles": [
       {
         "pos": {
-          "x": 4,
-          "y": 0
+          "x": 3,
+          "y": 1
         },
-        "type": "ONE_WAY_LEFT"
+        "type": "ONE_WAY_DOWN"
+      },
+      {
+        "pos": {
+          "x": 2,
+          "y": 2
+        },
+        "type": "ONE_WAY_DOWN"
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "worldId": 1,
+    "name": "TUTORIAL 7",
+    "width": 6,
+    "height": 6,
+    "start": {
+      "x": 3,
+      "y": 0
+    },
+    "goal": {
+      "x": 0,
+      "y": 3
+    },
+    "walls": [
+      {
+        "x": 3,
+        "y": 3
+      },
+      {
+        "x": 2,
+        "y": 3
+      },
+      {
+        "x": 4,
+        "y": 3
+      },
+      {
+        "x": 3,
+        "y": 2
+      },
+      {
+        "x": 3,
+        "y": 4
+      },
+      {
+        "x": 1,
+        "y": 4
+      },
+      {
+        "x": 0,
+        "y": 1
+      },
+      {
+        "x": 2,
+        "y": 4
+      },
+      {
+        "x": 2,
+        "y": 1
+      }
+    ],
+    "optimalSolutionLength": 6,
+    "parMoves": 6,
+    "targetMoves": 6,
+    "difficulty": 20,
+    "targetTime": 15,
+    "tiles": []
+  },
+  {
+    "id": 8,
+    "worldId": 1,
+    "name": "TUTORIAL 8",
+    "width": 6,
+    "height": 6,
+    "start": {
+      "x": 2,
+      "y": 0
+    },
+    "goal": {
+      "x": 4,
+      "y": 5
+    },
+    "walls": [
+      {
+        "x": 0,
+        "y": 1
+      },
+      {
+        "x": 1,
+        "y": 1
+      },
+      {
+        "x": 4,
+        "y": 1
+      },
+      {
+        "x": 5,
+        "y": 1
+      },
+      {
+        "x": 0,
+        "y": 3
+      },
+      {
+        "x": 1,
+        "y": 3
+      },
+      {
+        "x": 2,
+        "y": 3
+      },
+      {
+        "x": 3,
+        "y": 3
+      },
+      {
+        "x": 4,
+        "y": 3
+      },
+      {
+        "x": 3,
+        "y": 5
+      },
+      {
+        "x": 3,
+        "y": 1
+      }
+    ],
+    "optimalSolutionLength": 9,
+    "parMoves": 9,
+    "targetMoves": 9,
+    "difficulty": 16,
+    "targetTime": 23,
+    "tiles": [
+      {
+        "pos": {
+          "x": 0,
+          "y": 5
+        },
+        "type": "ONE_WAY_RIGHT"
+      },
+      {
+        "pos": {
+          "x": 0,
+          "y": 2
+        },
+        "type": "ONE_WAY_RIGHT"
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "worldId": 1,
+    "name": "TUTORIAL 9",
+    "width": 6,
+    "height": 6,
+    "start": {
+      "x": 2,
+      "y": 1
+    },
+    "goal": {
+      "x": 0,
+      "y": 5
+    },
+    "walls": [
+      {
+        "x": 1,
+        "y": 0
+      },
+      {
+        "x": 1,
+        "y": 1
+      },
+      {
+        "x": 1,
+        "y": 2
+      },
+      {
+        "x": 1,
+        "y": 5
+      },
+      {
+        "x": 3,
+        "y": 2
+      },
+      {
+        "x": 3,
+        "y": 3
+      },
+      {
+        "x": 3,
+        "y": 4
+      },
+      {
+        "x": 3,
+        "y": 5
+      },
+      {
+        "x": 4,
+        "y": 3
+      },
+      {
+        "x": 2,
+        "y": 4
+      }
+    ],
+    "optimalSolutionLength": 6,
+    "parMoves": 6,
+    "targetMoves": 6,
+    "difficulty": 26,
+    "targetTime": 17,
+    "tiles": []
+  },
+  {
+    "id": 10,
+    "worldId": 1,
+    "name": "TUTORIAL 10",
+    "width": 6,
+    "height": 6,
+    "start": {
+      "x": 3,
+      "y": 2
+    },
+    "goal": {
+      "x": 0,
+      "y": 5
+    },
+    "walls": [
+      {
+        "x": 3,
+        "y": 1
+      },
+      {
+        "x": 3,
+        "y": 3
+      },
+      {
+        "x": 3,
+        "y": 4
+      },
+      {
+        "x": 3,
+        "y": 5
+      },
+      {
+        "x": 0,
+        "y": 3
+      },
+      {
+        "x": 1,
+        "y": 4
+      },
+      {
+        "x": 4,
+        "y": 0
+      },
+      {
+        "x": 1,
+        "y": 3
+      },
+      {
+        "x": 0,
+        "y": 2
+      }
+    ],
+    "optimalSolutionLength": 6,
+    "parMoves": 6,
+    "targetMoves": 6,
+    "difficulty": 19,
+    "targetTime": 15,
+    "tiles": []
+  },
+  {
+    "id": 11,
+    "worldId": 1,
+    "name": "EASY 11",
+    "width": 7,
+    "height": 7,
+    "start": {
+      "x": 3,
+      "y": 2
+    },
+    "goal": {
+      "x": 0,
+      "y": 6
+    },
+    "walls": [
+      {
+        "x": 1,
+        "y": 2
+      },
+      {
+        "x": 1,
+        "y": 3
+      },
+      {
+        "x": 1,
+        "y": 4
+      },
+      {
+        "x": 1,
+        "y": 5
+      },
+      {
+        "x": 1,
+        "y": 6
+      },
+      {
+        "x": 3,
+        "y": 0
+      },
+      {
+        "x": 3,
+        "y": 1
+      },
+      {
+        "x": 3,
+        "y": 3
+      },
+      {
+        "x": 3,
+        "y": 4
+      },
+      {
+        "x": 3,
+        "y": 5
+      },
+      {
+        "x": 5,
+        "y": 0
+      },
+      {
+        "x": 5,
+        "y": 1
+      },
+      {
+        "x": 5,
+        "y": 4
+      },
+      {
+        "x": 5,
+        "y": 5
+      },
+      {
+        "x": 5,
+        "y": 6
+      },
+      {
+        "x": 1,
+        "y": 1
+      },
+      {
+        "x": 5,
+        "y": 2
+      }
+    ],
+    "optimalSolutionLength": 11,
+    "parMoves": 11,
+    "targetMoves": 11,
+    "difficulty": 27,
+    "targetTime": 27,
+    "tiles": []
+  },
+  {
+    "id": 12,
+    "worldId": 1,
+    "name": "EASY 12",
+    "width": 7,
+    "height": 7,
+    "start": {
+      "x": 5,
+      "y": 3
+    },
+    "goal": {
+      "x": 0,
+      "y": 6
+    },
+    "walls": [
+      {
+        "x": 3,
+        "y": 0
+      },
+      {
+        "x": 3,
+        "y": 1
+      },
+      {
+        "x": 3,
+        "y": 2
+      },
+      {
+        "x": 3,
+        "y": 4
+      },
+      {
+        "x": 3,
+        "y": 5
+      },
+      {
+        "x": 3,
+        "y": 6
+      },
+      {
+        "x": 4,
+        "y": 5
+      },
+      {
+        "x": 4,
+        "y": 2
+      },
+      {
+        "x": 5,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 2
+      },
+      {
+        "x": 0,
+        "y": 4
+      },
+      {
+        "x": 2,
+        "y": 5
+      },
+      {
+        "x": 2,
+        "y": 6
+      },
+      {
+        "x": 1,
+        "y": 6
+      },
+      {
+        "x": 2,
+        "y": 2
+      },
+      {
+        "x": 5,
+        "y": 4
+      }
+    ],
+    "optimalSolutionLength": 8,
+    "parMoves": 8,
+    "targetMoves": 8,
+    "difficulty": 30,
+    "targetTime": 22,
+    "tiles": []
+  },
+  {
+    "id": 13,
+    "worldId": 1,
+    "name": "EASY 13",
+    "width": 7,
+    "height": 7,
+    "start": {
+      "x": 3,
+      "y": 5
+    },
+    "goal": {
+      "x": 0,
+      "y": 0
+    },
+    "walls": [
+      {
+        "x": 1,
+        "y": 0
+      },
+      {
+        "x": 1,
+        "y": 1
+      },
+      {
+        "x": 1,
+        "y": 2
+      },
+      {
+        "x": 1,
+        "y": 3
+      },
+      {
+        "x": 1,
+        "y": 4
+      },
+      {
+        "x": 1,
+        "y": 5
+      },
+      {
+        "x": 3,
+        "y": 2
+      },
+      {
+        "x": 3,
+        "y": 3
+      },
+      {
+        "x": 3,
+        "y": 4
+      },
+      {
+        "x": 3,
+        "y": 6
+      },
+      {
+        "x": 5,
+        "y": 0
+      },
+      {
+        "x": 5,
+        "y": 3
+      },
+      {
+        "x": 5,
+        "y": 4
+      },
+      {
+        "x": 5,
+        "y": 5
+      },
+      {
+        "x": 5,
+        "y": 6
+      }
+    ],
+    "optimalSolutionLength": 10,
+    "parMoves": 10,
+    "targetMoves": 10,
+    "difficulty": 25,
+    "targetTime": 25,
+    "tiles": []
+  },
+  {
+    "id": 14,
+    "worldId": 1,
+    "name": "EASY 14",
+    "width": 7,
+    "height": 7,
+    "start": {
+      "x": 5,
+      "y": 3
+    },
+    "goal": {
+      "x": 0,
+      "y": 5
+    },
+    "walls": [
+      {
+        "x": 3,
+        "y": 3
+      },
+      {
+        "x": 3,
+        "y": 2
+      },
+      {
+        "x": 3,
+        "y": 4
+      },
+      {
+        "x": 2,
+        "y": 5
+      },
+      {
+        "x": 5,
+        "y": 4
+      },
+      {
+        "x": 6,
+        "y": 4
+      },
+      {
+        "x": 4,
+        "y": 6
+      },
+      {
+        "x": 3,
+        "y": 1
+      },
+      {
+        "x": 0,
+        "y": 3
+      },
+      {
+        "x": 2,
+        "y": 4
+      },
+      {
+        "x": 4,
+        "y": 2
+      },
+      {
+        "x": 2,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 2
+      },
+      {
+        "x": 5,
+        "y": 5
+      },
+      {
+        "x": 6,
+        "y": 2
+      }
+    ],
+    "optimalSolutionLength": 9,
+    "parMoves": 9,
+    "targetMoves": 9,
+    "difficulty": 55,
+    "targetTime": 25,
+    "tiles": []
+  },
+  {
+    "id": 15,
+    "worldId": 1,
+    "name": "EASY 15",
+    "width": 7,
+    "height": 7,
+    "start": {
+      "x": 6,
+      "y": 5
+    },
+    "goal": {
+      "x": 3,
+      "y": 0
+    },
+    "walls": [
+      {
+        "x": 1,
+        "y": 0
+      },
+      {
+        "x": 1,
+        "y": 3
+      },
+      {
+        "x": 1,
+        "y": 4
+      },
+      {
+        "x": 1,
+        "y": 5
+      },
+      {
+        "x": 1,
+        "y": 6
+      },
+      {
+        "x": 3,
+        "y": 1
+      },
+      {
+        "x": 3,
+        "y": 2
+      },
+      {
+        "x": 3,
+        "y": 3
+      },
+      {
+        "x": 3,
+        "y": 4
+      },
+      {
+        "x": 3,
+        "y": 5
+      },
+      {
+        "x": 5,
+        "y": 0
+      },
+      {
+        "x": 5,
+        "y": 3
+      },
+      {
+        "x": 5,
+        "y": 4
+      },
+      {
+        "x": 5,
+        "y": 5
+      },
+      {
+        "x": 5,
+        "y": 6
+      },
+      {
+        "x": 0,
+        "y": 6
+      },
+      {
+        "x": 4,
+        "y": 3
+      }
+    ],
+    "optimalSolutionLength": 7,
+    "parMoves": 7,
+    "targetMoves": 7,
+    "difficulty": 59,
+    "targetTime": 20,
+    "tiles": [
+      {
+        "pos": {
+          "x": 6,
+          "y": 6
+        },
+        "type": "ICE"
+      },
+      {
+        "pos": {
+          "x": 0,
+          "y": 2
+        },
+        "type": "ICE"
       },
       {
         "pos": {
           "x": 5,
-          "y": 5
+          "y": 2
         },
-        "type": "ONE_WAY_LEFT"
+        "type": "ICE"
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "worldId": 1,
+    "name": "EASY 16",
+    "width": 7,
+    "height": 7,
+    "start": {
+      "x": 4,
+      "y": 2
+    },
+    "goal": {
+      "x": 0,
+      "y": 6
+    },
+    "walls": [
+      {
+        "x": 3,
+        "y": 0
+      },
+      {
+        "x": 3,
+        "y": 1
+      },
+      {
+        "x": 3,
+        "y": 2
+      },
+      {
+        "x": 3,
+        "y": 3
+      },
+      {
+        "x": 3,
+        "y": 5
+      },
+      {
+        "x": 3,
+        "y": 6
+      },
+      {
+        "x": 1,
+        "y": 3
+      },
+      {
+        "x": 4,
+        "y": 6
+      },
+      {
+        "x": 6,
+        "y": 1
+      },
+      {
+        "x": 4,
+        "y": 1
+      },
+      {
+        "x": 2,
+        "y": 3
+      },
+      {
+        "x": 6,
+        "y": 4
+      },
+      {
+        "x": 0,
+        "y": 4
+      },
+      {
+        "x": 2,
+        "y": 5
+      },
+      {
+        "x": 6,
+        "y": 6
+      },
+      {
+        "x": 5,
+        "y": 3
+      }
+    ],
+    "optimalSolutionLength": 8,
+    "parMoves": 8,
+    "targetMoves": 8,
+    "difficulty": 25,
+    "targetTime": 20,
+    "tiles": []
+  },
+  {
+    "id": 17,
+    "worldId": 1,
+    "name": "EASY 17",
+    "width": 7,
+    "height": 7,
+    "start": {
+      "x": 0,
+      "y": 2
+    },
+    "goal": {
+      "x": 6,
+      "y": 5
+    },
+    "walls": [
+      {
+        "x": 1,
+        "y": 0
+      },
+      {
+        "x": 1,
+        "y": 1
+      },
+      {
+        "x": 1,
+        "y": 2
+      },
+      {
+        "x": 1,
+        "y": 3
+      },
+      {
+        "x": 1,
+        "y": 4
+      },
+      {
+        "x": 1,
+        "y": 5
+      },
+      {
+        "x": 3,
+        "y": 0
+      },
+      {
+        "x": 3,
+        "y": 1
+      },
+      {
+        "x": 3,
+        "y": 2
+      },
+      {
+        "x": 3,
+        "y": 3
+      },
+      {
+        "x": 3,
+        "y": 6
+      },
+      {
+        "x": 5,
+        "y": 0
+      },
+      {
+        "x": 5,
+        "y": 1
+      },
+      {
+        "x": 5,
+        "y": 2
+      },
+      {
+        "x": 5,
+        "y": 3
+      },
+      {
+        "x": 5,
+        "y": 6
+      },
+      {
+        "x": 5,
+        "y": 5
+      }
+    ],
+    "optimalSolutionLength": 13,
+    "parMoves": 13,
+    "targetMoves": 13,
+    "difficulty": 64,
+    "targetTime": 32,
+    "tiles": [
+      {
+        "pos": {
+          "x": 0,
+          "y": 1
+        },
+        "type": "SPIKE_TRAP",
+        "activeIntervalMs": 1000,
+        "idleIntervalMs": 1500,
+        "timeOffsetMs": 500
+      },
+      {
+        "pos": {
+          "x": 0,
+          "y": 0
+        },
+        "type": "SPIKE_TRAP",
+        "activeIntervalMs": 1500,
+        "idleIntervalMs": 1000,
+        "timeOffsetMs": 0
+      },
+      {
+        "pos": {
+          "x": 6,
+          "y": 4
+        },
+        "type": "SPIKE_TRAP",
+        "activeIntervalMs": 2000,
+        "idleIntervalMs": 1000,
+        "timeOffsetMs": 1500
       }
     ]
   },
@@ -1001,93 +1382,130 @@
     "id": 18,
     "worldId": 1,
     "name": "EASY 18",
-    "width": 6,
-    "height": 6,
+    "width": 7,
+    "height": 7,
     "start": {
-      "x": 4,
+      "x": 0,
       "y": 1
     },
     "goal": {
-      "x": 1,
-      "y": 5
+      "x": 6,
+      "y": 0
     },
     "walls": [
       {
-        "x": 2,
-        "y": 1
+        "x": 3,
+        "y": 0
       },
       {
         "x": 3,
         "y": 1
+      },
+      {
+        "x": 3,
+        "y": 3
+      },
+      {
+        "x": 3,
+        "y": 4
+      },
+      {
+        "x": 3,
+        "y": 5
+      },
+      {
+        "x": 3,
+        "y": 6
       },
       {
         "x": 5,
-        "y": 1
-      },
-      {
-        "x": 2,
-        "y": 3
-      },
-      {
-        "x": 3,
-        "y": 3
+        "y": 2
       },
       {
         "x": 4,
         "y": 3
       },
       {
-        "x": 5,
+        "x": 2,
         "y": 3
       },
       {
-        "x": 1,
-        "y": 4
+        "x": 0,
+        "y": 2
+      },
+      {
+        "x": 4,
+        "y": 5
       },
       {
         "x": 2,
-        "y": 0
-      }
-    ],
-    "optimalSolutionLength": 9,
-    "parMoves": 9,
-    "targetMoves": 9,
-    "difficulty": 67,
-    "targetTime": 24,
-    "tiles": [
-      {
-        "pos": {
-          "x": 3,
-          "y": 4
-        },
-        "type": "ONE_WAY_UP"
+        "y": 5
       },
       {
-        "pos": {
-          "x": 1,
-          "y": 1
-        },
-        "type": "ONE_WAY_UP"
+        "x": 5,
+        "y": 5
+      },
+      {
+        "x": 1,
+        "y": 1
+      },
+      {
+        "x": 6,
+        "y": 6
       }
-    ]
+    ],
+    "optimalSolutionLength": 11,
+    "parMoves": 11,
+    "targetMoves": 11,
+    "difficulty": 54,
+    "targetTime": 29,
+    "tiles": []
   },
   {
     "id": 19,
     "worldId": 1,
     "name": "EASY 19",
-    "width": 6,
-    "height": 6,
+    "width": 7,
+    "height": 7,
     "start": {
-      "x": 5,
-      "y": 4
+      "x": 0,
+      "y": 6
     },
     "goal": {
-      "x": 0,
-      "y": 5
+      "x": 1,
+      "y": 0
     },
     "walls": [
       {
+        "x": 0,
+        "y": 1
+      },
+      {
+        "x": 1,
+        "y": 1
+      },
+      {
+        "x": 2,
+        "y": 1
+      },
+      {
         "x": 3,
+        "y": 1
+      },
+      {
+        "x": 4,
+        "y": 1
+      },
+      {
+        "x": 5,
+        "y": 1
+      },
+      {
+        "x": 0,
+        "y": 3
+      },
+      {
+        "x": 1,
         "y": 3
       },
       {
@@ -1095,20 +1513,12 @@
         "y": 3
       },
       {
+        "x": 3,
+        "y": 3
+      },
+      {
         "x": 4,
         "y": 3
-      },
-      {
-        "x": 3,
-        "y": 2
-      },
-      {
-        "x": 1,
-        "y": 3
-      },
-      {
-        "x": 3,
-        "y": 1
       },
       {
         "x": 5,
@@ -1116,110 +1526,147 @@
       },
       {
         "x": 0,
-        "y": 0
-      }
-    ],
-    "optimalSolutionLength": 6,
-    "parMoves": 6,
-    "targetMoves": 6,
-    "difficulty": 66,
-    "targetTime": 15,
-    "tiles": [
-      {
-        "pos": {
-          "x": 3,
-          "y": 5
-        },
-        "type": "ONE_WAY_LEFT"
+        "y": 5
       },
       {
-        "pos": {
-          "x": 4,
-          "y": 5
-        },
-        "type": "ONE_WAY_LEFT"
+        "x": 3,
+        "y": 5
+      },
+      {
+        "x": 4,
+        "y": 5
+      },
+      {
+        "x": 5,
+        "y": 5
+      },
+      {
+        "x": 6,
+        "y": 5
       }
-    ]
+    ],
+    "optimalSolutionLength": 17,
+    "parMoves": 17,
+    "targetMoves": 17,
+    "difficulty": 56,
+    "targetTime": 41,
+    "tiles": []
   },
   {
     "id": 20,
     "worldId": 1,
     "name": "EASY 20",
-    "width": 6,
-    "height": 6,
+    "width": 7,
+    "height": 7,
     "start": {
-      "x": 3,
-      "y": 3
+      "x": 6,
+      "y": 0
     },
     "goal": {
       "x": 0,
-      "y": 0
+      "y": 2
     },
     "walls": [
       {
+        "x": 3,
+        "y": 3
+      },
+      {
+        "x": 2,
+        "y": 3
+      },
+      {
+        "x": 4,
+        "y": 3
+      },
+      {
+        "x": 3,
+        "y": 2
+      },
+      {
+        "x": 3,
+        "y": 4
+      },
+      {
+        "x": 2,
+        "y": 5
+      },
+      {
+        "x": 3,
+        "y": 5
+      },
+      {
         "x": 1,
+        "y": 2
+      },
+      {
+        "x": 4,
+        "y": 6
+      },
+      {
+        "x": 2,
+        "y": 1
+      },
+      {
+        "x": 0,
+        "y": 5
+      },
+      {
+        "x": 5,
         "y": 0
       },
       {
         "x": 1,
-        "y": 1
+        "y": 5
       },
       {
-        "x": 1,
+        "x": 6,
+        "y": 2
+      },
+      {
+        "x": 5,
         "y": 2
       },
       {
         "x": 1,
         "y": 3
-      },
-      {
-        "x": 1,
-        "y": 4
-      },
-      {
-        "x": 3,
-        "y": 0
-      },
-      {
-        "x": 3,
-        "y": 1
-      },
-      {
-        "x": 3,
-        "y": 2
-      },
-      {
-        "x": 3,
-        "y": 5
       }
     ],
     "optimalSolutionLength": 10,
     "parMoves": 10,
     "targetMoves": 10,
-    "difficulty": 65,
-    "targetTime": 26,
+    "difficulty": 39,
+    "targetTime": 27,
     "tiles": [
       {
         "pos": {
-          "x": 4,
+          "x": 1,
+          "y": 6
+        },
+        "type": "SPIKE_TRAP",
+        "activeIntervalMs": 2000,
+        "idleIntervalMs": 1000,
+        "timeOffsetMs": 1500
+      },
+      {
+        "pos": {
+          "x": 0,
           "y": 4
         },
-        "type": "PORTAL",
-        "linkedPos": {
-          "x": 2,
-          "y": 3
-        }
+        "type": "SPIKE_TRAP",
+        "activeIntervalMs": 1500,
+        "idleIntervalMs": 1500,
+        "timeOffsetMs": 500
       },
       {
         "pos": {
           "x": 2,
-          "y": 3
+          "y": 2
         },
-        "type": "PORTAL",
-        "linkedPos": {
-          "x": 4,
-          "y": 4
-        }
+        "type": "SPIKE_TRAP",
+        "activeIntervalMs": 1500,
+        "idleIntervalMs": 2000,
+        "timeOffsetMs": 0
       }
     ]
   },
@@ -1227,15 +1674,15 @@
     "id": 21,
     "worldId": 2,
     "name": "NORMAL 21",
-    "width": 7,
-    "height": 7,
+    "width": 8,
+    "height": 8,
     "start": {
       "x": 0,
       "y": 0
     },
     "goal": {
-      "x": 6,
-      "y": 6
+      "x": 7,
+      "y": 7
     },
     "walls": [
       {
@@ -1263,6 +1710,10 @@
         "y": 1
       },
       {
+        "x": 7,
+        "y": 1
+      },
+      {
         "x": 1,
         "y": 3
       },
@@ -1287,6 +1738,10 @@
         "y": 3
       },
       {
+        "x": 7,
+        "y": 3
+      },
+      {
         "x": 1,
         "y": 5
       },
@@ -1308,107 +1763,145 @@
       },
       {
         "x": 6,
+        "y": 5
+      },
+      {
+        "x": 7,
         "y": 5
       }
     ],
-    "optimalSolutionLength": 12,
-    "parMoves": 12,
-    "targetMoves": 12,
-    "difficulty": 23,
-    "targetTime": 28,
+    "optimalSolutionLength": 14,
+    "parMoves": 14,
+    "targetMoves": 14,
+    "difficulty": 75,
+    "targetTime": 33,
     "tiles": []
   },
   {
     "id": 22,
     "worldId": 2,
     "name": "NORMAL 22",
-    "width": 7,
-    "height": 7,
+    "width": 8,
+    "height": 8,
     "start": {
-      "x": 2,
-      "y": 6
+      "x": 6,
+      "y": 2
     },
     "goal": {
-      "x": 4,
-      "y": 1
+      "x": 0,
+      "y": 4
     },
     "walls": [
       {
-        "x": 3,
-        "y": 0
+        "x": 4,
+        "y": 4
       },
       {
         "x": 3,
+        "y": 4
+      },
+      {
+        "x": 5,
+        "y": 4
+      },
+      {
+        "x": 4,
+        "y": 3
+      },
+      {
+        "x": 3,
+        "y": 7
+      },
+      {
+        "x": 2,
         "y": 1
       },
       {
+        "x": 7,
+        "y": 0
+      },
+      {
+        "x": 6,
+        "y": 5
+      },
+      {
+        "x": 2,
+        "y": 5
+      },
+      {
         "x": 3,
-        "y": 2
+        "y": 5
+      },
+      {
+        "x": 1,
+        "y": 0
+      },
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 4,
+        "y": 7
+      },
+      {
+        "x": 1,
+        "y": 6
+      },
+      {
+        "x": 2,
+        "y": 6
       },
       {
         "x": 3,
         "y": 3
       },
       {
-        "x": 3,
-        "y": 4
-      },
-      {
-        "x": 3,
-        "y": 5
-      },
-      {
-        "x": 2,
-        "y": 0
-      },
-      {
-        "x": 5,
-        "y": 1
-      },
-      {
-        "x": 4,
-        "y": 4
-      },
-      {
-        "x": 5,
-        "y": 0
+        "x": 6,
+        "y": 3
       },
       {
         "x": 6,
-        "y": 2
+        "y": 4
       },
       {
-        "x": 5,
-        "y": 5
+        "x": 0,
+        "y": 6
       }
     ],
-    "optimalSolutionLength": 11,
-    "parMoves": 11,
-    "targetMoves": 11,
-    "difficulty": 35,
-    "targetTime": 29,
+    "optimalSolutionLength": 8,
+    "parMoves": 8,
+    "targetMoves": 8,
+    "difficulty": 71,
+    "targetTime": 20,
     "tiles": [
       {
         "pos": {
-          "x": 5,
-          "y": 4
+          "x": 4,
+          "y": 5
         },
-        "type": "PORTAL",
-        "linkedPos": {
-          "x": 6,
-          "y": 0
-        }
+        "type": "ONE_WAY_DOWN"
       },
       {
         "pos": {
-          "x": 6,
-          "y": 0
+          "x": 1,
+          "y": 3
         },
-        "type": "PORTAL",
-        "linkedPos": {
-          "x": 5,
+        "type": "ONE_WAY_DOWN"
+      },
+      {
+        "pos": {
+          "x": 2,
+          "y": 7
+        },
+        "type": "ONE_WAY_UP"
+      },
+      {
+        "pos": {
+          "x": 2,
           "y": 4
-        }
+        },
+        "type": "ONE_WAY_UP"
       }
     ]
   },
@@ -1416,92 +1909,159 @@
     "id": 23,
     "worldId": 2,
     "name": "NORMAL 23",
-    "width": 7,
-    "height": 7,
+    "width": 8,
+    "height": 8,
     "start": {
       "x": 3,
-      "y": 0
+      "y": 3
     },
     "goal": {
-      "x": 0,
-      "y": 4
+      "x": 7,
+      "y": 7
     },
     "walls": [
       {
+        "x": 4,
+        "y": 4
+      },
+      {
+        "x": 3,
+        "y": 4
+      },
+      {
+        "x": 4,
+        "y": 3
+      },
+      {
+        "x": 2,
+        "y": 6
+      },
+      {
+        "x": 0,
+        "y": 0
+      },
+      {
+        "x": 6,
+        "y": 2
+      },
+      {
         "x": 3,
         "y": 1
+      },
+      {
+        "x": 7,
+        "y": 4
+      },
+      {
+        "x": 1,
+        "y": 4
       },
       {
         "x": 3,
         "y": 2
       },
       {
-        "x": 3,
-        "y": 3
+        "x": 0,
+        "y": 7
       },
       {
-        "x": 3,
+        "x": 5,
         "y": 4
       },
       {
-        "x": 3,
-        "y": 5
+        "x": 1,
+        "y": 7
+      },
+      {
+        "x": 6,
+        "y": 4
       },
       {
         "x": 0,
-        "y": 1
-      },
-      {
-        "x": 6,
-        "y": 5
-      },
-      {
-        "x": 4,
-        "y": 5
-      },
-      {
-        "x": 4,
-        "y": 0
-      },
-      {
-        "x": 6,
-        "y": 3
-      },
-      {
-        "x": 4,
-        "y": 4
-      },
-      {
-        "x": 4,
         "y": 6
       },
       {
-        "x": 2,
-        "y": 1
+        "x": 1,
+        "y": 6
+      },
+      {
+        "x": 6,
+        "y": 6
+      },
+      {
+        "x": 6,
+        "y": 0
+      },
+      {
+        "x": 5,
+        "y": 6
+      },
+      {
+        "x": 3,
+        "y": 7
       }
     ],
-    "optimalSolutionLength": 7,
-    "parMoves": 7,
-    "targetMoves": 7,
-    "difficulty": 70,
-    "targetTime": 18,
-    "tiles": []
+    "optimalSolutionLength": 10,
+    "parMoves": 10,
+    "targetMoves": 10,
+    "difficulty": 75,
+    "targetTime": 25,
+    "tiles": [
+      {
+        "pos": {
+          "x": 4,
+          "y": 6
+        },
+        "type": "ONE_WAY_RIGHT"
+      },
+      {
+        "pos": {
+          "x": 1,
+          "y": 1
+        },
+        "type": "ONE_WAY_RIGHT"
+      }
+    ]
   },
   {
     "id": 24,
     "worldId": 2,
     "name": "NORMAL 24",
-    "width": 7,
-    "height": 7,
+    "width": 8,
+    "height": 8,
     "start": {
-      "x": 3,
+      "x": 1,
       "y": 6
     },
     "goal": {
-      "x": 6,
-      "y": 2
+      "x": 5,
+      "y": 0
     },
     "walls": [
+      {
+        "x": 1,
+        "y": 0
+      },
+      {
+        "x": 1,
+        "y": 1
+      },
+      {
+        "x": 1,
+        "y": 4
+      },
+      {
+        "x": 1,
+        "y": 5
+      },
+      {
+        "x": 1,
+        "y": 7
+      },
+      {
+        "x": 3,
+        "y": 0
+      },
       {
         "x": 3,
         "y": 1
@@ -1523,91 +2083,85 @@
         "y": 5
       },
       {
-        "x": 0,
-        "y": 0
-      },
-      {
-        "x": 4,
-        "y": 1
-      },
-      {
-        "x": 5,
-        "y": 5
-      },
-      {
-        "x": 4,
-        "y": 4
-      },
-      {
-        "x": 1,
-        "y": 2
-      },
-      {
-        "x": 2,
-        "y": 2
-      },
-      {
-        "x": 2,
-        "y": 5
-      },
-      {
-        "x": 5,
-        "y": 4
-      },
-      {
-        "x": 5,
-        "y": 2
-      },
-      {
         "x": 3,
-        "y": 0
+        "y": 6
+      },
+      {
+        "x": 5,
+        "y": 2
+      },
+      {
+        "x": 5,
+        "y": 3
+      },
+      {
+        "x": 5,
+        "y": 4
+      },
+      {
+        "x": 5,
+        "y": 5
+      },
+      {
+        "x": 5,
+        "y": 6
+      },
+      {
+        "x": 5,
+        "y": 7
+      },
+      {
+        "x": 2,
+        "y": 3
       }
     ],
-    "optimalSolutionLength": 7,
-    "parMoves": 7,
-    "targetMoves": 7,
-    "difficulty": 28,
-    "targetTime": 17,
-    "tiles": [
-      {
-        "pos": {
-          "x": 5,
-          "y": 1
-        },
-        "type": "ICE"
-      },
-      {
-        "pos": {
-          "x": 1,
-          "y": 3
-        },
-        "type": "ICE"
-      },
-      {
-        "pos": {
-          "x": 0,
-          "y": 4
-        },
-        "type": "ICE"
-      }
-    ]
+    "optimalSolutionLength": 12,
+    "parMoves": 12,
+    "targetMoves": 12,
+    "difficulty": 61,
+    "targetTime": 30,
+    "tiles": []
   },
   {
     "id": 25,
     "worldId": 2,
     "name": "NORMAL 25",
-    "width": 7,
-    "height": 7,
+    "width": 8,
+    "height": 8,
     "start": {
-      "x": 6,
-      "y": 4
+      "x": 4,
+      "y": 6
     },
     "goal": {
-      "x": 1,
-      "y": 6
+      "x": 0,
+      "y": 1
     },
     "walls": [
       {
+        "x": 1,
+        "y": 0
+      },
+      {
+        "x": 1,
+        "y": 1
+      },
+      {
+        "x": 1,
+        "y": 2
+      },
+      {
+        "x": 1,
+        "y": 3
+      },
+      {
+        "x": 1,
+        "y": 4
+      },
+      {
+        "x": 1,
+        "y": 7
+      },
+      {
         "x": 3,
         "y": 0
       },
@@ -1626,13 +2180,21 @@
       {
         "x": 3,
         "y": 4
+      },
+      {
+        "x": 3,
+        "y": 5
       },
       {
         "x": 3,
         "y": 6
       },
       {
-        "x": 4,
+        "x": 5,
+        "y": 0
+      },
+      {
+        "x": 5,
         "y": 1
       },
       {
@@ -1640,43 +2202,35 @@
         "y": 2
       },
       {
-        "x": 4,
-        "y": 0
+        "x": 5,
+        "y": 3
+      },
+      {
+        "x": 5,
+        "y": 4
       },
       {
         "x": 5,
         "y": 5
       },
       {
-        "x": 1,
-        "y": 5
-      },
-      {
-        "x": 1,
-        "y": 3
+        "x": 5,
+        "y": 7
       },
       {
         "x": 4,
-        "y": 4
-      },
-      {
-        "x": 0,
-        "y": 0
+        "y": 2
       },
       {
         "x": 6,
-        "y": 3
-      },
-      {
-        "x": 0,
-        "y": 6
+        "y": 2
       }
     ],
-    "optimalSolutionLength": 9,
-    "parMoves": 9,
-    "targetMoves": 9,
-    "difficulty": 30,
-    "targetTime": 24,
+    "optimalSolutionLength": 11,
+    "parMoves": 11,
+    "targetMoves": 11,
+    "difficulty": 62,
+    "targetTime": 28,
     "tiles": []
   },
   {

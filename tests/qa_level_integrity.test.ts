@@ -30,7 +30,7 @@ import type { LevelData } from '../src/game/types';
 
 function makeLevel(overrides: Partial<LevelData> = {}): LevelData {
   return {
-    id: 9000,
+    id: 1,
     worldId: 1,
     name: 'QA Base Level',
     width: 4,

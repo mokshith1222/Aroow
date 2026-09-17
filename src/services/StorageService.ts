@@ -1,6 +1,7 @@
 import type { CosmeticCategory } from '../data/InventoryTypes';
 
 export interface LevelRecord {
+  completed: boolean;
   stars: number;
   bestMoves: number;
   bestTime: number;
@@ -240,6 +241,7 @@ export class StorageService {
       const record = data.levelRecords[key];
       if (!isNaN(levelId) && record && typeof record.stars === 'number') {
         validLevelRecords[levelId] = {
+          completed: typeof record.completed === 'boolean' ? record.completed : (record.stars > 0 || !!record.completedAt),
           stars: record.stars,
           bestMoves: typeof record.bestMoves === 'number' ? record.bestMoves : 9999,
           bestTime: typeof record.bestTime === 'number' ? record.bestTime : 9999,
@@ -294,6 +296,18 @@ export class StorageService {
     return this.data.levelRecords;
   }
 
+  /**
+   * Determine if a specific level is unlocked.
+   * Level 1 is always unlocked.
+   * Level N is unlocked only if Level N-1 has been COMPLETED.
+   * This is separate from stage unlocking (which requires all stars).
+   */
+  public isLevelUnlocked(levelId: number): boolean {
+    if (levelId <= 1) return true;
+    const prevRecord = this.data.levelRecords[levelId - 1];
+    return !!prevRecord && prevRecord.completed === true;
+  }
+
   public saveLevelCompletion(
     levelId: number,
     moves: number,
@@ -310,6 +324,7 @@ export class StorageService {
     const actualPointsToAward = (existing || alreadyRewarded) ? 0 : pointsEarned;
     
     const newRecord: LevelRecord = {
+      completed: true,
       stars: Math.max(existing?.stars || 0, stars),
       bestMoves: existing ? Math.min(existing.bestMoves, moves) : moves,
       bestTime: existing ? Math.min(existing.bestTime, time) : time,

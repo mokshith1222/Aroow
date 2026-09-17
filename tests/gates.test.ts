@@ -105,7 +105,7 @@ describe('Phase 30 — Cosmetic Winning Gate System', () => {
 
       const engine = GameEngine.getInstance();
       const testLevel: LevelData = {
-        id: 999,
+        id: 1,
         width: 3,
         height: 3,
         start: { x: 0, y: 0 },
@@ -122,7 +122,7 @@ describe('Phase 30 — Cosmetic Winning Gate System', () => {
     it('triggers goal reach and marks level complete', () => {
       const engine = GameEngine.getInstance();
       const testLevel: LevelData = {
-        id: 998,
+        id: 1,
         width: 3,
         height: 1,
         start: { x: 0, y: 0 },
