@@ -1,0 +1,103 @@
+/* Achievement Toast Notifications (Phase 34) */
+
+.achievement-toast-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 9999;
+  pointer-events: auto;
+  cursor: pointer;
+  width: 90%;
+  max-width: 380px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.35s ease;
+}
+
+.achievement-toast-container.toast-enter {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0) scale(1);
+}
+
+.achievement-toast-container.toast-exit {
+  opacity: 0;
+  transform: translateX(-50%) translateY(-24px) scale(0.96);
+  pointer-events: none;
+}
+
+.achievement-toast-card {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(18, 22, 31, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 215, 0, 0.4);
+  border-radius: 14px;
+  padding: 12px 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 15px rgba(255, 215, 0, 0.15);
+  animation: toastGlow 2.5s ease-in-out infinite alternate;
+}
+
+@keyframes toastGlow {
+  0% {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45), 0 0 12px rgba(255, 215, 0, 0.12);
+  }
+  100% {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.28);
+  }
+}
+
+.achievement-toast-icon-wrap {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2), rgba(255, 165, 0, 0.08));
+  border: 1px solid rgba(255, 215, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.achievement-toast-icon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.achievement-toast-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  overflow: hidden;
+  text-align: left;
+}
+
+.achievement-toast-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: #ffd700;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.achievement-toast-title {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.achievement-toast-desc {
+  margin: 0;
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.25;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

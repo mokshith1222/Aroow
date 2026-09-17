@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Aroow</string>
+    <string name="title_activity_main">Aroow</string>
+    <string name="package_name">com.aroow.puzzle</string>
+    <string name="custom_url_scheme">com.aroow.puzzle</string>
+</resources>

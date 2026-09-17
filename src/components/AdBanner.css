@@ -1,0 +1,61 @@
+/* ─── AdBanner ─────────────────────────────────────────────────────────────
+   Non-intrusive banner ad placeholder, shown outside gameplay screens only.
+   Designed to fit the game's dark, premium aesthetic without feeling cheap.
+──────────────────────────────────────────────────────────────────────────── */
+
+.ad-banner-container {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 0 16px 12px;
+  box-sizing: border-box;
+}
+
+.ad-banner-inner {
+  position: relative;
+  width: 100%;
+  height: 52px;
+  background: var(--surface-color, rgba(255, 255, 255, 0.04));
+  border: 1px solid var(--border-color, rgba(255, 255, 255, 0.08));
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  opacity: 0;
+  animation: ad-banner-fadein 0.4s ease 0.3s forwards;
+}
+
+@keyframes ad-banner-fadein {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ad-banner-tag {
+  position: absolute;
+  top: 4px;
+  left: 6px;
+  font-size: 0.55rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text-muted, rgba(255, 255, 255, 0.3));
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.ad-banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.ad-banner-placeholder-text {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--text-muted, rgba(255, 255, 255, 0.2));
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  user-select: none;
+}

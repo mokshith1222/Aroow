@@ -1,0 +1,1107 @@
+Starting mass regeneration of 500 levels with hardcore presets...
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 38, Target bounds: 5-15)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 47, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 44, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 5-15)
+Generated level 1/500 (Moves: 6, Mechanics: 1)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 36, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 49, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 52, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 51, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 40, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+Generated level 2/500 (Moves: 5, Mechanics: 0)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 51, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 44, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 42, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 40, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 52, Target bounds: 5-15)
+Generated level 3/500 (Moves: 6, Mechanics: 1)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 41, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 40, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 42, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 44, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 44, Target bounds: 5-15)
+Generated level 4/500 (Moves: 5, Mechanics: 0)
+[Attempt 2991] Rejected: Unsolvable
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 44, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 44, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 42, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 44, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 39, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 25, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+Generated level 5/500 (Moves: 5, Mechanics: 1)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 47, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 42, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 49, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 38, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 31, Target bounds: 5-15)
+Generated level 6/500 (Moves: 7, Mechanics: 1)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 50, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 49, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 28, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 41, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 42, Target bounds: 5-15)
+Generated level 7/500 (Moves: 5, Mechanics: 0)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 37, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 50, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 30, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 41, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 42, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 44, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 5-15)
+Generated level 8/500 (Moves: 6, Mechanics: 1)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 41, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 29, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 40, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 38, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 39, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 49, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 51, Target bounds: 5-15)
+Generated level 9/500 (Moves: 6, Mechanics: 0)
+[Attempt 2991] Rejected: Unsolvable
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 50, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 49, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 56, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 50, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 49, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 39, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 49, Target bounds: 5-15)
+Generated level 10/500 (Moves: 5, Mechanics: 0)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 38, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 33, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 36, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 49, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 5-15)
+Generated level 11/500 (Moves: 8, Mechanics: 0)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 41, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 40, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 40, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 35, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 42, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 38, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 52, Target bounds: 5-15)
+Generated level 12/500 (Moves: 5, Mechanics: 0)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 35, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 39, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 47, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 52, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 39, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 50, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 34, Target bounds: 5-15)
+Generated level 13/500 (Moves: 5, Mechanics: 0)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 42, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 42, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 49, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 58, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 49, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 40, Target bounds: 5-15)
+Generated level 14/500 (Moves: 7, Mechanics: 0)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 27, Target bounds: 5-15)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 50, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 47, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 49, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 44, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 34, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 50, Target bounds: 5-15)
+Generated level 15/500 (Moves: 6, Mechanics: 0)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 36, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 37, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 50, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 40, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 42, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 38, Target bounds: 5-15)
+Generated level 16/500 (Moves: 6, Mechanics: 0)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 35, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 49, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 49, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 50, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+Generated level 17/500 (Moves: 6, Mechanics: 0)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 51, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 44, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 51, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 51, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 49, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 28, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 41, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 33, Target bounds: 5-15)
+Generated level 18/500 (Moves: 6, Mechanics: 0)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 30, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 39, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 40, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 39, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 40, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 54, Target bounds: 5-15)
+Generated level 19/500 (Moves: 5, Mechanics: 0)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 42, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 39, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 35, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 50, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 44, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 30, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 49, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 49, Target bounds: 5-15)
+Generated level 20/500 (Moves: 5, Mechanics: 1)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 58, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 44, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 54, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 52, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 39, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 47, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 34, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 38, Target bounds: 5-15)
+[Attempt 2999] Rejected: Unsolvable
+Generated level 21/500 (Moves: 5, Mechanics: 0)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 47, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 37, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 36, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 30, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 53, Target bounds: 5-15)
+Generated level 22/500 (Moves: 5, Mechanics: 1)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 39, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 38, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 59, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 44, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 40, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 49, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 5-15)
+Generated level 23/500 (Moves: 6, Mechanics: 1)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 41, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 39, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 44, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 41, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 33, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 42, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 5-15)
+Generated level 24/500 (Moves: 6, Mechanics: 0)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 41, Target bounds: 5-15)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 41, Target bounds: 5-15)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 47, Target bounds: 5-15)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 24, Target bounds: 5-15)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 5-15)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 39, Target bounds: 5-15)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 5-15)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 5-15)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 41, Target bounds: 5-15)
+Generated level 25/500 (Moves: 5, Mechanics: 0)
+[Attempt 2995] Rejected: Unsolvable
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2997] Rejected: Unsolvable
+Generated level 26/500 (Moves: 7, Mechanics: 2)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 52, Target bounds: 16-30)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 16-30)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 65, Target bounds: 16-30)
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 56, Target bounds: 16-30)
+Generated level 27/500 (Moves: 7, Mechanics: 0)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 55, Target bounds: 16-30)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 41, Target bounds: 16-30)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 16-30)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 55, Target bounds: 16-30)
+Generated level 28/500 (Moves: 7, Mechanics: 0)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 16-30)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 16-30)
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 55, Target bounds: 16-30)
+Generated level 29/500 (Moves: 8, Mechanics: 2)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 37, Target bounds: 16-30)
+[Attempt 2994] Rejected: Unsolvable
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 62, Target bounds: 16-30)
+Generated level 30/500 (Moves: 9, Mechanics: 0)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 52, Target bounds: 16-30)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 16-30)
+[Attempt 2995] Rejected: Unsolvable
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 57, Target bounds: 16-30)
+[Attempt 2999] Rejected: Unsolvable
+Generated level 31/500 (Moves: 9, Mechanics: 2)
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 62, Target bounds: 16-30)
+Generated level 32/500 (Moves: 7, Mechanics: 0)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 55, Target bounds: 16-30)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 44, Target bounds: 16-30)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 54, Target bounds: 16-30)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 61, Target bounds: 16-30)
+Generated level 33/500 (Moves: 9, Mechanics: 2)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 52, Target bounds: 16-30)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 50, Target bounds: 16-30)
+[Attempt 2994] Rejected: Unsolvable
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 51, Target bounds: 16-30)
+Generated level 34/500 (Moves: 8, Mechanics: 2)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 59, Target bounds: 16-30)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 53, Target bounds: 16-30)
+Generated level 35/500 (Moves: 7, Mechanics: 2)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 58, Target bounds: 16-30)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 57, Target bounds: 16-30)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 56, Target bounds: 16-30)
+[Attempt 2997] Rejected: Unsolvable
+Generated level 36/500 (Moves: 9, Mechanics: 0)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 62, Target bounds: 16-30)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 59, Target bounds: 16-30)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 53, Target bounds: 16-30)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 65, Target bounds: 16-30)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 44, Target bounds: 16-30)
+Generated level 37/500 (Moves: 7, Mechanics: 2)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 51, Target bounds: 16-30)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 44, Target bounds: 16-30)
+Generated level 38/500 (Moves: 11, Mechanics: 2)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 57, Target bounds: 16-30)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 52, Target bounds: 16-30)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 53, Target bounds: 16-30)
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 55, Target bounds: 16-30)
+[Attempt 2999] Rejected: Unsolvable
+Generated level 39/500 (Moves: 8, Mechanics: 2)
+[Attempt 2991] Rejected: Unsolvable
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 50, Target bounds: 16-30)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 58, Target bounds: 16-30)
+Generated level 40/500 (Moves: 7, Mechanics: 2)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 47, Target bounds: 16-30)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 56, Target bounds: 16-30)
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2998] Rejected: Unsolvable
+Generated level 41/500 (Moves: 9, Mechanics: 2)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 49, Target bounds: 16-30)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 58, Target bounds: 16-30)
+[Attempt 2995] Rejected: Unsolvable
+[Attempt 2996] Rejected: Unsolvable
+Generated level 42/500 (Moves: 9, Mechanics: 0)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 60, Target bounds: 16-30)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 57, Target bounds: 16-30)
+[Attempt 2998] Rejected: Unsolvable
+[Attempt 2999] Pushed candidate! isPerfect: true (Score: 29, Target bounds: 16-30)
+Generated level 43/500 (Moves: 7, Mechanics: 0)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 16-30)
+Generated level 44/500 (Moves: 10, Mechanics: 2)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 56, Target bounds: 16-30)
+Generated level 45/500 (Moves: 9, Mechanics: 0)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 50, Target bounds: 16-30)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 49, Target bounds: 16-30)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 53, Target bounds: 16-30)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 31, Target bounds: 16-30)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 50, Target bounds: 16-30)
+Generated level 46/500 (Moves: 9, Mechanics: 2)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 16-30)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2995] Rejected: Unsolvable
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 60, Target bounds: 16-30)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 54, Target bounds: 16-30)
+Generated level 47/500 (Moves: 8, Mechanics: 0)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 16-30)
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 50, Target bounds: 16-30)
+Generated level 48/500 (Moves: 7, Mechanics: 2)
+[Attempt 2991] Rejected: Unsolvable
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 55, Target bounds: 16-30)
+[Attempt 2994] Rejected: Unsolvable
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 51, Target bounds: 16-30)
+[Attempt 2999] Rejected: Unsolvable
+Generated level 49/500 (Moves: 14, Mechanics: 2)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 53, Target bounds: 16-30)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 58, Target bounds: 16-30)
+Generated level 50/500 (Moves: 7, Mechanics: 2)
+[Attempt 2995] Rejected: Unsolvable
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 64, Target bounds: 16-30)
+Generated level 51/500 (Moves: 9, Mechanics: 0)
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2995] Rejected: Unsolvable
+[Attempt 2999] Rejected: Unsolvable
+Generated level 52/500 (Moves: 9, Mechanics: 0)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 16-30)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 16-30)
+[Attempt 2998] Rejected: Unsolvable
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 48, Target bounds: 16-30)
+Generated level 53/500 (Moves: 7, Mechanics: 0)
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 53, Target bounds: 16-30)
+[Attempt 2995] Rejected: Unsolvable
+Generated level 54/500 (Moves: 7, Mechanics: 2)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 47, Target bounds: 16-30)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 47, Target bounds: 16-30)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 51, Target bounds: 16-30)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 56, Target bounds: 16-30)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 50, Target bounds: 16-30)
+Generated level 55/500 (Moves: 7, Mechanics: 2)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 51, Target bounds: 16-30)
+[Attempt 2996] Rejected: Unsolvable
+Generated level 56/500 (Moves: 7, Mechanics: 0)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 39, Target bounds: 16-30)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 47, Target bounds: 16-30)
+[Attempt 2998] Rejected: Unsolvable
+Generated level 57/500 (Moves: 7, Mechanics: 2)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 16-30)
+[Attempt 2993] Rejected: Unsolvable
+Generated level 58/500 (Moves: 7, Mechanics: 2)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 57, Target bounds: 16-30)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 16-30)
+Generated level 59/500 (Moves: 7, Mechanics: 0)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 53, Target bounds: 16-30)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 59, Target bounds: 16-30)
+[Attempt 2995] Rejected: Unsolvable
+Generated level 60/500 (Moves: 8, Mechanics: 2)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 59, Target bounds: 16-30)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 61, Target bounds: 16-30)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 50, Target bounds: 16-30)
+Generated level 61/500 (Moves: 9, Mechanics: 2)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 70, Target bounds: 16-30)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 53, Target bounds: 16-30)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 57, Target bounds: 16-30)
+Generated level 62/500 (Moves: 7, Mechanics: 2)
+[Attempt 2991] Rejected: Unsolvable
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 59, Target bounds: 16-30)
+Generated level 63/500 (Moves: 10, Mechanics: 0)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 55, Target bounds: 16-30)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 46, Target bounds: 16-30)
+Generated level 64/500 (Moves: 9, Mechanics: 0)
+[Attempt 2995] Rejected: Unsolvable
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 55, Target bounds: 16-30)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 52, Target bounds: 16-30)
+Generated level 65/500 (Moves: 13, Mechanics: 0)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 45, Target bounds: 16-30)
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 59, Target bounds: 16-30)
+Generated level 66/500 (Moves: 8, Mechanics: 2)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 51, Target bounds: 16-30)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2994] Rejected: Unsolvable
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 47, Target bounds: 16-30)
+Generated level 67/500 (Moves: 9, Mechanics: 2)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 59, Target bounds: 16-30)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 51, Target bounds: 16-30)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 38, Target bounds: 16-30)
+[Attempt 2998] Rejected: Unsolvable
+[Attempt 2999] Rejected: Unsolvable
+Generated level 68/500 (Moves: 7, Mechanics: 0)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 52, Target bounds: 16-30)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 52, Target bounds: 16-30)
+[Attempt 2996] Rejected: Unsolvable
+Generated level 69/500 (Moves: 7, Mechanics: 0)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 51, Target bounds: 16-30)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 42, Target bounds: 16-30)
+[Attempt 2995] Rejected: Unsolvable
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 56, Target bounds: 16-30)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 50, Target bounds: 16-30)
+Generated level 70/500 (Moves: 8, Mechanics: 0)
+[Attempt 2991] Rejected: Unsolvable
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 55, Target bounds: 16-30)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 44, Target bounds: 16-30)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 66, Target bounds: 16-30)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 51, Target bounds: 16-30)
+Generated level 71/500 (Moves: 9, Mechanics: 0)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 47, Target bounds: 16-30)
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2995] Rejected: Unsolvable
+[Attempt 2996] Rejected: Unsolvable
+Generated level 72/500 (Moves: 7, Mechanics: 0)
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 52, Target bounds: 16-30)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 56, Target bounds: 16-30)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 16-30)
+Generated level 73/500 (Moves: 7, Mechanics: 0)
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 65, Target bounds: 16-30)
+[Attempt 2997] Rejected: Unsolvable
+Generated level 74/500 (Moves: 9, Mechanics: 2)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 43, Target bounds: 16-30)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 66, Target bounds: 16-30)
+Generated level 75/500 (Moves: 10, Mechanics: 0)
+[Attempt 2995] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 76/500 (Moves: 12, Mechanics: 0)
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 77/500 (Moves: 12, Mechanics: 0)
+[Attempt 2995] Rejected: Unsolvable
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 78/500 (Moves: 16, Mechanics: 3)
+[Attempt 2992] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 74, Target bounds: 31-45)
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 79/500 (Moves: 14, Mechanics: 0)
+[Attempt 2991] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 80/500 (Moves: 10, Mechanics: 2)
+Generated level 81/500 (Moves: 10, Mechanics: 3)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2996] Rejected: Unsolvable
+Generated level 82/500 (Moves: 10, Mechanics: 0)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 62, Target bounds: 31-45)
+[Attempt 2992] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 55, Target bounds: 31-45)
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2995] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 83/500 (Moves: 10, Mechanics: 0)
+[Attempt 2991] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 69, Target bounds: 31-45)
+Generated level 84/500 (Moves: 10, Mechanics: 3)
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 85/500 (Moves: 11, Mechanics: 3)
+[Attempt 2995] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Rejected: Unsolvable
+Generated level 86/500 (Moves: 10, Mechanics: 0)
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2995] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 50, Target bounds: 31-45)
+[Attempt 2997] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 87/500 (Moves: 10, Mechanics: 2)
+[Attempt 2993] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 88/500 (Moves: 12, Mechanics: 0)
+[Attempt 2991] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2993] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2997] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 89/500 (Moves: 10, Mechanics: 0)
+[Attempt 2997] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 90/500 (Moves: 10, Mechanics: 0)
+[Attempt 2995] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 91/500 (Moves: 18, Mechanics: 2)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 65, Target bounds: 31-45)
+[Attempt 2995] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2996] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 92/500 (Moves: 12, Mechanics: 0)
+[Attempt 2992] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2996] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 93/500 (Moves: 12, Mechanics: 0)
+[Attempt 2995] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 65, Target bounds: 31-45)
+[Attempt 2997] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 94/500 (Moves: 14, Mechanics: 3)
+[Attempt 2997] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 95/500 (Moves: 10, Mechanics: 0)
+[Attempt 2992] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2993] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 54, Target bounds: 31-45)
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 96/500 (Moves: 9, Mechanics: 3)
+[Attempt 2991] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Rejected: Unsolvable
+Generated level 97/500 (Moves: 10, Mechanics: 0)
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2997] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 98/500 (Moves: 11, Mechanics: 3)
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 78, Target bounds: 31-45)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 69, Target bounds: 31-45)
+Generated level 99/500 (Moves: 12, Mechanics: 3)
+[Attempt 2991] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2996] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 100/500 (Moves: 11, Mechanics: 0)
+[Attempt 2994] Rejected: Unsolvable
+Generated level 101/500 (Moves: 10, Mechanics: 0)
+[Attempt 2996] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 102/500 (Moves: 10, Mechanics: 0)
+[Attempt 2992] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2997] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 64, Target bounds: 31-45)
+Generated level 103/500 (Moves: 11, Mechanics: 2)
+[Attempt 2992] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 104/500 (Moves: 15, Mechanics: 3)
+[Attempt 2992] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2995] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2996] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2997] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 105/500 (Moves: 10, Mechanics: 0)
+[Attempt 2991] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2995] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2997] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 106/500 (Moves: 18, Mechanics: 0)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 107/500 (Moves: 19, Mechanics: 2)
+[Attempt 2993] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 108/500 (Moves: 6, Mechanics: 3)
+[Attempt 2995] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 109/500 (Moves: 10, Mechanics: 0)
+[Attempt 2993] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 110/500 (Moves: 11, Mechanics: 0)
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 111/500 (Moves: 10, Mechanics: 3)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 61, Target bounds: 31-45)
+[Attempt 2993] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2996] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 112/500 (Moves: 14, Mechanics: 0)
+[Attempt 2992] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2996] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2998] Rejected: Unsolvable
+Generated level 113/500 (Moves: 9, Mechanics: 3)
+[Attempt 2991] Rejected: Unsolvable
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2994] Rejected: Unsolvable
+[Attempt 2995] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 114/500 (Moves: 10, Mechanics: 2)
+[Attempt 2996] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 115/500 (Moves: 13, Mechanics: 3)
+[Attempt 2995] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 116/500 (Moves: 10, Mechanics: 0)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 55, Target bounds: 31-45)
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2995] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 117/500 (Moves: 10, Mechanics: 2)
+Generated level 118/500 (Moves: 14, Mechanics: 0)
+[Attempt 2992] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2993] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2999] Rejected: Unsolvable
+Generated level 119/500 (Moves: 10, Mechanics: 0)
+[Attempt 2992] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2995] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2997] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 120/500 (Moves: 12, Mechanics: 3)
+[Attempt 2993] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 121/500 (Moves: 10, Mechanics: 0)
+[Attempt 2992] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2993] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2997] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 122/500 (Moves: 12, Mechanics: 0)
+Generated level 123/500 (Moves: 12, Mechanics: 3)
+[Attempt 2991] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2995] Rejected: Unsolvable
+Generated level 124/500 (Moves: 10, Mechanics: 0)
+[Attempt 2991] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 125/500 (Moves: 10, Mechanics: 0)
+[Attempt 2991] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 126/500 (Moves: 11, Mechanics: 2)
+[Attempt 2991] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 78, Target bounds: 31-45)
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 127/500 (Moves: 10, Mechanics: 0)
+[Attempt 2995] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2996] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 53, Target bounds: 31-45)
+Generated level 128/500 (Moves: 10, Mechanics: 0)
+[Attempt 2993] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2995] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 129/500 (Moves: 10, Mechanics: 3)
+[Attempt 2991] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2995] Rejected: Unsolvable
+[Attempt 2996] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2999] Rejected: Unsolvable
+Generated level 130/500 (Moves: 12, Mechanics: 2)
+[Attempt 2991] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2992] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2996] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 131/500 (Moves: 12, Mechanics: 0)
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2997] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 132/500 (Moves: 10, Mechanics: 0)
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2997] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Rejected: Unsolvable
+Generated level 133/500 (Moves: 10, Mechanics: 0)
+[Attempt 2991] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 134/500 (Moves: 14, Mechanics: 0)
+[Attempt 2991] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2997] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 135/500 (Moves: 12, Mechanics: 0)
+[Attempt 2991] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 136/500 (Moves: 9, Mechanics: 2)
+[Attempt 2991] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 137/500 (Moves: 13, Mechanics: 3)
+[Attempt 2993] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2995] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 138/500 (Moves: 10, Mechanics: 0)
+[Attempt 2993] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2994] Rejected: Unsolvable
+[Attempt 2996] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2997] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 139/500 (Moves: 14, Mechanics: 0)
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 140/500 (Moves: 10, Mechanics: 0)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2994] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 65, Target bounds: 31-45)
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 141/500 (Moves: 10, Mechanics: 0)
+[Attempt 2992] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 142/500 (Moves: 4, Mechanics: 4)
+[Attempt 2996] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 47, Target bounds: 31-45)
+Generated level 143/500 (Moves: 10, Mechanics: 3)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 60, Target bounds: 31-45)
+[Attempt 2996] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2998] Rejected: Unsolvable
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 144/500 (Moves: 18, Mechanics: 0)
+[Attempt 2992] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2995] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2999] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 145/500 (Moves: 10, Mechanics: 0)
+[Attempt 2992] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2995] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 62, Target bounds: 31-45)
+[Attempt 2998] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 146/500 (Moves: 12, Mechanics: 0)
+Generated level 147/500 (Moves: 10, Mechanics: 0)
+[Attempt 2991] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2992] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2996] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2997] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 148/500 (Moves: 14, Mechanics: 0)
+[Attempt 2993] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2996] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+Generated level 149/500 (Moves: 2, Mechanics: 3)
+[Attempt 2992] Rejected: Trivial (moves: 12 < 7 or turns: 1 < 2)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 62, Target bounds: 31-45)
+Generated level 150/500 (Moves: 12, Mechanics: 0)
+[Attempt 2992] Pushed candidate! isPerfect: true (Score: 58, Target bounds: 46-60)
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2994] Rejected: Unsolvable
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2997] Rejected: Unsolvable
+Generated level 151/500 (Moves: 14, Mechanics: 0)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 66, Target bounds: 46-60)
+[Attempt 2994] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+Generated level 152/500 (Moves: 20, Mechanics: 2)
+[Attempt 2991] Rejected: Unsolvable
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2994] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 69, Target bounds: 46-60)
+[Attempt 2997] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+Generated level 153/500 (Moves: 16, Mechanics: 0)
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 68, Target bounds: 46-60)
+[Attempt 2995] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 67, Target bounds: 46-60)
+[Attempt 2997] Rejected: Unsolvable
+Generated level 154/500 (Moves: 14, Mechanics: 0)
+[Attempt 2991] Rejected: Unsolvable
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 69, Target bounds: 46-60)
+[Attempt 2995] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 65, Target bounds: 46-60)
+[Attempt 2998] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2999] Rejected: Unsolvable
+Generated level 155/500 (Moves: 16, Mechanics: 0)
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2996] Rejected: Unsolvable
+Generated level 156/500 (Moves: 18, Mechanics: 2)
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 75, Target bounds: 46-60)
+Generated level 157/500 (Moves: 13, Mechanics: 2)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 75, Target bounds: 46-60)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 74, Target bounds: 46-60)
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2997] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 82, Target bounds: 46-60)
+Generated level 158/500 (Moves: 18, Mechanics: 2)
+[Attempt 2991] Rejected: Trivial (moves: 14 < 9 or turns: 1 < 3)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 71, Target bounds: 46-60)
+[Attempt 2997] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+Generated level 159/500 (Moves: 14, Mechanics: 0)
+[Attempt 2994] Rejected: Unsolvable
+[Attempt 2995] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 62, Target bounds: 46-60)
+[Attempt 2998] Rejected: Unsolvable
+[Attempt 2999] Rejected: Unsolvable
+Generated level 160/500 (Moves: 14, Mechanics: 4)
+[Attempt 2993] Pushed candidate! isPerfect: true (Score: 58, Target bounds: 46-60)
+[Attempt 2996] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2998] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+Generated level 161/500 (Moves: 14, Mechanics: 2)
+[Attempt 2991] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2998] Rejected: Trivial (moves: 14 < 9 or turns: 1 < 3)
+Generated level 162/500 (Moves: 14, Mechanics: 0)
+[Attempt 2991] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2993] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 77, Target bounds: 46-60)
+Generated level 163/500 (Moves: 14, Mechanics: 0)
+[Attempt 2991] Rejected: Unsolvable
+Generated level 164/500 (Moves: 16, Mechanics: 0)
+[Attempt 2992] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 68, Target bounds: 46-60)
+[Attempt 2999] Rejected: Unsolvable
+Generated level 165/500 (Moves: 18, Mechanics: 0)
+[Attempt 2991] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 61, Target bounds: 46-60)
+[Attempt 2994] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+Generated level 166/500 (Moves: 14, Mechanics: 0)
+[Attempt 2993] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2999] Pushed candidate! isPerfect: true (Score: 53, Target bounds: 46-60)
+Generated level 167/500 (Moves: 12, Mechanics: 3)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 76, Target bounds: 46-60)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 67, Target bounds: 46-60)
+[Attempt 2995] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 70, Target bounds: 46-60)
+Generated level 168/500 (Moves: 18, Mechanics: 0)
+[Attempt 2991] Rejected: Unsolvable
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 72, Target bounds: 46-60)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 69, Target bounds: 46-60)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 75, Target bounds: 46-60)
+Generated level 169/500 (Moves: 14, Mechanics: 4)
+[Attempt 2991] Rejected: Unsolvable
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2995] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+Generated level 170/500 (Moves: 14, Mechanics: 0)
+[Attempt 2991] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 66, Target bounds: 46-60)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 72, Target bounds: 46-60)
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 79, Target bounds: 46-60)
+Generated level 171/500 (Moves: 14, Mechanics: 0)
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 66, Target bounds: 46-60)
+[Attempt 2995] Rejected: Unsolvable
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 67, Target bounds: 46-60)
+[Attempt 2997] Rejected: Trivial (moves: 14 < 9 or turns: 1 < 3)
+[Attempt 2999] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+Generated level 172/500 (Moves: 14, Mechanics: 0)
+[Attempt 2994] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2996] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 77, Target bounds: 46-60)
+Generated level 173/500 (Moves: 16, Mechanics: 0)
+[Attempt 2991] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2995] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2999] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+Generated level 174/500 (Moves: 15, Mechanics: 2)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 72, Target bounds: 46-60)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 74, Target bounds: 46-60)
+[Attempt 2999] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+Generated level 175/500 (Moves: 14, Mechanics: 4)
+[Attempt 2996] Rejected: Trivial (moves: 14 < 9 or turns: 1 < 3)
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2999] Rejected: Unsolvable
+Generated level 176/500 (Moves: 20, Mechanics: 4)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 68, Target bounds: 46-60)
+[Attempt 2993] Rejected: Trivial (moves: 14 < 9 or turns: 1 < 3)
+[Attempt 2995] Rejected: Unsolvable
+[Attempt 2997] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+Generated level 177/500 (Moves: 14, Mechanics: 0)
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 72, Target bounds: 46-60)
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2998] Rejected: Unsolvable
+Generated level 178/500 (Moves: 18, Mechanics: 0)
+[Attempt 2991] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 83, Target bounds: 46-60)
+[Attempt 2999] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+Generated level 179/500 (Moves: 14, Mechanics: 4)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 70, Target bounds: 46-60)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 73, Target bounds: 46-60)
+Generated level 180/500 (Moves: 14, Mechanics: 4)
+[Attempt 2991] Pushed candidate! isPerfect: false (Score: 62, Target bounds: 46-60)
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2995] Rejected: Unsolvable
+[Attempt 2996] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+Generated level 181/500 (Moves: 14, Mechanics: 0)
+[Attempt 2994] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2995] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2999] Rejected: Unsolvable
+Generated level 182/500 (Moves: 14, Mechanics: 2)
+[Attempt 2991] Rejected: Unsolvable
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2999] Rejected: Unsolvable
+Generated level 183/500 (Moves: 14, Mechanics: 0)
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2998] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+Generated level 184/500 (Moves: 14, Mechanics: 0)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 63, Target bounds: 46-60)
+[Attempt 2996] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2999] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+Generated level 185/500 (Moves: 13, Mechanics: 4)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2993] Rejected: Trivial (moves: 14 < 9 or turns: 1 < 3)
+[Attempt 2998] Rejected: Unsolvable
+Generated level 186/500 (Moves: 14, Mechanics: 0)
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2994] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2995] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2998] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2999] Rejected: Unsolvable
+Generated level 187/500 (Moves: 14, Mechanics: 0)
+[Attempt 2994] Rejected: Unsolvable
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 65, Target bounds: 46-60)
+Generated level 188/500 (Moves: 16, Mechanics: 0)
+[Attempt 2991] Rejected: Unsolvable
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 63, Target bounds: 46-60)
+[Attempt 2993] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2995] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2998] Rejected: Unsolvable
+Generated level 189/500 (Moves: 14, Mechanics: 4)
+[Attempt 2991] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2995] Rejected: Unsolvable
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 69, Target bounds: 46-60)
+Generated level 190/500 (Moves: 20, Mechanics: 0)
+[Attempt 2993] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2994] Rejected: Unsolvable
+[Attempt 2997] Rejected: Unsolvable
+Generated level 191/500 (Moves: 16, Mechanics: 4)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2993] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2995] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2998] Rejected: Unsolvable
+Generated level 192/500 (Moves: 15, Mechanics: 4)
+Generated level 193/500 (Moves: 16, Mechanics: 0)
+Generated level 194/500 (Moves: 16, Mechanics: 0)
+[Attempt 2991] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2993] Pushed candidate! isPerfect: false (Score: 63, Target bounds: 46-60)
+Generated level 195/500 (Moves: 14, Mechanics: 4)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2994] Rejected: Unsolvable
+[Attempt 2996] Rejected: Unsolvable
+Generated level 196/500 (Moves: 16, Mechanics: 0)
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2994] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2995] Rejected: Trivial (moves: 14 < 9 or turns: 1 < 3)
+[Attempt 2997] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+Generated level 197/500 (Moves: 14, Mechanics: 2)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2994] Rejected: Unsolvable
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 67, Target bounds: 46-60)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 74, Target bounds: 46-60)
+[Attempt 2997] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+Generated level 198/500 (Moves: 16, Mechanics: 3)
+[Attempt 2991] Rejected: Unsolvable
+[Attempt 2993] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2999] Rejected: Unsolvable
+Generated level 199/500 (Moves: 18, Mechanics: 2)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2994] Rejected: Unsolvable
+[Attempt 2995] Rejected: Unsolvable
+[Attempt 2998] Rejected: Unsolvable
+Generated level 200/500 (Moves: 16, Mechanics: 2)
+[Attempt 2991] Rejected: Unsolvable
+[Attempt 2992] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2994] Rejected: Unsolvable
+[Attempt 2998] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+Generated level 201/500 (Moves: 14, Mechanics: 0)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 63, Target bounds: 46-60)
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 65, Target bounds: 46-60)
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 67, Target bounds: 46-60)
+Generated level 202/500 (Moves: 13, Mechanics: 4)
+[Attempt 2997] Rejected: Unsolvable
+Generated level 203/500 (Moves: 14, Mechanics: 0)
+[Attempt 2991] Rejected: Unsolvable
+[Attempt 2994] Pushed candidate! isPerfect: false (Score: 66, Target bounds: 46-60)
+[Attempt 2995] Pushed candidate! isPerfect: false (Score: 61, Target bounds: 46-60)
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2998] Rejected: Unsolvable
+Generated level 204/500 (Moves: 14, Mechanics: 0)
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 85, Target bounds: 46-60)
+[Attempt 2994] Rejected: Unsolvable
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2999] Pushed candidate! isPerfect: false (Score: 71, Target bounds: 46-60)
+Generated level 205/500 (Moves: 14, Mechanics: 2)
+[Attempt 2995] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2998] Rejected: Unsolvable
+[Attempt 2999] Pushed candidate! isPerfect: true (Score: 58, Target bounds: 46-60)
+Generated level 206/500 (Moves: 16, Mechanics: 0)
+[Attempt 2994] Rejected: Trivial (moves: 14 < 9 or turns: 1 < 3)
+[Attempt 2997] Rejected: Unsolvable
+Generated level 207/500 (Moves: 12, Mechanics: 4)
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2998] Rejected: Unsolvable
+[Attempt 2999] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+Generated level 208/500 (Moves: 14, Mechanics: 3)
+[Attempt 2994] Rejected: Unsolvable
+[Attempt 2996] Rejected: Unsolvable
+Generated level 209/500 (Moves: 16, Mechanics: 0)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2993] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2994] Rejected: Unsolvable
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 67, Target bounds: 46-60)
+[Attempt 2999] Rejected: Unsolvable
+Generated level 210/500 (Moves: 14, Mechanics: 4)
+[Attempt 2991] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2997] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+Generated level 211/500 (Moves: 16, Mechanics: 0)
+[Attempt 2993] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2996] Pushed candidate! isPerfect: false (Score: 73, Target bounds: 46-60)
+[Attempt 2997] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2998] Rejected: Unsolvable
+Generated level 212/500 (Moves: 16, Mechanics: 0)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2997] Pushed candidate! isPerfect: false (Score: 72, Target bounds: 46-60)
+Generated level 213/500 (Moves: 16, Mechanics: 0)
+[Attempt 2995] Rejected: Unsolvable
+Generated level 214/500 (Moves: 16, Mechanics: 2)
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2994] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2998] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2999] Rejected: Unsolvable
+Generated level 215/500 (Moves: 14, Mechanics: 2)
+[Attempt 2991] Rejected: Unsolvable
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2995] Rejected: Unsolvable
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 67, Target bounds: 46-60)
+Generated level 216/500 (Moves: 16, Mechanics: 0)
+[Attempt 2996] Rejected: Unsolvable
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 72, Target bounds: 46-60)
+[Attempt 2999] Rejected: Unsolvable
+Generated level 217/500 (Moves: 16, Mechanics: 0)
+[Attempt 2992] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2999] Rejected: Unsolvable
+Generated level 218/500 (Moves: 16, Mechanics: 0)
+[Attempt 2993] Rejected: Trivial (moves: 14 < 9 or turns: 1 < 3)
+[Attempt 2995] Rejected: Unsolvable
+[Attempt 2998] Rejected: Unsolvable
+[Attempt 2999] Rejected: Unsolvable
+Generated level 219/500 (Moves: 18, Mechanics: 4)
+[Attempt 2991] Rejected: Unsolvable
+[Attempt 2992] Rejected: Unsolvable
+[Attempt 2994] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2995] Rejected: Unsolvable
+[Attempt 2996] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2997] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2999] Rejected: Unsolvable
+Generated level 220/500 (Moves: 21, Mechanics: 4)
+[Attempt 2992] Rejected: Trivial (moves: 14 < 9 or turns: 2 < 3)
+[Attempt 2997] Rejected: Unsolvable
+Generated level 221/500 (Moves: 16, Mechanics: 0)
+[Attempt 2991] Rejected: Unsolvable
+[Attempt 2992] Pushed candidate! isPerfect: false (Score: 63, Target bounds: 46-60)
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2998] Pushed candidate! isPerfect: false (Score: 72, Target bounds: 46-60)
+Generated level 222/500 (Moves: 14, Mechanics: 0)
+[Attempt 2993] Rejected: Unsolvable
+[Attempt 2999] Rejected: Unsolvable
+Generated level 223/500 (Moves: 16, Mechanics: 2)
+[Attempt 2997] Rejected: Unsolvable
+[Attempt 2998] Rejected: Unsolvable
+Generated level 224/500 (Moves: 16, Mechanics: 0)
+[Attempt 2999] Rejected: Unsolvable
+Generated level 225/500 (Moves: 17, Mechanics: 4)
+Error: Failed to generate a valid level for ID 226 after 3000 attempts.
+    at LevelGenerator.generate (C:\Users\moksh\OneDrive\Desktop\Aroow game\src\game\LevelGenerator.ts:159:13)
+    at main (C:\Users\moksh\OneDrive\Desktop\Aroow game\regenerate_levels.ts:17:34)
+    at <anonymous> (C:\Users\moksh\OneDrive\Desktop\Aroow game\regenerate_levels.ts:28:1)
+    at ModuleJob.run (node:internal/modules/esm/module_job:439:25)
+    at async node:internal/modules/esm/loader:643:26
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:101:5)
