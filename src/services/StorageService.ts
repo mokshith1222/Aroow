@@ -721,6 +721,7 @@ export class StorageService {
     const actualPointsToAward = (existing || alreadyRewarded) ? 0 : pointsEarned;
     
     const newRecord: LevelRecord = {
+      completed: true,
       stars: Math.max(existing?.stars || 0, stars),
       bestMoves: existing ? Math.min(existing.bestMoves, moves) : moves,
       bestTime: existing ? Math.min(existing.bestTime, time) : time,
