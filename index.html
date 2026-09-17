@@ -12,6 +12,19 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="description" content="Aroow — a minimalist arrow puzzle game" />
     <title>Aroow</title>
+    <script>
+      try {
+        var data = localStorage.getItem('arrow_puzzle_save') || localStorage.getItem('arrow_puzzle_save_v1');
+        var colorMode = 'dark'; // default
+        if (data) {
+          var parsed = JSON.parse(data);
+          if (parsed && parsed.colorMode === 'light') {
+            colorMode = 'light';
+          }
+        }
+        document.documentElement.setAttribute('data-color-mode', colorMode);
+      } catch (e) {}
+    </script>
   </head>
   <body>
     <div id="root"></div>

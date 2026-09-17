@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { LevelLoader } from '../game/LevelLoader';
-import { WorldManager } from '../data/worlds';
-import { StorageService } from '../services/StorageService';
+import React, { useState, useEffect } from 'react';
+import { ProgressionManager, Stage } from '../game/ProgressionManager';
 import { AudioService } from '../services/AudioService';
 import { HapticService } from '../services/HapticService';
 
@@ -16,19 +14,26 @@ export const LevelSelector: React.FC<LevelSelectorProps> = ({
   onSelectLevel,
   onBack
 }) => {
-  const storage = StorageService.getInstance();
   const audio = AudioService.getInstance();
   const haptics = HapticService.getInstance();
 
-  const unlockedLevel = storage.getUnlockedLevel();
+  const [stages, setStages] = useState<Stage[]>([]);
+  const [selectedStageId, setSelectedStageId] = useState<number>(1);
 
-  // Find world of current level or unlocked level to auto-select
-  const initialWorld = WorldManager.getWorldForLevel(currentLevelId || unlockedLevel || 1);
-  const [selectedWorldId, setSelectedWorldId] = useState<number>(initialWorld.id);
+  useEffect(() => {
+    const loadedStages = ProgressionManager.getProgressionTree();
+    setStages(loadedStages);
 
-  const allWorlds = WorldManager.getAllWorlds(LevelLoader.MAX_LEVELS);
-  const selectedWorld = WorldManager.getWorld(selectedWorldId) || allWorlds[0];
-  const currentWorldLevels = LevelLoader.getLevelsByWorld(selectedWorldId);
+    // Auto-select the stage containing the current level
+    const currentStage = loadedStages.find(
+      s => currentLevelId >= s.startLevel && currentLevelId <= s.endLevel
+    );
+    if (currentStage) {
+      setSelectedStageId(currentStage.stageId);
+    }
+  }, [currentLevelId]);
+
+  const selectedStage = stages.find(s => s.stageId === selectedStageId) || stages[0];
 
   const handleBack = () => {
     audio.playButton();
@@ -36,11 +41,11 @@ export const LevelSelector: React.FC<LevelSelectorProps> = ({
     onBack();
   };
 
-  const handleWorldSelect = (worldId: number, isUnlocked: boolean) => {
+  const handleStageSelect = (stageId: number, isUnlocked: boolean) => {
     if (isUnlocked) {
       audio.playButton();
       haptics.button();
-      setSelectedWorldId(worldId);
+      setSelectedStageId(stageId);
     } else {
       audio.playInvalid();
       haptics.invalid();
@@ -53,6 +58,8 @@ export const LevelSelector: React.FC<LevelSelectorProps> = ({
     onSelectLevel(levelId);
   };
 
+  if (!stages.length) return null;
+
   return (
     <div className="screen-container level-selector-screen">
       <header className="screen-header">
@@ -64,31 +71,43 @@ export const LevelSelector: React.FC<LevelSelectorProps> = ({
         <div className="screen-title-group">
           <h1 className="screen-title">SELECT LEVEL</h1>
           <span className="screen-subtitle">
-            {selectedWorld.name} • Lv {selectedWorld.startLevel}–{selectedWorld.endLevel}
+            {selectedStage?.stageName} • ★ {selectedStage?.totalStarsEarned}/{selectedStage?.totalStarsAvailable}
           </span>
         </div>
         <div style={{ width: 40 }} />
       </header>
 
       {/* World Tabs */}
-      <div className="world-tabs" role="tablist" aria-label="World selection">
-        {allWorlds.map(world => {
-          const isUnlocked = WorldManager.isWorldUnlocked(world.id, unlockedLevel);
-          const isSelected = world.id === selectedWorldId;
-
+      <div className="world-tabs" role="tablist" aria-label="Stage selection">
+        {stages.map(stage => {
+          const isSelected = stage.stageId === selectedStageId;
+          
           return (
             <button
-              key={world.id}
+              key={stage.stageId}
               role="tab"
               aria-selected={isSelected}
-              className={`world-tab ${isSelected ? 'active' : ''} ${!isUnlocked ? 'world-locked' : ''}`}
-              onClick={() => handleWorldSelect(world.id, isUnlocked)}
-              title={isUnlocked ? world.name : `Locked (Reach Level ${world.startLevel})`}
+              className={`world-tab ${isSelected ? 'active' : ''} ${!stage.unlockedStatus ? 'world-locked' : ''}`}
+              onClick={() => handleStageSelect(stage.stageId, stage.unlockedStatus)}
+              title={stage.unlockedStatus ? stage.stageName : stage.unlockRequirement || 'Locked'}
             >
-              <span className="world-tab-icon">
-                {isUnlocked ? world.icon : '🔒'}
-              </span>
-              <span className="world-tab-name">{world.name}</span>
+              <div className="world-tab-content" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '4px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <span className="world-tab-icon">
+                    {stage.unlockedStatus ? stage.icon : '🔒'}
+                  </span>
+                  <span className="world-tab-name">{stage.stageName}</span>
+                </div>
+                {stage.unlockedStatus ? (
+                  <span style={{ fontSize: '0.75rem', opacity: 0.8 }}>
+                    ★ {stage.totalStarsEarned}/{stage.totalStarsAvailable}
+                  </span>
+                ) : (
+                  <span style={{ fontSize: '0.7rem', opacity: 0.6, whiteSpace: 'nowrap' }}>
+                    {stage.unlockRequirement}
+                  </span>
+                )}
+              </div>
             </button>
           );
         })}
@@ -96,39 +115,35 @@ export const LevelSelector: React.FC<LevelSelectorProps> = ({
 
       {/* Level Grid */}
       <div className="level-grid" role="region" aria-label="Levels">
-        {currentWorldLevels.map(lvl => {
-          const isUnlocked = lvl.id <= unlockedLevel;
-          const isCurrent = lvl.id === currentLevelId;
-          const record = storage.getLevelRecord(lvl.id);
-          const isCompleted = !!(record && record.stars > 0);
-          const stars = record?.stars || 0;
+        {selectedStage?.levels.map(lvl => {
+          const isCurrent = lvl.levelId === currentLevelId;
 
           return (
             <button
-              key={lvl.id}
-              className={`level-card ${isUnlocked ? 'unlocked' : 'locked'} ${
+              key={lvl.levelId}
+              className={`level-card ${selectedStage.unlockedStatus ? 'unlocked' : 'locked'} ${
                 isCurrent ? 'current' : ''
-              } ${isCompleted ? 'completed' : ''}`}
-              disabled={!isUnlocked}
-              onClick={() => handleLevelClick(lvl.id)}
-              aria-label={`Level ${lvl.id}, ${isCompleted ? `${stars} stars earned` : isUnlocked ? 'Unlocked' : 'Locked'}`}
+              } ${lvl.completionStatus ? 'completed' : ''}`}
+              disabled={!selectedStage.unlockedStatus}
+              onClick={() => handleLevelClick(lvl.levelId)}
+              aria-label={`Level ${lvl.levelId}, ${lvl.completionStatus ? `${lvl.earnedStars} stars earned` : selectedStage.unlockedStatus ? 'Unlocked' : 'Locked'}`}
             >
               {/* Completed Checkmark Indicator */}
-              {isCompleted && (
+              {lvl.completionStatus && (
                 <span className="level-completed-badge" title="Completed">
                   ✓
                 </span>
               )}
 
               {/* Level Number */}
-              <span className="level-number">{lvl.id}</span>
+              <span className="level-number">{lvl.levelId}</span>
 
               {/* Status / Best Stars */}
-              {isUnlocked ? (
+              {selectedStage.unlockedStatus ? (
                 <div className="level-stars" aria-hidden="true">
-                  <span className={stars >= 1 ? 'star-filled' : 'star-empty'}>★</span>
-                  <span className={stars >= 2 ? 'star-filled' : 'star-empty'}>★</span>
-                  <span className={stars >= 3 ? 'star-filled' : 'star-empty'}>★</span>
+                  <span className={lvl.earnedStars >= 1 ? 'star-filled' : 'star-empty'}>★</span>
+                  <span className={lvl.earnedStars >= 2 ? 'star-filled' : 'star-empty'}>★</span>
+                  <span className={lvl.earnedStars >= 3 ? 'star-filled' : 'star-empty'}>★</span>
                 </div>
               ) : (
                 <svg

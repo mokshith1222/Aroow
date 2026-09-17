@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useCallback } from 'react';
 import type { Direction, LevelData, Position } from '../game/types';
 import { GridCell } from './GridCell';
+import { Saw } from './Saw';
 
 interface GameBoardProps {
   level: LevelData;
@@ -238,6 +239,40 @@ export const GameBoard: React.FC<GameBoardProps> = ({
             );
           })
         )}
+
+        {/* Phase 3 Route Labels Overlay */}
+        {level.routes && level.routes.map((route, i) => (
+          <div
+            key={`route-${i}`}
+            className={`route-label route-${route.text.toLowerCase()}`}
+            style={{
+              position: 'absolute',
+              top: `${(route.pos.y / level.height) * 100}%`,
+              left: `${(route.pos.x / level.width) * 100}%`,
+              width: `${(1 / level.width) * 100}%`,
+              height: `${(1 / level.height) * 100}%`,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              pointerEvents: 'none',
+              zIndex: 15,
+              opacity: 0.85
+            }}
+          >
+            <span style={{ fontSize: '0.7em', fontWeight: 'bold', color: route.maxStars === 3 ? '#fbbf24' : '#9ca3af', textShadow: '0 1px 2px rgba(0,0,0,0.8)' }}>
+              {route.text}
+            </span>
+            <span style={{ fontSize: '0.4em', textAlign: 'center', color: '#f3f4f6', lineHeight: 1.1, marginTop: '2px', textShadow: '0 1px 2px rgba(0,0,0,0.8)' }}>
+              {route.description}
+            </span>
+          </div>
+        ))}
+        
+        {/* Phase 4 Hazard Overlays */}
+        {level.tiles?.filter(t => t.type === 'MOVING_SAW').map((tile, i) => (
+          <Saw key={`saw-${i}`} tile={tile} level={level} />
+        ))}
       </div>
     </div>
   );

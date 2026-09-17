@@ -14,7 +14,8 @@ export type AnalyticsEventType =
   | 'rewarded_ad_completed'
   | 'rewarded_ad_opportunity'
   | 'daily_started'
-  | 'endless_started';
+  | 'endless_started'
+  | 'hazard_death';
 
 export interface AnalyticsEventRecord {
   name: AnalyticsEventType;

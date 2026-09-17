@@ -30,65 +30,28 @@ export class DifficultyManager {
    * Calculate the star rating (1–3) for a completed level.
    */
   public static calculateStars(
-    moves: number,
-    parMoves: number,
+    _moves: number,
+    _parMoves: number,
     mistakes: number = 0,
-    elapsedSeconds: number = 0,
-    level?: LevelData | null
+    _elapsedSeconds: number = 0,
+    _level?: LevelData | null
   ): number {
-    if (moves <= 0) return 1;
-    if (parMoves <= 0) return 3;
-
-    const thresholds = this.getThresholds(parMoves, level);
-
-    // --- Factor 1: Move efficiency (0–100) ---
-    let moveScore: number;
-    if (moves <= thresholds.threeStarMoves) {
-      moveScore = 100;
-    } else if (moves <= thresholds.twoStarMoves) {
-      // Linear interpolation between 3-star and 2-star boundary
-      const range = thresholds.twoStarMoves - thresholds.threeStarMoves;
-      const over = moves - thresholds.threeStarMoves;
-      moveScore = 100 - (over / Math.max(range, 1)) * 34;
-    } else {
-      // Beyond 2-star threshold, decay toward 0
-      const beyondTwo = moves - thresholds.twoStarMoves;
-      moveScore = Math.max(0, 66 - beyondTwo * 8);
+    let stars = 0;
+    // 0 collisions = 3 stars
+    if (mistakes === 0) stars = 3;
+    // 1 collision = 2 stars
+    else if (mistakes === 1) stars = 2;
+    // 2 collisions = 1 star
+    else if (mistakes === 2) stars = 1;
+    // 3 or more collisions (if somehow survived) = 0 stars
+    else stars = 0;
+    
+    // Phase 3 Route constraint
+    if (_level?.longRouteMinMoves && _moves >= _level.longRouteMinMoves) {
+      stars = Math.min(stars, 2);
     }
-
-    // --- Factor 2: Mistake penalty (0–100) ---
-    let mistakeScore: number;
-    if (mistakes <= thresholds.maxMistakesForThree) {
-      mistakeScore = 100;
-    } else if (mistakes <= thresholds.maxMistakesForTwo) {
-      const range = thresholds.maxMistakesForTwo - thresholds.maxMistakesForThree;
-      const over = mistakes - thresholds.maxMistakesForThree;
-      mistakeScore = 100 - (over / Math.max(range, 1)) * 34;
-    } else {
-      mistakeScore = Math.max(0, 66 - (mistakes - thresholds.maxMistakesForTwo) * 15);
-    }
-
-    // --- Factor 3: Time performance (0–100) ---
-    let timeScore = 100;
-    if (elapsedSeconds > 0 && thresholds.threeStarTime > 0) {
-      if (elapsedSeconds <= thresholds.threeStarTime) {
-        timeScore = 100;
-      } else if (elapsedSeconds <= thresholds.twoStarTime) {
-        const range = thresholds.twoStarTime - thresholds.threeStarTime;
-        const over = elapsedSeconds - thresholds.threeStarTime;
-        timeScore = 100 - (over / Math.max(range, 1)) * 34;
-      } else {
-        const beyond = elapsedSeconds - thresholds.twoStarTime;
-        timeScore = Math.max(0, 66 - beyond * 2);
-      }
-    }
-
-    // --- Weighted composite ---
-    const composite = moveScore * 0.50 + mistakeScore * 0.30 + timeScore * 0.20;
-
-    if (composite >= 85) return 3;
-    if (composite >= 55) return 2;
-    return 1;
+    
+    return stars;
   }
 
   /**

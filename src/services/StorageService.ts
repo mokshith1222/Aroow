@@ -25,6 +25,7 @@ export interface EndlessStats {
 
 export interface PlayerData {
   schemaVersion: number;
+  colorMode: 'light' | 'dark';
   unlockedLevel: number;
   levelRecords: Record<number, LevelRecord>;
   soundEnabled: boolean;
@@ -54,6 +55,7 @@ export const LEGACY_STORAGE_KEY = 'arrow_puzzle_save_v1';
 
 export const createDefaultData = (): PlayerData => ({
   schemaVersion: CURRENT_SCHEMA_VERSION,
+  colorMode: 'dark',
   unlockedLevel: 1,
   levelRecords: {},
   soundEnabled: true,
@@ -155,6 +157,7 @@ export class StorageService {
     const data = { ...parsed };
     
     // Validate and fix structure to handle missing/bad fields
+    if (data.colorMode !== 'light' && data.colorMode !== 'dark') data.colorMode = 'dark';
     if (typeof data.unlockedLevel !== 'number') data.unlockedLevel = 1;
     if (typeof data.levelRecords !== 'object' || data.levelRecords === null) data.levelRecords = {};
     if (typeof data.soundEnabled !== 'boolean') data.soundEnabled = true;
@@ -269,6 +272,18 @@ export class StorageService {
 
   public getUnlockedLevel(): number {
     return this.data.unlockedLevel;
+  }
+
+  public getColorMode(): 'light' | 'dark' {
+    return this.data.colorMode || 'dark';
+  }
+
+  public setColorMode(mode: 'light' | 'dark'): void {
+    this.data.colorMode = mode;
+    this.saveData();
+    if (typeof document !== 'undefined') {
+      document.documentElement.setAttribute('data-color-mode', mode);
+    }
   }
 
   public getLevelRecord(levelId: number): LevelRecord | null {

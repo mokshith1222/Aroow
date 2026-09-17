@@ -3,6 +3,7 @@ import levelsDb from '../data/levels_db.json';
 import { LevelSolver } from './LevelSolver';
 import { DifficultyManager } from './DifficultyManager';
 import { WorldManager } from '../data/worlds';
+import { routeOverrides } from './routeOverrides';
 
 export class LevelLoader {
   private static levelMap: Map<number, LevelData> = new Map();
@@ -13,8 +14,13 @@ export class LevelLoader {
   private static ensureInit(): void {
     if (this.levelMap.size === 0) {
       const db = levelsDb as LevelData[];
+      
       for (const lvl of db) {
-        this.levelMap.set(lvl.id, lvl);
+        if (routeOverrides[lvl.id]) {
+          this.levelMap.set(lvl.id, routeOverrides[lvl.id]);
+        } else {
+          this.levelMap.set(lvl.id, lvl);
+        }
       }
     }
   }

@@ -124,6 +124,13 @@ export const LevelComplete: React.FC<LevelCompleteProps> = ({
             HINT PENALTY APPLIED (-{hintsUsedLevel === 1 ? 10 : hintsUsedLevel === 2 ? 25 : 50}%)
           </span>
         )}
+        
+        {/* Phase 3 Route UI Feedback */}
+        {level?.longRouteMinMoves && moves >= level.longRouteMinMoves && stars <= 2 && (
+          <span className="completion-level-tag" style={{ color: 'var(--accent-amber)', marginTop: '4px', background: 'rgba(251, 191, 36, 0.1)' }}>
+            SAFE ROUTE TAKEN (MAX 2★)
+          </span>
+        )}
 
         {/* Dynamic Stars Row — each star animates individually */}
         <div className="completion-stars" aria-label={`${stars} of 3 stars earned`}>

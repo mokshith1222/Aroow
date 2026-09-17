@@ -25,6 +25,7 @@ import { getPresetForLevelId } from './LevelGeneratorPresets';
 import { LevelGenerator } from './LevelGenerator';
 import { WorldManager } from '../data/worlds';
 import { AchievementService } from '../services/AchievementService';
+import { HazardResolver } from './HazardResolver';
 
 export class GameEngine {
   private static instance: GameEngine;
@@ -39,6 +40,7 @@ export class GameEngine {
   private lives: number = 3;
   private readonly MAX_LIVES = 3;
   private timerInterval: number | null = null;
+  private hazardInterval: number | null = null;
   private undoStack: UndoState[] = [];
   private path: Position[] = [];
   private mistakes: number = 0;
@@ -98,6 +100,7 @@ export class GameEngine {
       }
       this.instance.clearGateTimers();
       this.instance['stopTimer']();
+      this.instance['stopHazardTimer']();
     }
     this.instance = undefined as any;
   }
@@ -140,6 +143,11 @@ export class GameEngine {
 
   public getElapsedSeconds(): number {
     return this.elapsedSeconds;
+  }
+
+  public getElapsedMs(): number {
+    if (!this.stateMachine.isPlaying()) return 0;
+    return Date.now() - this.levelStartTime;
   }
 
   public canUndo(): boolean {
@@ -198,6 +206,7 @@ export class GameEngine {
     }
 
     this.stopTimer();
+    this.stopHazardTimer();
     return true;
   }
 
@@ -215,6 +224,7 @@ export class GameEngine {
         LevelLoader.preloadLevelAsync(this.currentLevel.id + 1);
       }
       this.startTimer();
+      this.startHazardTimer();
       this.notify();
       return true;
     }
@@ -236,6 +246,7 @@ export class GameEngine {
     if (this.stateMachine.canTransitionTo('PLAYING') && this.stateMachine.transitionTo('PLAYING')) {
       this.analytics.track('daily_started', { date: dateStr });
       this.startTimer();
+      this.startHazardTimer();
       this.notify();
       return true;
     }
@@ -256,6 +267,7 @@ export class GameEngine {
     if (this.stateMachine.canTransitionTo('PLAYING') && this.stateMachine.transitionTo('PLAYING')) {
       this.analytics.track('endless_started', { endlessLevel: targetLevel });
       this.startTimer();
+      this.startHazardTimer();
       this.notify();
       return true;
     }
@@ -304,6 +316,7 @@ export class GameEngine {
     }
 
     this.startTimer();
+    this.startHazardTimer();
     this.notify();
   }
 
@@ -811,6 +824,91 @@ export class GameEngine {
     if (this.timerInterval !== null && typeof window !== 'undefined') {
       window.clearInterval(this.timerInterval);
       this.timerInterval = null;
+    }
+  }
+
+  private startHazardTimer(): void {
+    this.stopHazardTimer();
+    if (typeof window === 'undefined') return;
+
+    this.hazardInterval = window.setInterval(() => {
+      if (!this.stateMachine.isPlaying() || !this.currentLevel) return;
+
+      const elapsedMs = Date.now() - this.levelStartTime;
+      const playerPos = this.player.getPosition();
+      let hitHazard = false;
+
+      // Check all hazards in the level against current player position
+      for (const tile of this.currentLevel.tiles ?? []) {
+        if (tile.type === 'SPIKE_TRAP') {
+          if (tile.pos.x === playerPos.x && tile.pos.y === playerPos.y) {
+            if (HazardResolver.isSpikeActive(tile, elapsedMs)) {
+              hitHazard = true;
+              break;
+            }
+          }
+        } else if (tile.type === 'MOVING_SAW') {
+          const sawPos = HazardResolver.getSawPosition(tile, elapsedMs, this.currentLevel);
+          // Check collision with bounding box (a tile is 1x1, check if centers are close)
+          const dx = Math.abs(sawPos.x - playerPos.x);
+          const dy = Math.abs(sawPos.y - playerPos.y);
+          // If saw is visually touching the player cell (distance < 0.75 for example)
+          if (dx < 0.75 && dy < 0.75) {
+            hitHazard = true;
+            break;
+          }
+        }
+      }
+
+      if (hitHazard) {
+        this.triggerHazardDeath();
+      }
+    }, 50); // High frequency check for smooth response
+  }
+
+  private stopHazardTimer(): void {
+    if (this.hazardInterval !== null && typeof window !== 'undefined') {
+      window.clearInterval(this.hazardInterval);
+      this.hazardInterval = null;
+    }
+  }
+
+  private triggerHazardDeath(): void {
+    if (!this.currentLevel || !this.grid) return;
+    
+    // Prevent accidental multi-life deductions
+    const now = Date.now();
+    if (now - this.lastInvalidMoveTime < this.INVALID_MOVE_COOLDOWN_MS) {
+      return;
+    }
+    this.lastInvalidMoveTime = now;
+
+    this.lives = Math.max(0, this.lives - 1);
+    this.mistakes += 1;
+    
+    this.analytics.track('hazard_death', {
+      levelId: this.currentLevel.id,
+      remainingLives: this.lives
+    });
+
+    if (this.lives === 0) {
+      this.handleGameOver('out_of_lives');
+    } else {
+      this.audio.playLifeLost();
+      this.haptics.lifeLost();
+
+      // Reset to level start position
+      this.player.reset(this.currentLevel.start);
+      this.moves = 0;
+      this.undoStack = [];
+      this.path = [{ ...this.currentLevel.start }];
+      
+      this.collectedKeys = new Set();
+      this.grid.resetMechanics(
+        this.currentLevel.gates ?? [],
+        this.currentLevel.keys ?? []
+      );
+      this.notify();
     }
   }
 

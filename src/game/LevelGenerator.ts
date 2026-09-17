@@ -75,7 +75,8 @@ export class LevelGenerator {
     const targetDifficulty = (preset.minDifficultyScore + preset.maxDifficultyScore) / 2;
     const candidates: Array<{ level: LevelData; difficultyDelta: number; solution: SolverResult; isPerfect: boolean }> = [];
 
-    const MAX_ATTEMPTS = 50;
+    // Try up to 200 times to find a level that satisfies all difficulty criteria
+    const MAX_ATTEMPTS = 200;
     const POOL_SIZE = 10;
 
     for (let attempt = 0; attempt < MAX_ATTEMPTS; attempt++) {
@@ -618,6 +619,44 @@ export class LevelGenerator {
           usedPositions.add(Grid.posKey(pos));
           placed++;
           owPlaced++;
+        }
+      } else if (mechType === 'SPIKE_TRAP') {
+        const freeCells = rng.shuffle(candidatePositions.filter(p => !usedPositions.has(Grid.posKey(p))));
+        let spikesPlaced = 0;
+        for (const pos of freeCells) {
+          if (placed >= maxTiles || spikesPlaced >= 3) break;
+          // Vary the intervals to make patterns (e.g. 1000/1000, 1500/1000, 500/1500)
+          const active = rng.choice([1000, 1500, 2000]);
+          const idle = rng.choice([1000, 1500, 2000]);
+          const offset = rng.choice([0, 500, 1000, 1500]);
+          level.tiles.push({ 
+            pos, 
+            type: 'SPIKE_TRAP',
+            activeIntervalMs: active,
+            idleIntervalMs: idle,
+            timeOffsetMs: offset
+          });
+          usedPositions.add(Grid.posKey(pos));
+          placed++;
+          spikesPlaced++;
+        }
+      } else if (mechType === 'MOVING_SAW') {
+        const freeCells = rng.shuffle(candidatePositions.filter(p => !usedPositions.has(Grid.posKey(p))));
+        let sawsPlaced = 0;
+        for (const pos of freeCells) {
+          if (placed >= maxTiles || sawsPlaced >= 2) break;
+          // Determine axis (HORIZONTAL or VERTICAL) and speed
+          const axis = rng.choice(['HORIZONTAL', 'VERTICAL']) as 'HORIZONTAL' | 'VERTICAL';
+          const speed = rng.choice([2, 3, 4, 5]); // cells per second
+          level.tiles.push({ 
+            pos, 
+            type: 'MOVING_SAW',
+            axis,
+            speed
+          });
+          usedPositions.add(Grid.posKey(pos));
+          placed++;
+          sawsPlaced++;
         }
       }
     }

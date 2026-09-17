@@ -29,7 +29,9 @@ export type TileType =
   | 'ONE_WAY_LEFT'  // Only passable moving LEFT (blocks RIGHT entry)
   | 'ONE_WAY_RIGHT' // Only passable moving RIGHT (blocks LEFT entry)
   | 'PORTAL'        // Teleports player to linked portal
-  | 'ICE';          // Player slides until hitting a wall or non-ice cell
+  | 'ICE'           // Player slides until hitting a wall or non-ice cell
+  | 'SPIKE_TRAP'    // Toggles between dangerous and safe on a timer
+  | 'MOVING_SAW';   // Patrols back and forth and kills on contact
 
 export interface TileMeta {
   pos: Position;
@@ -38,6 +40,26 @@ export interface TileMeta {
   linkedPos?: Position;
   /** For ONE_WAY tiles: redundant since it's encoded in type, but useful for renderer queries. */
   allowedDirection?: Direction;
+  
+  // --- Hazard Properties ---
+  /** For SPIKE_TRAP: How long the spikes are raised (dangerous) */
+  activeIntervalMs?: number;
+  /** For SPIKE_TRAP: How long the spikes are lowered (safe) */
+  idleIntervalMs?: number;
+  /** For SPIKE_TRAP: Time offset to create sequential patterns */
+  timeOffsetMs?: number;
+  
+  /** For MOVING_SAW: Direction of patrol */
+  axis?: 'HORIZONTAL' | 'VERTICAL';
+  /** For MOVING_SAW: Speed in cells per second */
+  speed?: number;
+}
+
+export interface RouteInfo {
+  pos: Position;
+  text: string;
+  description: string;
+  maxStars: number;
 }
 
 export interface LevelData {
@@ -62,6 +84,10 @@ export interface LevelData {
   targetTime?: number;
   difficulty?: number;        // 1–100 scale
   optimalSolutionLength?: number;  // BFS shortest path length
+  
+  /** Route specific properties for Phase 3 */
+  routes?: RouteInfo[];
+  longRouteMinMoves?: number;
 }
 
 /** Defines a locked gate cell that becomes traversable when its key is collected */

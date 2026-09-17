@@ -524,6 +524,46 @@
   opacity: 0.5;
 }
 
+/* --- Hazards (Phase 4) --- */
+
+/* Spike Trap */
+.spike-trap {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease-out;
+}
+.spike-holes {
+  position: absolute;
+  width: 60%;
+  height: 60%;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.4);
+}
+.spike-blades {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  color: var(--accent-danger);
+  transition: transform 0.1s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.1s;
+}
+.spike-idle .spike-blades {
+  transform: scale(0);
+  opacity: 0;
+}
+.spike-active .spike-blades {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* Moving Saw */
+.moving-saw {
+  transition: transform 0.1s linear; /* Smooth sub-pixel tracking */
+}
+
 /* Goal Vector & Cosmetic Gate System */
 .goal-node {
   width: 80%;
