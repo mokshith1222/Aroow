@@ -32,7 +32,7 @@ export class VisitedMask {
     if (existing) {
       this.mask = new Uint32Array(existing);
     } else {
-      this.mask = new Uint32Array(5);
+      this.mask = new Uint32Array(7);
     }
   }
 
@@ -108,7 +108,19 @@ export class LevelSolver {
         continue;
       }
       
-      const queue = buckets[currentMoves];
+      let queue = buckets[currentMoves];
+      
+      // Beam Search: Prevent BFS memory explosion on complex levels
+      if (queue.length > 20000) {
+        queue.sort((a, b) => {
+           const distA = Math.abs(a.pos.x - level.goal.x) + Math.abs(a.pos.y - level.goal.y);
+           const distB = Math.abs(b.pos.x - level.goal.x) + Math.abs(b.pos.y - level.goal.y);
+           return distA - distB;
+        });
+        queue = queue.slice(0, 20000);
+        buckets[currentMoves] = queue;
+      }
+
       for (let i = 0; i < queue.length; i++) {
         const node = queue[i];
         visitedNodesCount++;

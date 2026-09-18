@@ -188,18 +188,31 @@ export class LevelGenerator {
     if (preset.allowedMechanics.length > 0 && preset.maxMechanicTiles > 0) {
       const mechSeed = (baseSeed ^ 0xDEADBEEF) >>> 0;
       const mechRng = new PRNG(mechSeed);
-      this.placeMechanicTiles(best.level, preset, mechRng);
-      // Re-validate: ensure level is still solvable after tile placement
-      const postSolution = LevelSolver.solve(best.level);
-      if (!postSolution.solvable) {
-        // Strip tiles if they made the level unsolvable
-        best.level.tiles = [];
-      } else {
-        // Update optimal moves with mechanic-aware solution
-        best.level.optimalSolutionLength = postSolution.optimalMoves;
-        best.level.parMoves = postSolution.optimalMoves;
-        best.level.targetMoves = postSolution.optimalMoves;
+      
+      let bestMechLevel = best.level;
+      let bestMechSolution = best.solution;
+
+      // Try applying mechanics 5 times and keep the one that gives the highest valid complexity
+      for (let m = 0; m < 5; m++) {
+        const testLevel = JSON.parse(JSON.stringify(best.level));
+        testLevel.tiles = [];
+        testLevel.keys = [];
+        testLevel.gates = [];
+        
+        this.placeMechanicTiles(testLevel, preset, mechRng);
+        
+        const testSolution = LevelSolver.solve(testLevel);
+        if (testSolution.solvable && testSolution.optimalMoves >= bestMechSolution.optimalMoves) {
+           bestMechLevel = testLevel;
+           bestMechSolution = testSolution;
+        }
       }
+      
+      best.level = bestMechLevel;
+      best.solution = bestMechSolution;
+      best.level.optimalSolutionLength = bestMechSolution.optimalMoves;
+      best.level.parMoves = bestMechSolution.optimalMoves;
+      best.level.targetMoves = bestMechSolution.optimalMoves;
     }
 
     const bestCandidate = best.level;
@@ -607,16 +620,29 @@ export class LevelGenerator {
     if (candidatePositions.length < 2) return;
 
     level.tiles = [];
+    level.keys = [];
+    level.gates = [];
     const usedPositions = new Set<string>();
     let placed = 0;
     const maxTiles = preset.maxMechanicTiles;
 
-    // 60% chance to include any mechanics — keeps levels varied
-    if (!rng.chance(0.6)) return;
+    // KEY & GATE Logic (50% chance for medium/hard/expert/master levels)
+    if (preset.name !== 'TUTORIAL' && preset.name !== 'EASY' && rng.chance(0.5)) {
+      const freeCells = rng.shuffle(candidatePositions.filter(p => !usedPositions.has(Grid.posKey(p))));
+      if (freeCells.length >= 2) {
+        const keyPos = freeCells[0];
+        const gatePos = freeCells[1];
+        level.keys.push(keyPos);
+        level.gates.push({ pos: gatePos, keyIndex: 0 });
+        usedPositions.add(Grid.posKey(keyPos));
+        usedPositions.add(Grid.posKey(gatePos));
+        placed += 2;
+      }
+    }
 
-    // Pick 1-2 mechanic types from allowed list, shuffled
+    // Pick 1-3 mechanic types from allowed list, shuffled
     const availableTypes = rng.shuffle(preset.allowedMechanics);
-    const numTypes = rng.range(1, Math.min(2, availableTypes.length));
+    const numTypes = rng.range(1, Math.min(3, availableTypes.length));
     const selectedTypes = availableTypes.slice(0, numTypes);
 
     for (const mechType of selectedTypes) {
