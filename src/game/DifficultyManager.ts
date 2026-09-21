@@ -30,24 +30,34 @@ export class DifficultyManager {
    * Calculate the star rating (1–3) for a completed level.
    */
   public static calculateStars(
-    _moves: number,
-    _parMoves: number,
+    moves: number,
+    parMoves: number,
     mistakes: number = 0,
-    _elapsedSeconds: number = 0,
-    _level?: LevelData | null
+    elapsedSeconds: number = 0,
+    level?: LevelData | null
   ): number {
-    let stars = 0;
-    // 0 collisions = 3 stars
-    if (mistakes === 0) stars = 3;
-    // 1 collision = 2 stars
-    else if (mistakes === 1) stars = 2;
-    // 2 collisions = 1 star
-    else if (mistakes === 2) stars = 1;
-    // 3 or more collisions (if somehow survived) = 0 stars
-    else stars = 0;
+    const thresholds = this.getThresholds(parMoves, level);
     
-    // Phase 3 Route constraint
-    if (_level?.longRouteMinMoves && _moves >= _level.longRouteMinMoves) {
+    let stars = 0;
+    
+    if (moves <= thresholds.threeStarMoves) {
+      stars = 3;
+    } else if (moves <= thresholds.twoStarMoves) {
+      stars = 2;
+    } else {
+      stars = 1;
+    }
+
+    // Still penalize for mistakes, but moves is the primary metric
+    if (mistakes > thresholds.maxMistakesForThree && stars === 3) {
+      stars = 2;
+    }
+    if (mistakes > thresholds.maxMistakesForTwo && stars >= 2) {
+      stars = 1;
+    }
+
+    // Phase 3 Route constraint (legacy fallback, but still useful if explicitly defined)
+    if (level?.longRouteMinMoves && moves >= level.longRouteMinMoves) {
       stars = Math.min(stars, 2);
     }
     
