@@ -45,7 +45,7 @@ export interface LevelPresetConfig {
 const CLASSIC_CHALLENGE: ChallengePolicy = {
   maxLives: 3,
   allowUndo: true,
-  maxUndoUses: undefined,
+  maxUndoUses: 3,
   hazardSpeedMultiplier: 1,
   timeLimitMultiplier: undefined,
   hintsReduceMastery: true
@@ -62,8 +62,8 @@ const STRICT_CHALLENGE: ChallengePolicy = {
 
 const EXTREME_CHALLENGE: ChallengePolicy = {
   maxLives: 3,
-  allowUndo: false,
-  maxUndoUses: 0,
+  allowUndo: true,
+  maxUndoUses: 3,
   hazardSpeedMultiplier: 1.35,
   timeLimitMultiplier: 1.1,
   hintsReduceMastery: true

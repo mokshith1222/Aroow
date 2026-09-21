@@ -68111,8 +68111,8 @@
     ],
     "challenge": {
       "maxLives": 3,
-      "allowUndo": false,
-      "maxUndoUses": 0,
+      "allowUndo": true,
+      "maxUndoUses": 3,
       "hazardSpeedMultiplier": 1.35,
       "timeLimitMultiplier": 1.1,
       "hintsReduceMastery": true
@@ -69871,8 +69871,8 @@
     ],
     "challenge": {
       "maxLives": 3,
-      "allowUndo": false,
-      "maxUndoUses": 0,
+      "allowUndo": true,
+      "maxUndoUses": 3,
       "hazardSpeedMultiplier": 1.35,
       "timeLimitMultiplier": 1.1,
       "hintsReduceMastery": true
@@ -78726,8 +78726,8 @@
     ],
     "challenge": {
       "maxLives": 3,
-      "allowUndo": false,
-      "maxUndoUses": 0,
+      "allowUndo": true,
+      "maxUndoUses": 3,
       "hazardSpeedMultiplier": 1.35,
       "timeLimitMultiplier": 1.1,
       "hintsReduceMastery": true
