@@ -802,7 +802,6 @@ export class GameEngine {
 
     this.audio.playWin();
     this.haptics.win();
-    AdService.getInstance().recordLevelCompleted();
 
     this.analytics.track('level_completed', {
       levelId: this.currentLevel.id,
@@ -831,6 +830,7 @@ export class GameEngine {
     }
 
     if (this.stateMachine.transitionTo('LEVEL_COMPLETE')) {
+      AdService.getInstance().recordLevelCompleted();
       this.notify();
     }
   }
@@ -848,6 +848,7 @@ export class GameEngine {
     });
 
     if (this.stateMachine.transitionTo('GAME_OVER')) {
+      AdService.getInstance().recordLevelFailed();
       this.notify();
     }
   }

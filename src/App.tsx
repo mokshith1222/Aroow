@@ -131,11 +131,7 @@ function App() {
   }, []);
 
   const handleWatchAdForUndo = useCallback(() => {
-    AdService.getInstance().showRewardedAd(
-      () => engine.addUndos(3),
-      undefined,
-      'generic'
-    );
+    AdService.getInstance().showRewardedUndo(() => engine.addUndos(3));
   }, [engine]);
 
   // Global hotkeys for Undo (Z) and Restart (R)

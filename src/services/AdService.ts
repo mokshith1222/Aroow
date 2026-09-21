@@ -51,8 +51,9 @@ type AdAnalyticsEvent =
 
 /** Frequency controller constants */
 const INTERSTITIAL_COOLDOWN_MS   = 120_000; // 2 minutes between interstitials
-const MIN_LEVELS_BETWEEN_ADS     = 3;       // min levels completed since last interstitial
-const MIN_INITIAL_LEVELS         = 3;       // never show on first N completions
+const MIN_LEVELS_BETWEEN_ADS     = 2;       // cooldown: min 2 levels completed since last interstitial
+const WIN_AD_THRESHOLD           = 3;       // 3 wins = interstitial eligible
+const LOSS_AD_THRESHOLD          = 3;       // 3 consecutive losses = interstitial eligible
 
 /** Web-simulation delays (production native ads don't use these) */
 const SIM_INTERSTITIAL_DELAY_MS  = 1_000;
@@ -72,7 +73,10 @@ export class AdService {
   // ── Frequency controller state
   private lastInterstitialTime: number = 0;
   private levelsSinceLastAd: number = 0;
-  private totalLevelsCompleted: number = 0;
+  
+  // ── Win / Loss Counters
+  private winCounter: number = 0;
+  private lossCounter: number = 0;
 
   // ── Concurrency guard — ONLY ONE ad active at a time
   private isAdCurrentlyShowing: boolean = false;
@@ -161,10 +165,17 @@ export class AdService {
 
   // ─── Public API: Level tracking ────────────────────────────────────────
 
-  /** Called by GameEngine after every level completion */
+  /** Called by GameEngine exactly once upon genuine level completion */
   public recordLevelCompleted(): void {
-    this.totalLevelsCompleted++;
     this.levelsSinceLastAd++;
+    this.winCounter++;
+    this.lossCounter = 0; // Reset loss counter on win
+  }
+
+  /** Called by GameEngine exactly once upon genuine game over/failure */
+  public recordLevelFailed(): void {
+    this.lossCounter++;
+    this.winCounter = 0; // Reset win counter on loss
   }
 
   // ─── Public API: Interstitial ──────────────────────────────────────────
@@ -176,10 +187,17 @@ export class AdService {
   public canShowInterstitial(): boolean {
     if (!this.adsEnabled)                               return false;
     if (this.isAdCurrentlyShowing)                     return false;
-    if (this.totalLevelsCompleted <= MIN_INITIAL_LEVELS) return false;
+    
+    // Check strict win/loss threshold logic
+    if (this.winCounter < WIN_AD_THRESHOLD && this.lossCounter < LOSS_AD_THRESHOLD) {
+      return false;
+    }
+
+    // Check cooldown logic
     if (this.levelsSinceLastAd < MIN_LEVELS_BETWEEN_ADS) return false;
     const now = Date.now();
     if (now - this.lastInterstitialTime < INTERSTITIAL_COOLDOWN_MS) return false;
+    
     return true;
   }
 
@@ -188,25 +206,27 @@ export class AdService {
    * Always calls `onDismiss` — immediately if blocked, after ad if shown.
    * Safe to call without `await`; never blocks gameplay.
    */
-  public showInterstitial(onDismiss?: () => void): void {
+  public tryShowInterstitial(onComplete: () => void): void {
     if (!this.canShowInterstitial()) {
-      onDismiss?.();
+      onComplete();
       return;
     }
 
     // Commit the frequency state immediately to prevent double-shows
     this.lastInterstitialTime = Date.now();
+    this.winCounter = 0;
+    this.lossCounter = 0;
     this.levelsSinceLastAd = 0;
     this.acquireAdGuard('level_transition');
 
     if (Capacitor.isNativePlatform() && this.initializedNative) {
-      this._showNativeInterstitial(onDismiss);
+      this._showNativeInterstitial(onComplete);
     } else {
-      this._showSimulatedInterstitial(onDismiss);
+      this._showSimulatedInterstitial(onComplete);
     }
   }
 
-  private async _showNativeInterstitial(onDismiss?: () => void): Promise<void> {
+  private async _showNativeInterstitial(onComplete: () => void): Promise<void> {
     try {
       await AdMob.prepareInterstitial({ adId: CURRENT_AD_CONFIG.interstitialId });
       this.logEvent('ad_loaded', { type: 'interstitial' });
@@ -219,11 +239,16 @@ export class AdService {
       this.logEvent('ad_failed', { type: 'interstitial', error: err });
     } finally {
       this.releaseAdGuard();
-      if (!this.appIsInBackground) onDismiss?.();
+      if (!this.appIsInBackground) onComplete();
+      
+      // Preload next interstitial immediately after closing
+      if (Capacitor.isNativePlatform() && this.initializedNative) {
+        AdMob.prepareInterstitial({ adId: CURRENT_AD_CONFIG.interstitialId }).catch(() => {});
+      }
     }
   }
 
-  private _showSimulatedInterstitial(onDismiss?: () => void): void {
+  private _showSimulatedInterstitial(onComplete: () => void): void {
     this.logEvent('interstitial_shown');
     this.analytics.track('ad_impression', { type: 'interstitial' });
 
@@ -231,7 +256,7 @@ export class AdService {
       this.pendingSimTimer = null;
       this.logEvent('interstitial_closed');
       this.releaseAdGuard();
-      if (!this.appIsInBackground) onDismiss?.();
+      if (!this.appIsInBackground) onComplete();
     }, SIM_INTERSTITIAL_DELAY_MS);
   }
 
@@ -371,6 +396,20 @@ export class AdService {
     onFailed?: () => void
   ): void {
     this.showRewardedAd(onHint, onFailed, 'hint');
+  }
+
+  // ─── Public API: Rewarded — Undo ───────────────────────────────────────
+
+  /**
+   * Player explicitly opts in to watch a rewarded ad for +3 Undo moves.
+   * `onRewarded()` called only on successful completion.
+   * Idempotent: guaranteed to fire exactly once per successful watch.
+   */
+  public showRewardedUndo(
+    onRewarded: () => void,
+    onFailed?: () => void
+  ): void {
+    this.showRewardedAd(onRewarded, onFailed, 'generic'); // using generic or create an 'undo' placement
   }
 
   // ─── Public API: Rewarded — Bonus Points ───────────────────────────────

@@ -74,7 +74,7 @@ export const LevelComplete: React.FC<LevelCompleteProps> = ({
     setIsTransitioning(true);
     audio.playButton();
     haptics.button();
-    adService.showInterstitial(() => {
+    adService.tryShowInterstitial(() => {
       setIsTransitioning(false);
       onNextLevel();
     });
@@ -85,7 +85,7 @@ export const LevelComplete: React.FC<LevelCompleteProps> = ({
     setIsTransitioning(true);
     audio.playButton();
     haptics.button();
-    adService.showInterstitial(() => {
+    adService.tryShowInterstitial(() => {
       setIsTransitioning(false);
       onReplay();
     });
@@ -96,7 +96,7 @@ export const LevelComplete: React.FC<LevelCompleteProps> = ({
     setIsTransitioning(true);
     audio.playButton();
     haptics.button();
-    adService.showInterstitial(() => {
+    adService.tryShowInterstitial(() => {
       setIsTransitioning(false);
       onLevelSelect();
     });

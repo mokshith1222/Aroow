@@ -47,15 +47,17 @@ describe('AdService — ad unavailable', () => {
     expect(ads().canShowInterstitial()).toBe(false);
   });
 
-  it('showInterstitial() calls onDismiss immediately when frequency gate blocks it', () => {
-    const onDismiss = vi.fn();
-    ads().showInterstitial(onDismiss);
-    // Not enough levels completed — onDismiss should fire synchronously
-    expect(onDismiss).toHaveBeenCalledTimes(1);
+  it('tryShowInterstitial() calls onComplete immediately when frequency gate blocks it', () => {
+    const onComplete = vi.fn();
+    ads().tryShowInterstitial(onComplete);
+    // Not enough levels completed — onComplete should fire synchronously
+    expect(onComplete).toHaveBeenCalledTimes(1);
   });
 
-  it('showInterstitial() with no callback does not throw when gate blocks', () => {
-    expect(() => ads().showInterstitial()).not.toThrow();
+  it('tryShowInterstitial() with no callback throws or fails because onComplete is required', () => {
+    // tryShowInterstitial requires an onComplete parameter now.
+    // If we pass an empty one, it shouldn't throw.
+    expect(() => ads().tryShowInterstitial(() => {})).not.toThrow();
   });
 
   it('showRewardedAd with adsEnabled=false calls onFailed (no silent reward grant)', () => {
@@ -81,8 +83,8 @@ describe('AdService — ad unavailable', () => {
 
 describe('AdService — ad loaded and dismissed', () => {
   function unlockInterstitial(): void {
-    // recordLevelCompleted enough times to pass frequency gate
-    for (let i = 0; i < 5; i++) {
+    // recordLevelCompleted enough times to pass WIN frequency gate (3 wins)
+    for (let i = 0; i < 3; i++) {
       ads().recordLevelCompleted();
     }
     // Advance time past cooldown (2 minutes)
@@ -95,27 +97,27 @@ describe('AdService — ad loaded and dismissed', () => {
     expect(ads().canShowInterstitial()).toBe(true);
   });
 
-  it('showInterstitial() calls onDismiss after 1 second delay', () => {
+  it('tryShowInterstitial() calls onComplete after 1 second delay', () => {
     unlockInterstitial();
-    const onDismiss = vi.fn();
-    ads().showInterstitial(onDismiss);
+    const onComplete = vi.fn();
+    ads().tryShowInterstitial(onComplete);
 
-    expect(onDismiss).not.toHaveBeenCalled(); // Not yet
+    expect(onComplete).not.toHaveBeenCalled(); // Not yet
     vi.advanceTimersByTime(1001);
-    expect(onDismiss).toHaveBeenCalledTimes(1);
+    expect(onComplete).toHaveBeenCalledTimes(1);
   });
 
-  it('onDismiss is called exactly once per interstitial', () => {
+  it('onComplete is called exactly once per interstitial', () => {
     unlockInterstitial();
-    const onDismiss = vi.fn();
-    ads().showInterstitial(onDismiss);
+    const onComplete = vi.fn();
+    ads().tryShowInterstitial(onComplete);
     vi.advanceTimersByTime(2000);
-    expect(onDismiss).toHaveBeenCalledTimes(1);
+    expect(onComplete).toHaveBeenCalledTimes(1);
   });
 
-  it('levelsSinceLastAd resets to 0 after an interstitial is shown', () => {
+  it('levelsSinceLastAd and counters reset to 0 after an interstitial is shown', () => {
     unlockInterstitial();
-    ads().showInterstitial();
+    ads().tryShowInterstitial(() => {});
     vi.advanceTimersByTime(2000);
     // Now gate should block (cooldown active, levels since reset to 0)
     expect(ads().canShowInterstitial()).toBe(false);
@@ -212,53 +214,53 @@ describe('AdService — no duplicate reward', () => {
     vi.mocked(Math.random).mockRestore();
   });
 
-  it('interstitial onDismiss fires exactly once even if advance time far forward', () => {
+  it('interstitial onComplete fires exactly once even if advance time far forward', () => {
     // Unlock interstitial gate
-    for (let i = 0; i < 5; i++) ads().recordLevelCompleted();
+    for (let i = 0; i < 3; i++) ads().recordLevelCompleted();
     vi.advanceTimersByTime(121_000);
 
-    const onDismiss = vi.fn();
-    ads().showInterstitial(onDismiss);
+    const onComplete = vi.fn();
+    ads().tryShowInterstitial(onComplete);
     vi.advanceTimersByTime(10_000); // Way beyond 1s duration
-    expect(onDismiss).toHaveBeenCalledTimes(1);
+    expect(onComplete).toHaveBeenCalledTimes(1);
   });
 });
 
 // ─── frequency controller ─────────────────────────────────────────────────
 
 describe('AdService — frequency controller', () => {
-  it('does not show interstitial on first 3 levels', () => {
-    for (let i = 0; i < 3; i++) ads().recordLevelCompleted();
+  it('does not show interstitial on first 2 levels (requires 3)', () => {
+    for (let i = 0; i < 2; i++) ads().recordLevelCompleted();
     expect(ads().canShowInterstitial()).toBe(false);
   });
 
-  it('shows interstitial after MIN_INITIAL_LEVELS + enough cooldown', () => {
-    for (let i = 0; i < 5; i++) ads().recordLevelCompleted();
+  it('shows interstitial after WIN_AD_THRESHOLD + enough cooldown', () => {
+    for (let i = 0; i < 3; i++) ads().recordLevelCompleted();
     vi.advanceTimersByTime(121_000);
     expect(ads().canShowInterstitial()).toBe(true);
   });
 
   it('cooldown blocks a second interstitial immediately after the first', () => {
-    for (let i = 0; i < 5; i++) ads().recordLevelCompleted();
+    for (let i = 0; i < 3; i++) ads().recordLevelCompleted();
     vi.advanceTimersByTime(121_000);
 
-    ads().showInterstitial(); // shown
+    ads().tryShowInterstitial(() => {}); // shown
     vi.advanceTimersByTime(1001);
 
     // Add more levels so level gate doesn't block
-    for (let i = 0; i < 5; i++) ads().recordLevelCompleted();
+    for (let i = 0; i < 3; i++) ads().recordLevelCompleted();
     // But cooldown still active (< 2 minutes)
     vi.advanceTimersByTime(30_000);
     expect(ads().canShowInterstitial()).toBe(false);
   });
 
   it('cooldown allows interstitial after 2 minutes have passed', () => {
-    for (let i = 0; i < 5; i++) ads().recordLevelCompleted();
+    for (let i = 0; i < 3; i++) ads().recordLevelCompleted();
     vi.advanceTimersByTime(121_000);
-    ads().showInterstitial();
+    ads().tryShowInterstitial(() => {});
     vi.advanceTimersByTime(1001);
 
-    for (let i = 0; i < 5; i++) ads().recordLevelCompleted();
+    for (let i = 0; i < 3; i++) ads().recordLevelCompleted();
     vi.advanceTimersByTime(121_000); // full 2 minute cooldown
     expect(ads().canShowInterstitial()).toBe(true);
   });

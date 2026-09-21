@@ -73,14 +73,18 @@ export const GameOver: React.FC<GameOverProps> = ({
     if (isAdActive) return;
     audio.playButton();
     haptics.button();
-    onRetry();
+    AdService.getInstance().tryShowInterstitial(() => {
+      onRetry();
+    });
   };
 
   const handleLevelSelect = () => {
     if (isAdActive) return;
     audio.playButton();
     haptics.button();
-    onLevelSelect();
+    AdService.getInstance().tryShowInterstitial(() => {
+      onLevelSelect();
+    });
   };
 
   // ── Build contextual failure line
