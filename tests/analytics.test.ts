@@ -168,12 +168,12 @@ describe('AnalyticsService & Telemetry Metrics', () => {
     };
 
     // Start Level
-    engine.startLevel(testLevel);
+    engine.startLevel(testLevel); engine.startPlaying();
     let events = analytics.getRecentEvents();
     expect(events.some(e => e.name === 'level_started' && e.params?.levelId === 1)).toBe(true);
 
     // Restart Level
-    engine.restart();
+    engine.restart(); engine.startPlaying();
     events = analytics.getRecentEvents();
     expect(events.some(e => e.name === 'retry' && e.params?.levelId === 1)).toBe(true);
 

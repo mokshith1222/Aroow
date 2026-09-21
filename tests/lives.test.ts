@@ -18,7 +18,7 @@ describe('Three-Chance / Lives System', () => {
 
   beforeEach(() => {
     engine = new GameEngine();
-    engine.startLevel(testLevel);
+    engine.startLevel(testLevel); engine.startPlaying();
   });
 
   it('starts each level with exactly 3 lives', () => {
@@ -69,7 +69,7 @@ describe('Three-Chance / Lives System', () => {
     engine.move('UP');
     expect(engine.getSnapshot().lives).toBe(1);
 
-    engine.restart();
+    engine.restart(); engine.startPlaying();
     expect(engine.getSnapshot().lives).toBe(3);
     expect(engine.getSnapshot().mistakes).toBe(0);
     expect(engine.getSnapshot().state).toBe('PLAYING');
@@ -80,7 +80,7 @@ describe('Three-Chance / Lives System', () => {
     expect(engine.getSnapshot().lives).toBe(2);
 
     const level2: LevelData = { ...testLevel, id: 1 };
-    engine.startLevel(level2);
+    engine.startLevel(level2); engine.startPlaying();
     expect(engine.getSnapshot().lives).toBe(3);
     expect(engine.getSnapshot().mistakes).toBe(0);
   });

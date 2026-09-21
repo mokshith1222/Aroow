@@ -332,3 +332,73 @@ html[data-color-mode="light"] :root {
   --wall-bg: #1e293b;
   --wall-border: #0f172a;
 }
+
+/* =========================================
+   LEVEL START OVERLAY
+   ========================================= */
+.level-start-overlay {
+  z-index: 1000;
+  backdrop-filter: blur(8px);
+  background: rgba(9, 9, 12, 0.85);
+  animation: fade-in 0.3s var(--ease-snappy) forwards;
+}
+
+.level-start-card {
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
+  animation: slide-up-fade 0.4s var(--ease-snappy) forwards;
+}
+
+.target-banner {
+  margin: 24px 0;
+  padding: 16px;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--accent-primary-dim);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 32px var(--accent-primary-glow);
+}
+
+.target-banner-stars {
+  font-size: 0.9rem;
+  color: var(--accent-gold);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.target-banner-moves {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--text-primary);
+  line-height: 1;
+  text-shadow: 0 0 20px var(--accent-primary-glow);
+}
+
+.start-quote {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  font-style: italic;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+.btn-start-play {
+  width: 100%;
+  padding: 16px;
+  font-size: 1.2rem;
+  letter-spacing: 0.2em;
+}
+
+/* =========================================
+   MOBILE TOUCH TARGET FIXES (UNDO)
+   ========================================= */
+.control-icon-btn {
+  min-width: 48px;
+  min-height: 48px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: manipulation;
+}

@@ -4,6 +4,7 @@ import { AudioService } from '../services/AudioService';
 import { HapticService } from '../services/HapticService';
 import { AdService } from '../services/AdService';
 import { StorageService } from '../services/StorageService';
+import { getMotivationalQuote } from '../utils/quotes';
 
 interface LevelCompleteProps {
   level: LevelData | null;
@@ -167,18 +168,9 @@ export const LevelComplete: React.FC<LevelCompleteProps> = ({
         {/* Stats Summary: Moves, Time, Remaining Lives */}
         <div className="completion-stats-grid">
           <div className="completion-stat-item">
-            <span className="completion-stat-num">{moves}</span>
+            <span className="completion-stat-num" style={{ color: moves <= (level?.targetMoves ?? level?.parMoves ?? 0) ? 'var(--accent-green)' : 'inherit' }}>{moves}</span>
             <span className="completion-stat-label">MOVES</span>
-            {level?.optimalSolutionLength ? (
-              <>
-                <span className="completion-stat-sub">Optimal: {level.optimalSolutionLength}</span>
-                <span className="completion-stat-sub" style={{ color: moves <= level.optimalSolutionLength ? 'var(--accent-green)' : 'inherit' }}>
-                  Eff: {Math.max(0, Math.round((level.optimalSolutionLength / Math.max(1, moves)) * 100))}%
-                </span>
-              </>
-            ) : level?.parMoves ? (
-              <span className="completion-stat-sub">Par: {level.parMoves}</span>
-            ) : null}
+            <span className="completion-stat-sub">Target: {level?.targetMoves ?? level?.parMoves ?? 0}</span>
           </div>
 
           <div className="completion-stat-item">
@@ -199,6 +191,20 @@ export const LevelComplete: React.FC<LevelCompleteProps> = ({
             </div>
             <span className="completion-stat-label">LIVES</span>
           </div>
+        </div>
+
+        {/* Motivational Quote */}
+        <div className="completion-quote" style={{
+          marginTop: '20px',
+          padding: '12px',
+          fontStyle: 'italic',
+          color: 'var(--color-text)',
+          textAlign: 'center',
+          borderTop: '1px solid var(--color-border)',
+          borderBottom: '1px solid var(--color-border)',
+          backgroundColor: 'rgba(0,0,0,0.1)'
+        }}>
+          "{getMotivationalQuote(level?.id || 1, stars)}"
         </div>
 
         {pointsEarned !== undefined && pointsEarned > 0 && (

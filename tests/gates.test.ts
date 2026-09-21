@@ -113,7 +113,7 @@ describe('Phase 30 — Cosmetic Winning Gate System', () => {
         walls: []
       };
 
-      engine.startLevel(testLevel);
+      engine.startLevel(testLevel); engine.startPlaying();
       const snapshot = engine.getSnapshot();
       expect(snapshot.equippedGate).toBe('galaxy_gate');
       expect(snapshot.gateAnimationState).toBe('idle');
@@ -130,7 +130,7 @@ describe('Phase 30 — Cosmetic Winning Gate System', () => {
         walls: []
       };
 
-      engine.startLevel(testLevel);
+      engine.startLevel(testLevel); engine.startPlaying();
       expect(engine.getSnapshot().isWon).toBe(false);
 
       const moveSuccess = engine.move('RIGHT');

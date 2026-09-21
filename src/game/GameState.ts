@@ -3,12 +3,13 @@ import type {  GameStateType  } from './types';
 export class GameState {
   private current: GameStateType;
   private readonly validTransitions: Record<GameStateType, Set<GameStateType>> = {
-    MENU: new Set(['LEVEL_SELECT', 'PLAYING']),
-    LEVEL_SELECT: new Set(['MENU', 'PLAYING']),
-    PLAYING: new Set(['PAUSED', 'LEVEL_COMPLETE', 'GAME_OVER', 'MENU', 'LEVEL_SELECT']),
+    MENU: new Set(['LEVEL_SELECT', 'LEVEL_START', 'PLAYING']),
+    LEVEL_SELECT: new Set(['MENU', 'LEVEL_START', 'PLAYING']),
+    LEVEL_START: new Set(['PLAYING', 'MENU', 'LEVEL_SELECT']),
+    PLAYING: new Set(['PAUSED', 'LEVEL_COMPLETE', 'GAME_OVER', 'MENU', 'LEVEL_SELECT', 'LEVEL_START']),
     PAUSED: new Set(['PLAYING', 'MENU', 'LEVEL_SELECT']),
-    LEVEL_COMPLETE: new Set(['PLAYING', 'LEVEL_SELECT', 'MENU']),
-    GAME_OVER: new Set(['PLAYING', 'LEVEL_SELECT', 'MENU'])
+    LEVEL_COMPLETE: new Set(['PLAYING', 'LEVEL_SELECT', 'MENU', 'LEVEL_START']),
+    GAME_OVER: new Set(['PLAYING', 'LEVEL_SELECT', 'MENU', 'LEVEL_START'])
   };
 
   constructor(initialState: GameStateType = 'MENU') {

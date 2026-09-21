@@ -23,7 +23,7 @@ describe('Collision System', () => {
 
   beforeEach(() => {
     engine = new GameEngine();
-    engine.startLevel(wallLevel);
+    engine.startLevel(wallLevel); engine.startPlaying();
   });
 
   it('detects collision when moving UP into a wall and does not change player position', () => {
@@ -47,7 +47,7 @@ describe('Collision System', () => {
       ...wallLevel,
       walls: [{ x: 1, y: 0 }]
     };
-    engine.startLevel(openLevel);
+    engine.startLevel(openLevel); engine.startPlaying();
 
     // Collide with wall UP
     engine.move('UP');

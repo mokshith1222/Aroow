@@ -24,7 +24,7 @@ describe('Level Completion & Star System', () => {
 
   beforeEach(() => {
     engine = new GameEngine();
-    engine.startLevel(simpleLevel);
+    engine.startLevel(simpleLevel); engine.startPlaying();
   });
 
   it('triggers LEVEL_COMPLETE when player reaches goal', () => {

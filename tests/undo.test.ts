@@ -26,7 +26,7 @@ function engine(): GameEngine {
 
 describe('Strict 3-Undo System', () => {
   beforeEach(() => {
-    engine().startLevel(testLevel);
+    engine().startLevel(testLevel); engine().startPlaying(); engine().startPlaying();
   });
 
   it('Test 1: Start level -> Undo = 3', () => {
@@ -100,7 +100,7 @@ describe('Strict 3-Undo System', () => {
     engine().undo();
     expect(engine().getSnapshot().undosRemaining).toBe(2);
 
-    engine().restart(); // Retry
+    engine().restart(); engine().startPlaying(); engine().startPlaying(); // Retry
     expect(engine().getSnapshot().undosRemaining).toBe(3);
   });
 
@@ -108,7 +108,7 @@ describe('Strict 3-Undo System', () => {
     engine().move('RIGHT');
     engine().undo();
     
-    engine().startLevel({ ...testLevel, id: 1 });
+    engine().startLevel({ ...testLevel, id: 1 }); engine().startPlaying(); engine().startPlaying();
     expect(engine().getSnapshot().undosRemaining).toBe(3);
   });
   

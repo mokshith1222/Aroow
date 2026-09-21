@@ -122,7 +122,7 @@ describe('Phase 31 — Background and Theme System', () => {
         walls: []
       };
 
-      engine.startLevel(testLevel);
+      engine.startLevel(testLevel); engine.startPlaying();
       const snapshot = engine.getSnapshot();
       expect(snapshot.equippedTheme).toBe('theme_neon');
     });

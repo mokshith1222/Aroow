@@ -234,7 +234,7 @@ export class GameEngine {
     }
     if (!this.loadLevel(levelOrId)) return false;
 
-    if (this.stateMachine.canTransitionTo('PLAYING') && this.stateMachine.transitionTo('PLAYING')) {
+    if (this.stateMachine.canTransitionTo('LEVEL_START') && this.stateMachine.transitionTo('LEVEL_START')) {
       if (this.currentLevel) {
         this.analytics.track('level_started', {
           levelId: this.currentLevel.id,
@@ -244,8 +244,6 @@ export class GameEngine {
         // Asynchronously preload the next level to avoid blocking the main thread 
         LevelLoader.preloadLevelAsync(this.currentLevel.id + 1);
       }
-      this.startTimer();
-      this.startHazardTimer();
       this.notify();
       return true;
     }
@@ -264,10 +262,8 @@ export class GameEngine {
       this.currentLevel.name = 'Daily Puzzle';
     }
 
-    if (this.stateMachine.canTransitionTo('PLAYING') && this.stateMachine.transitionTo('PLAYING')) {
+    if (this.stateMachine.canTransitionTo('LEVEL_START') && this.stateMachine.transitionTo('LEVEL_START')) {
       this.analytics.track('daily_started', { date: dateStr });
-      this.startTimer();
-      this.startHazardTimer();
       this.notify();
       return true;
     }
@@ -285,14 +281,22 @@ export class GameEngine {
     this.isEndlessMode = true;
     this.endlessLevel = targetLevel;
 
-    if (this.stateMachine.canTransitionTo('PLAYING') && this.stateMachine.transitionTo('PLAYING')) {
+    if (this.stateMachine.canTransitionTo('LEVEL_START') && this.stateMachine.transitionTo('LEVEL_START')) {
       this.analytics.track('endless_started', { endlessLevel: targetLevel });
-      this.startTimer();
-      this.startHazardTimer();
       this.notify();
       return true;
     }
     return false;
+  }
+
+  public startPlaying(): void {
+    if (this.stateMachine.canTransitionTo('PLAYING')) {
+      this.stateMachine.transitionTo('PLAYING');
+      this.levelStartTime = Date.now();
+      this.startTimer();
+      this.startHazardTimer();
+      this.notify();
+    }
   }
 
   public restart(): void {
@@ -333,12 +337,10 @@ export class GameEngine {
     this.audio.playReset();
     this.haptics.light();
 
-    if (this.stateMachine.canTransitionTo('PLAYING')) {
-      this.stateMachine.transitionTo('PLAYING');
+    if (this.stateMachine.canTransitionTo('LEVEL_START')) {
+      this.stateMachine.transitionTo('LEVEL_START');
     }
 
-    this.startTimer();
-    this.startHazardTimer();
     this.notify();
   }
 

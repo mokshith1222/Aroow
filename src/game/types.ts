@@ -5,6 +5,7 @@ export type Direction = 'UP' | 'DOWN' | 'LEFT' | 'RIGHT';
 export type GameStateType =
   | 'MENU'
   | 'LEVEL_SELECT'
+  | 'LEVEL_START'
   | 'PLAYING'
   | 'PAUSED'
   | 'LEVEL_COMPLETE'

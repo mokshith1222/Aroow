@@ -52,7 +52,7 @@ describe('Level 76 & Locked Level Fixes', () => {
     expect(storage.getUnlockedLevel()).toBe(75);
 
     // GameEngine must refuse to start locked Level 76
-    const startResult = engine.startLevel(76);
+    const startResult = engine.startLevel(76); engine.startPlaying();
     expect(startResult).toBe(false);
   });
 
@@ -65,7 +65,7 @@ describe('Level 76 & Locked Level Fixes', () => {
     storage.saveLevelCompletion(75, 10, 20, 1, 10);
 
     // Start level 75
-    engine.startLevel(75);
+    engine.startLevel(75); engine.startPlaying();
     expect(engine.getSnapshot().level?.id).toBe(75);
 
     // Calling nextLevel must not start level 76
@@ -84,7 +84,7 @@ describe('Level 76 & Locked Level Fixes', () => {
     expect(storage.isLevelUnlocked(76)).toBe(true);
     expect(storage.getUnlockedLevel()).toBe(76);
 
-    const startResult = engine.startLevel(76);
+    const startResult = engine.startLevel(76); engine.startPlaying();
     expect(startResult).toBe(true);
     expect(engine.getSnapshot().level?.id).toBe(76);
   });

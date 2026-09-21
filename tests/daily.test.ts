@@ -19,7 +19,7 @@ describe('Daily Puzzle System', () => {
   });
 
   it('generates a deterministic level for the same date string', () => {
-    engine.startDailyLevel('2026-09-17');
+    engine.startDailyLevel('2026-09-17'); engine.startPlaying();
     const firstDailyLevel = engine.getSnapshot().level;
     expect(firstDailyLevel).not.toBeNull();
     
@@ -39,7 +39,7 @@ describe('Daily Puzzle System', () => {
   });
 
   it('generates a different level for a different date string', () => {
-    engine.startDailyLevel('2026-09-17');
+    engine.startDailyLevel('2026-09-17'); engine.startPlaying();
     const firstDailyLevel = engine.getSnapshot().level;
     
     const engine2 = new GameEngine();
@@ -56,7 +56,7 @@ describe('Daily Puzzle System', () => {
   });
 
   it('sets isDailyMode and changes level name to Daily Puzzle', () => {
-    engine.startDailyLevel('2026-09-17');
+    engine.startDailyLevel('2026-09-17'); engine.startPlaying();
     const snapshot = engine.getSnapshot();
     expect(snapshot.isDailyMode).toBe(true);
     expect(snapshot.level?.name).toBe('Daily Puzzle');

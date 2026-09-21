@@ -4,6 +4,7 @@ import { HapticService } from '../services/HapticService';
 
 interface GameControlsProps {
   moves: number;
+  targetMoves: number;
   canUndo: boolean;
   onUndo: () => void;
   undosRemaining: number;
@@ -17,6 +18,7 @@ interface GameControlsProps {
 
 export const GameControls: React.FC<GameControlsProps> = ({
   moves,
+  targetMoves,
   canUndo,
   onUndo,
   undosRemaining,
@@ -52,11 +54,21 @@ export const GameControls: React.FC<GameControlsProps> = ({
     setTimeout(() => setHintUsed(false), 3000);
   };
 
+  const isOptimal = moves <= targetMoves;
+
   return (
     <footer className="game-bottom-bar" role="region" aria-label="Game controls">
-      {/* Move count */}
-      <div className="bottom-moves-text">
-        <span className="moves-count">{moves}</span> moves
+      {/* Target & Move count */}
+      <div className="bottom-moves-text" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+        <div style={{ fontSize: '0.65rem', color: 'var(--color-text-dim)', letterSpacing: '0.05em', fontWeight: 600 }}>
+          TARGET: {targetMoves}
+        </div>
+        <div>
+          <span className="moves-count" style={{ color: isOptimal ? 'var(--color-primary)' : 'var(--accent-amber)' }}>
+            {moves}
+          </span>
+          <span style={{ fontSize: '0.8rem', marginLeft: '4px', color: 'var(--color-text-dim)' }}>MOVES</span>
+        </div>
       </div>
 
       {/* Actions: Undo, Restart (and optional Hint) */}

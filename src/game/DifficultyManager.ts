@@ -66,12 +66,12 @@ export class DifficultyManager {
     // Optimal solution length from BFS solver, or fall back to parMoves
     const optimal = level?.optimalSolutionLength ?? parMoves;
 
-    // Target moves: explicit override, else optimal with difficulty-scaled tolerance
+    // Target moves: explicit override, else optimal
     const targetMoves = level?.targetMoves ?? optimal;
-    const moveTolerance = Math.max(1, Math.ceil(targetMoves * 0.15 * difficultyFactor));
+    const moveTolerance = Math.max(2, Math.ceil(targetMoves * 0.15 * difficultyFactor));
 
-    const threeStarMoves = targetMoves + moveTolerance;
-    const twoStarMoves = Math.ceil(threeStarMoves * 1.4 * difficultyFactor);
+    const threeStarMoves = targetMoves;
+    const twoStarMoves = targetMoves + moveTolerance;
 
     // Target time: explicit override, else generous estimate
     const baseTime = level?.targetTime ?? Math.max(10, parMoves * 3);

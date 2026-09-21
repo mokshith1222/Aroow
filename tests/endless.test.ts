@@ -89,7 +89,7 @@ describe('Endless Mode', () => {
       const storage = StorageService.getInstance();
       
       // Start endless level 1
-      const started = engine.startEndlessLevel(1);
+      const started = engine.startEndlessLevel(1); engine.startPlaying();
       expect(started).toBe(true);
       
       let snapshot = engine.getSnapshot();
@@ -115,6 +115,7 @@ describe('Endless Mode', () => {
       
       // Next level should be Endless 2
       engine.nextLevel();
+      engine.startPlaying();
       snapshot = engine.getSnapshot();
       expect(snapshot.state).toBe('PLAYING');
       expect(snapshot.isEndlessMode).toBe(true);

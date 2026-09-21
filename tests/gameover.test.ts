@@ -18,7 +18,7 @@ describe('Game Over System', () => {
 
   beforeEach(() => {
     engine = new GameEngine();
-    engine.startLevel(wallTrapLevel);
+    engine.startLevel(wallTrapLevel); engine.startPlaying();
   });
 
   it('transitions to GAME_OVER after 3 collisions', () => {
@@ -47,7 +47,7 @@ describe('Game Over System', () => {
     engine.move('RIGHT');
     expect(engine.getSnapshot().state).toBe('GAME_OVER');
 
-    engine.restart();
+    engine.restart(); engine.startPlaying();
     const snap = engine.getSnapshot();
     expect(snap.state).toBe('PLAYING');
     expect(snap.lives).toBe(3);

@@ -21,7 +21,7 @@ describe('Movement System', () => {
 
   beforeEach(() => {
     engine = new GameEngine();
-    engine.startLevel(testLevel);
+    engine.startLevel(testLevel); engine.startPlaying();
   });
 
   it('moves player RIGHT when valid and updates position', () => {
@@ -52,7 +52,7 @@ describe('Movement System', () => {
       start: { x: 0, y: 0 },
       walls: []
     };
-    engine.startLevel(cornerLevel);
+    engine.startLevel(cornerLevel); engine.startPlaying();
 
     const res = engine.move('UP');
     expect(res).toBe(false);
@@ -66,7 +66,7 @@ describe('Movement System', () => {
       start: { x: 0, y: 0 },
       walls: []
     };
-    engine.startLevel(cornerLevel);
+    engine.startLevel(cornerLevel); engine.startPlaying();
 
     const res = engine.move('LEFT');
     expect(res).toBe(false);

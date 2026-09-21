@@ -41,7 +41,7 @@ describe('Phase 37 — Intelligent Hint System', () => {
 
   describe('GameEngine Hint Integration', () => {
     beforeEach(() => {
-      engine.startLevel(mockLevel);
+      engine.startLevel(mockLevel); engine.startPlaying();
     });
 
     it('sets activeHintCells for Level 1 hint (Next Step)', () => {

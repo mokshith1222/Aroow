@@ -6,6 +6,7 @@ import { LevelHeader } from './components/LevelHeader';
 import { GameBoard } from './components/GameBoard';
 import { GameControls } from './components/GameControls';
 import { LevelComplete } from './components/LevelComplete';
+import { LevelStartOverlay } from './components/LevelStartOverlay';
 import { GameOver } from './components/GameOver';
 import { Settings } from './components/Settings';
 import { ShopScreen } from './components/ShopScreen';
@@ -196,8 +197,8 @@ function App() {
         />
       )}
 
-      {/* Finite States: PLAYING, PAUSED, LEVEL_COMPLETE, GAME_OVER */}
-      {['PLAYING', 'PAUSED', 'LEVEL_COMPLETE', 'GAME_OVER'].includes(snapshot.state) &&
+      {/* Finite States: LEVEL_START, PLAYING, PAUSED, LEVEL_COMPLETE, GAME_OVER */}
+      {['LEVEL_START', 'PLAYING', 'PAUSED', 'LEVEL_COMPLETE', 'GAME_OVER'].includes(snapshot.state) &&
         snapshot.level && (
           <div className="game-screen">
             {/* Top: LEVEL number and Lives */}
@@ -237,6 +238,7 @@ function App() {
             {/* Bottom: Moves, Undo, Restart, optional Hint */}
             <GameControls
               moves={snapshot.moves}
+              targetMoves={snapshot.level.targetMoves ?? snapshot.level.optimalSolutionLength ?? snapshot.level.parMoves ?? 0}
               canUndo={snapshot.canUndo}
               undosRemaining={snapshot.undosRemaining}
               onUndo={handleUndo}
@@ -247,6 +249,13 @@ function App() {
             />
 
             {/* Overlays */}
+            {snapshot.state === 'LEVEL_START' && (
+              <LevelStartOverlay 
+                level={snapshot.level} 
+                onStart={() => engine.startPlaying()} 
+              />
+            )}
+
             {snapshot.state === 'PAUSED' && (
               <div className="modal-overlay" role="dialog" aria-labelledby="pause-title">
                 <div className="modal-card">
