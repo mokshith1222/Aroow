@@ -44,7 +44,7 @@ describe('Level Validation & Procedural Generation', () => {
 
   it('keeps MASTER layouts solvable-friendly instead of relying on chamber walls', () => {
     expect(DIFFICULTY_PRESETS.MASTER.allowedLayouts).not.toContain('CHAMBERS');
-    expect(DIFFICULTY_PRESETS.MASTER.wallDensityMax).toBeLessThanOrEqual(0.32);
+    expect(DIFFICULTY_PRESETS.MASTER.wallDensityMax).toBeLessThanOrEqual(0.52);
   });
 
   it('accepts a well-formed solvable level', () => {

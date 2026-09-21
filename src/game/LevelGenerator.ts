@@ -154,7 +154,7 @@ export class LevelGenerator {
       candidate.parMoves = solution.optimalMoves;
       candidate.targetMoves = solution.optimalMoves;
       candidate.difficulty = difficultyRating;
-      const baseTime = Math.max(8, solution.optimalMoves * 2.2 + solution.turnsCount * 0.8);
+      const baseTime = Math.max(5, solution.optimalMoves * 1.2 + solution.turnsCount * 0.5);
       candidate.targetTime = Math.ceil(baseTime);
       if (preset.challenge.timeLimitMultiplier !== undefined) {
         candidate.timeLimit = Math.ceil(candidate.targetTime * preset.challenge.timeLimitMultiplier);
