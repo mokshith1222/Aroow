@@ -201,13 +201,30 @@ describe('Gameplay — challenge policies', () => {
     expect(engine().undo()).toBe(false);
   });
 
-  it('limits strict-level undo uses without affecting movement', () => {
+  it('limits strict-level undo uses to 3', () => {
     engine().startLevel(limitedUndoLevel);
+    // Move 4 times so we have 4 moves to undo
+    engine().move('RIGHT');
+    engine().move('DOWN');
     engine().move('RIGHT');
     engine().move('DOWN');
 
+    expect(engine().getSnapshot().undosRemaining).toBe(3);
+    
+    // Undo 1
     expect(engine().getSnapshot().canUndo).toBe(true);
     expect(engine().undo()).toBe(true);
+    expect(engine().getSnapshot().undosRemaining).toBe(2);
+
+    // Undo 2
+    expect(engine().undo()).toBe(true);
+    expect(engine().getSnapshot().undosRemaining).toBe(1);
+
+    // Undo 3
+    expect(engine().undo()).toBe(true);
+    expect(engine().getSnapshot().undosRemaining).toBe(0);
+
+    // Undo 4 (Should fail)
     expect(engine().getSnapshot().canUndo).toBe(false);
     expect(engine().undo()).toBe(false);
   });

@@ -148,6 +148,7 @@ export interface GameSnapshot {
   moves: number;
   elapsedSeconds: number;
   canUndo: boolean;
+  undosRemaining: number;
   isWon: boolean;
   isLost: boolean;
   lives: number;

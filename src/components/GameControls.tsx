@@ -6,7 +6,9 @@ interface GameControlsProps {
   moves: number;
   canUndo: boolean;
   onUndo: () => void;
+  undosRemaining: number;
   onRestart: () => void;
+  onWatchAdForUndo?: () => void;
   /** When provided, renders a "HINT (Ad)" button that the player can tap */
   onRequestHint?: () => void;
   /** Whether the hint button is currently in a loading/playing state */
@@ -17,7 +19,9 @@ export const GameControls: React.FC<GameControlsProps> = ({
   moves,
   canUndo,
   onUndo,
+  undosRemaining,
   onRestart,
+  onWatchAdForUndo,
   onRequestHint,
   hintAdLoading = false,
 }) => {
@@ -93,18 +97,50 @@ export const GameControls: React.FC<GameControlsProps> = ({
           </button>
         )}
 
-        <button
-          className="control-icon-btn undo-btn"
-          onClick={handleUndo}
-          disabled={!canUndo}
-          aria-label="Undo move"
-          title="Undo (Z)"
-        >
-          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.2">
-            <path d="M3 10h10a5 5 0 0 1 5 5v2" strokeLinecap="round" />
-            <polyline points="7 6 3 10 7 14" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
+        {undosRemaining > 0 ? (
+          <button
+            className="control-icon-btn undo-btn"
+            onClick={handleUndo}
+            disabled={!canUndo}
+            aria-label="Undo move"
+            title="Undo (Z)"
+            style={{ position: 'relative', display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '2px' }}
+          >
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <path d="M3 10h10a5 5 0 0 1 5 5v2" strokeLinecap="round" />
+              <polyline points="7 6 3 10 7 14" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span style={{ fontSize: '0.6rem', fontWeight: 'bold' }}>{undosRemaining}</span>
+          </button>
+        ) : (
+          <button
+            className="control-icon-btn undo-ad-btn"
+            onClick={onWatchAdForUndo}
+            aria-label="Watch ad for 3 more undo moves"
+            title="Watch ad for +3 Undos"
+            style={{
+              fontSize: '0.55rem',
+              fontWeight: 700,
+              letterSpacing: '0.05em',
+              minWidth: '44px',
+              padding: '4px 6px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '2px',
+              color: 'var(--text-primary)',
+              background: 'rgba(255, 215, 0, 0.1)',
+              border: '1px solid rgba(255, 215, 0, 0.5)',
+              borderRadius: '8px'
+            }}
+          >
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2">
+              <path d="M3 10h10a5 5 0 0 1 5 5v2" strokeLinecap="round" />
+              <polyline points="7 6 3 10 7 14" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+            <span style={{ color: '#FFD700' }}>+3 AD</span>
+          </button>
+        )}
 
         <button
           className="control-icon-btn restart-btn"

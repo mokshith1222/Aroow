@@ -39,7 +39,7 @@ export class GameEngine {
   private levelStartTime: number = 0;
   private lives: number = 3;
   private readonly MAX_LIVES = 3;
-  private undoUses: number = 0;
+  private undosRemaining: number = 3;
   private timerInterval: number | null = null;
   private hazardInterval: number | null = null;
   private undoStack: UndoState[] = [];
@@ -157,8 +157,13 @@ export class GameEngine {
     if (!this.stateMachine.isPlaying() || this.undoStack.length === 0) return false;
     const challenge = this.currentLevel?.challenge;
     if (challenge && !challenge.allowUndo) return false;
-    if (!challenge) return true;
-    return challenge.maxUndoUses === undefined || this.undoUses < challenge.maxUndoUses;
+    return this.undosRemaining > 0;
+  }
+
+  /** Called after the user successfully completes a rewarded ad for more undos */
+  public addUndos(count: number): void {
+    this.undosRemaining += count;
+    this.notify();
   }
 
   private getMaxLives(): number {
@@ -188,7 +193,7 @@ export class GameEngine {
     this.lastPointsEarned = 0;
     this.moves = 0;
     this.lives = this.getMaxLives();
-    this.undoUses = 0;
+    this.undosRemaining = 3;
     this.elapsedSeconds = 0;
     this.levelStartTime = Date.now();
     this.undoStack = [];
@@ -304,7 +309,7 @@ export class GameEngine {
     this.player.reset(this.currentLevel.start);
     this.moves = 0;
     this.lives = this.getMaxLives();
-    this.undoUses = 0;
+    this.undosRemaining = 3;
     this.elapsedSeconds = 0;
     this.levelStartTime = Date.now();
     this.undoStack = [];
@@ -488,7 +493,7 @@ export class GameEngine {
 
     const previous = this.undoStack.pop();
     if (!previous) return false;
-    this.undoUses += 1;
+    this.undosRemaining -= 1;
 
     this.player.setPosition(previous.position);
     this.moves = previous.moves;
@@ -569,11 +574,7 @@ export class GameEngine {
         this.elapsedSeconds = Math.min(this.elapsedSeconds, Math.max(0, this.currentLevel.timeLimit - 15));
       }
 
-      // Grant one extra undo if they have none left, so they can escape a wrong path
-      const challenge = this.currentLevel?.challenge;
-      if (challenge?.allowUndo && challenge.maxUndoUses !== undefined && this.undoUses >= challenge.maxUndoUses) {
-        this.undoUses = challenge.maxUndoUses - 1;
-      }
+      // (Extra undo hack removed to enforce strict undo limits)
 
       this.stateMachine.transitionTo('PLAYING');
       this.startTimer();
@@ -995,6 +996,7 @@ export class GameEngine {
       moves: this.moves,
       elapsedSeconds: this.elapsedSeconds,
       canUndo: this.canUndo(),
+      undosRemaining: this.undosRemaining,
       isWon: this.stateMachine.is('LEVEL_COMPLETE') || this.gateAnimationState !== 'idle',
       isLost: this.stateMachine.is('GAME_OVER'),
       lives: this.lives,
