@@ -493,7 +493,6 @@ export class GameEngine {
 
     const previous = this.undoStack.pop();
     if (!previous) return false;
-    this.undosRemaining -= 1;
 
     this.player.setPosition(previous.position);
     this.moves = previous.moves;
@@ -538,6 +537,7 @@ export class GameEngine {
 
     this.audio.playUndo();
     this.haptics.light();
+    this.undosRemaining -= 1; // Consume credit only after state is fully restored
     this.notify();
     return true;
   }
@@ -577,8 +577,6 @@ export class GameEngine {
       if (this.currentLevel?.timeLimit) {
         this.elapsedSeconds = Math.min(this.elapsedSeconds, Math.max(0, this.currentLevel.timeLimit - 15));
       }
-
-      // (Extra undo hack removed to enforce strict undo limits)
 
       this.stateMachine.transitionTo('PLAYING');
       this.startTimer();

@@ -130,9 +130,22 @@ function App() {
     setShowHintModal(true);
   }, []);
 
+  const [undoAdLoading, setUndoAdLoading] = useState(false);
+
   const handleWatchAdForUndo = useCallback(() => {
-    AdService.getInstance().showRewardedUndo(() => engine.addUndos(3));
-  }, [engine]);
+    if (undoAdLoading) return;
+    setUndoAdLoading(true);
+    AdService.getInstance().showRewardedUndo(
+      () => {
+        engine.addUndos(3);
+        setUndoAdLoading(false);
+      },
+      () => {
+        // Failure or closed early
+        setUndoAdLoading(false);
+      }
+    );
+  }, [engine, undoAdLoading]);
 
   // Global hotkeys for Undo (Z) and Restart (R)
   useEffect(() => {
@@ -242,6 +255,7 @@ function App() {
               onRestart={handleRestart}
               onRequestHint={handleHintClick}
               hintAdLoading={false}
+              undoAdLoading={undoAdLoading}
             />
 
             {/* Overlays */}

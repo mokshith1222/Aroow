@@ -188,9 +188,16 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           </button>
         </div>
 
-        <button className="btn-secondary" onClick={handleSettingsClick}>
-          SETTINGS
-        </button>
+        <div style={{ display: 'flex', gap: '8px', width: '100%' }}>
+          <button className="btn-secondary" style={{ flex: 1 }} onClick={handleSettingsClick}>
+            SETTINGS
+          </button>
+          <a href="/aroow-test.apk" download style={{ flex: 1, textDecoration: 'none' }}>
+            <button className="btn-secondary" style={{ width: '100%', height: '100%' }}>
+              GET APK
+            </button>
+          </a>
+        </div>
       </nav>
 
       <footer className="home-footer">

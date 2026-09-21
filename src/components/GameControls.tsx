@@ -14,6 +14,8 @@ interface GameControlsProps {
   onRequestHint?: () => void;
   /** Whether the hint button is currently in a loading/playing state */
   hintAdLoading?: boolean;
+  /** Whether the undo rewarded ad is currently in a loading/playing state */
+  undoAdLoading?: boolean;
 }
 
 export const GameControls: React.FC<GameControlsProps> = ({
@@ -26,6 +28,7 @@ export const GameControls: React.FC<GameControlsProps> = ({
   onWatchAdForUndo,
   onRequestHint,
   hintAdLoading = false,
+  undoAdLoading = false,
 }) => {
   const audio = AudioService.getInstance();
   const haptics = HapticService.getInstance();
@@ -128,6 +131,7 @@ export const GameControls: React.FC<GameControlsProps> = ({
           <button
             className="control-icon-btn undo-ad-btn"
             onPointerDown={(e) => { e.preventDefault(); onWatchAdForUndo && onWatchAdForUndo(); }}
+            disabled={undoAdLoading}
             aria-label="Watch ad for 3 more undo moves"
             title="Watch ad for +3 Undos"
             style={{
@@ -143,14 +147,26 @@ export const GameControls: React.FC<GameControlsProps> = ({
               color: 'var(--text-primary)',
               background: 'rgba(255, 215, 0, 0.1)',
               border: '1px solid rgba(255, 215, 0, 0.5)',
-              borderRadius: '8px'
+              borderRadius: '8px',
+              opacity: undoAdLoading ? 0.5 : 1,
             }}
           >
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2">
-              <path d="M3 10h10a5 5 0 0 1 5 5v2" strokeLinecap="round" />
-              <polyline points="7 6 3 10 7 14" strokeLinecap="round" strokeLinejoin="round" />
-            </svg>
-            <span style={{ color: '#FFD700' }}>+3 AD</span>
+            {undoAdLoading ? (
+              <>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2" className="spinner-animation">
+                  <path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83" strokeLinecap="round" />
+                </svg>
+                <span style={{ color: '#FFD700', fontSize: '0.5rem' }}>WAIT</span>
+              </>
+            ) : (
+              <>
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2.2">
+                  <path d="M3 10h10a5 5 0 0 1 5 5v2" strokeLinecap="round" />
+                  <polyline points="7 6 3 10 7 14" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <span style={{ color: '#FFD700' }}>+3 AD</span>
+              </>
+            )}
           </button>
         )}
 
