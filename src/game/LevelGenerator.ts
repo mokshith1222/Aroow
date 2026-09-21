@@ -87,7 +87,7 @@ export class LevelGenerator {
       // 1. Choose layout style
       const layout = rng.choice(preset.allowedLayouts);
 
-      // 2. Generate candidate puzzle
+      // 2. Generate candidate puzzle using maze-carving approach
       const candidate = this.generateCandidate(id, preset, layout, rng);
 
       // 3. Ensure start and goal are valid
@@ -126,6 +126,18 @@ export class LevelGenerator {
 
       if (!this.meetsRouteDifficulty(solution, preset, relaxFactor) && !emergencyAttempt) {
         if (debug) console.log(`[Attempt ${attempt}] Rejected: Route is too obvious`);
+        continue;
+      }
+
+      // NEW: Spatial balance check — reject levels with obstacles concentrated on one side
+      if (!this.isSpatiallyBalanced(candidate, solution) && !emergencyAttempt) {
+        if (debug) console.log(`[Attempt ${attempt}] Rejected: Spatially imbalanced (obstacle cluster)`);
+        continue;
+      }
+
+      // NEW: Boundary bypass check — reject levels with a trivial path along the edge
+      if (this.hasBoundaryBypass(candidate, solution) && !emergencyAttempt) {
+        if (debug) console.log(`[Attempt ${attempt}] Rejected: Boundary bypass route exists`);
         continue;
       }
 
@@ -226,8 +238,22 @@ export class LevelGenerator {
     return bestCandidate;
   }
 
+  // ─────────────────────────────────────────────────────────────────────────────
+  // MAZE-CARVING GENERATION ENGINE
+  // ─────────────────────────────────────────────────────────────────────────────
+
   /**
-   * Generate raw candidate level based on layout template
+   * Generate candidate using a recursive-backtracker maze carver.
+   *
+   * Algorithm:
+   * 1. Start with every cell WALLED (full grid of obstacles).
+   * 2. Carve a perfect maze using recursive backtracker (DFS). This creates a
+   *    spanning tree of passages covering 100% of the grid — no isolated areas.
+   * 3. Remove extra walls to open up the maze according to the density setting,
+   *    adding branches and alternative routes. Removals are spread across all
+   *    regions (3×3 zone grid) to guarantee spatial balance.
+   * 4. Place START in the top-left quadrant, GOAL in the bottom-right quadrant
+   *    (or diagonally opposite corners) to force traversal of the full board.
    */
   private static generateCandidate(
     id: number,
@@ -237,147 +263,192 @@ export class LevelGenerator {
   ): LevelData {
     const width = preset.gridWidth;
     const height = preset.gridHeight;
-    const totalCells = width * height;
-    const density = rng.floatRange(preset.wallDensityMin, preset.wallDensityMax);
-    const targetWallsCount = Math.floor(totalCells * density);
 
-    // Pick start and goal
-    let start: Position;
-    let goal: Position;
+    // ── Step 1: Generate a perfect maze via recursive backtracker ──────────
+    // The maze operates on "cells" separated by walls.
+    // We work in a full-grid model: every cell can be wall or open.
+    // Carve starting from (0,0) in a DFS pattern to guarantee full connectivity.
 
-    // Place start and goal on edges or corners for interesting travel
-    if (layout === 'SERPENTINE' || layout === 'ASYMMETRIC_MAZE') {
-      start = { x: 0, y: 0 };
-      goal = { x: width - 1, y: height - 1 };
-    } else {
-      const positions: Position[] = [];
-      for (let x = 0; x < width; x++) {
-        for (let y = 0; y < height; y++) {
-          positions.push({ x, y });
-        }
-      }
-      start = rng.choice(positions);
-      const minDistance = Math.max(3, Math.floor((width + height) * 0.55));
-      const validGoals = positions.filter(
-        p => Math.abs(p.x - start.x) + Math.abs(p.y - start.y) >= minDistance
-      );
-      goal = validGoals.length > 0 ? rng.choice(validGoals) : { x: width - 1, y: height - 1 };
+    const wallGrid: boolean[][] = [];
+    for (let y = 0; y < height; y++) {
+      wallGrid.push(new Array(width).fill(true)); // all walls initially
     }
 
-    const walls: Position[] = [];
-    const occupied = new Set<string>([
-      Grid.posKey(start),
-      Grid.posKey(goal)
-    ]);
+    const visited: boolean[][] = [];
+    for (let y = 0; y < height; y++) {
+      visited.push(new Array(width).fill(false));
+    }
 
-    const addWall = (pos: Position) => {
-      const key = Grid.posKey(pos);
-      if (
-        pos.x >= 0 &&
-        pos.x < width &&
-        pos.y >= 0 &&
-        pos.y < height &&
-        !occupied.has(key)
-      ) {
-        occupied.add(key);
-        walls.push(pos);
+    // DFS maze carver — carves a perfect spanning tree
+    const carve = (x: number, y: number) => {
+      visited[y][x] = true;
+      wallGrid[y][x] = false; // open this cell
+
+      // Randomise direction order
+      const dirs = rng.shuffle([
+        { dx: 0, dy: -2 }, // up
+        { dx: 2, dy: 0  }, // right
+        { dx: 0, dy: 2  }, // down
+        { dx: -2, dy: 0 }, // left
+      ]);
+
+      for (const { dx, dy } of dirs) {
+        const nx = x + dx;
+        const ny = y + dy;
+        if (nx >= 0 && nx < width && ny >= 0 && ny < height && !visited[ny][nx]) {
+          // Open the wall between current and next cell
+          const mx = x + dx / 2;
+          const my = y + dy / 2;
+          wallGrid[my][mx] = false;
+          carve(nx, ny);
+        }
       }
     };
 
-    switch (layout) {
-      case 'CHAMBERS': {
-        // Divide grid with dividing walls with 1–2 gaps (doors)
-        const midX = Math.floor(width / 2);
-        const doorY = rng.range(0, height - 1);
-        for (let y = 0; y < height; y++) {
-          if (y !== doorY) addWall({ x: midX, y });
-        }
-        if (width >= 8) {
-          const midY = Math.floor(height / 2);
-          const doorX = rng.range(0, width - 1);
-          for (let x = 0; x < width; x++) {
-            if (x !== doorX && x !== midX) addWall({ x, y: midY });
-          }
-        }
-        break;
-      }
+    // Start carving from a random odd-coordinate cell to create a proper maze grid
+    const startCarvX = rng.range(0, Math.floor((width - 1) / 2)) * 2;
+    const startCarvY = rng.range(0, Math.floor((height - 1) / 2)) * 2;
+    carve(startCarvX, startCarvY);
 
-      case 'CENTRAL_PILLARS': {
-        // Create island obstacle clusters
-        const centerX = Math.floor(width / 2);
-        const centerY = Math.floor(height / 2);
-        const offsets = [
-          { dx: 0, dy: 0 },
-          { dx: -1, dy: 0 },
-          { dx: 1, dy: 0 },
-          { dx: 0, dy: -1 },
-          { dx: 0, dy: 1 }
-        ];
-        for (const off of offsets) {
-          if (rng.chance(0.8)) {
-            addWall({ x: centerX + off.dx, y: centerY + off.dy });
-          }
-        }
-        break;
-      }
+    // ── Step 2: Open extra passages to add branching / multiple routes ──────
+    // This controls how "open" the maze is. More removals = more routes = harder decisions.
+    // We distribute removals EVENLY across 3×3 zones to guarantee spatial balance.
 
-      case 'CORRIDORS': {
-        // Alternating horizontal or vertical stripes with gaps
-        const isHorizontal = rng.chance(0.5);
-        const step = 2;
-        if (isHorizontal) {
-          for (let y = 1; y < height - 1; y += step) {
-            const gap = rng.range(0, width - 1);
-            for (let x = 0; x < width; x++) {
-              if (x !== gap && x !== gap + 1) addWall({ x, y });
-            }
-          }
+    const density = rng.floatRange(preset.wallDensityMin, preset.wallDensityMax);
+    const totalCells = width * height;
+    // Target: density% of cells should be walls AFTER carving
+    // Count how many walls we have already and how many we should keep
+    let currentWallCount = wallGrid.flat().filter(w => w).length;
+    const targetWallCount = Math.floor(totalCells * density);
+    const wallsToRemove = Math.max(0, currentWallCount - targetWallCount);
+
+    // Collect interior walls (not on boundary) that can be removed, grouped by zone
+    const zones: Position[][] = Array.from({ length: 9 }, () => []);
+    for (let y = 1; y < height - 1; y++) {
+      for (let x = 1; x < width - 1; x++) {
+        if (wallGrid[y][x]) {
+          const zx = Math.floor((x / width) * 3);
+          const zy = Math.floor((y / height) * 3);
+          zones[zy * 3 + zx].push({ x, y });
+        }
+      }
+    }
+
+    // Remove walls zone-by-zone in a round-robin fashion to balance the board
+    const shuffledZones = zones.map(z => rng.shuffle(z));
+    let removed = 0;
+    let zoneIdx = 0;
+    const zonePointers = new Array(9).fill(0);
+    while (removed < wallsToRemove) {
+      const zone = shuffledZones[zoneIdx % 9];
+      const ptr = zonePointers[zoneIdx % 9];
+      if (ptr < zone.length) {
+        const pos = zone[ptr];
+        wallGrid[pos.y][pos.x] = false;
+        zonePointers[zoneIdx % 9]++;
+        removed++;
+      }
+      zoneIdx++;
+      // Safety: break if we've cycled all zones with nothing left to remove
+      if (zoneIdx > wallsToRemove * 9 + 100) break;
+    }
+
+    // ── Step 3: Convert wall grid to walls array ─────────────────────────────
+    const walls: Position[] = [];
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        if (wallGrid[y][x]) walls.push({ x, y });
+      }
+    }
+
+    // ── Step 4: Place START and GOAL in diagonally opposite quadrants ────────
+    // This FORCES the player to cross the entire board.
+    // START is in one corner quadrant, GOAL is in the diagonally opposite quadrant.
+
+    const wallSet = new Set(walls.map(w => `${w.x},${w.y}`));
+    const isOpen = (x: number, y: number) => !wallSet.has(`${x},${y}`);
+
+    // Choose quadrant pair: top-left→bottom-right or top-right→bottom-left
+    const flipDiag = rng.chance(0.5);
+    const qW = Math.floor(width / 2);
+    const qH = Math.floor(height / 2);
+
+    // Collect open cells from each quadrant
+    const startQuadCells: Position[] = [];
+    const goalQuadCells: Position[] = [];
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        if (!isOpen(x, y)) continue;
+        if (!flipDiag) {
+          if (x < qW && y < qH) startQuadCells.push({ x, y });
+          if (x >= width - qW && y >= height - qH) goalQuadCells.push({ x, y });
         } else {
-          for (let x = 1; x < width - 1; x += step) {
-            const gap = rng.range(0, height - 1);
-            for (let y = 0; y < height; y++) {
-              if (y !== gap && y !== gap + 1) addWall({ x, y });
-            }
+          if (x >= width - qW && y < qH) startQuadCells.push({ x, y });
+          if (x < qW && y >= height - qH) goalQuadCells.push({ x, y });
+        }
+      }
+    }
+
+    let start: Position;
+    let goal: Position;
+
+    if (startQuadCells.length > 0 && goalQuadCells.length > 0) {
+      // Pick cells toward the outer edge of each quadrant for maximum path length
+      start = rng.choice(startQuadCells);
+      goal = rng.choice(goalQuadCells);
+    } else {
+      // Fallback: use corners
+      const corners: Position[] = [
+        { x: 0, y: 0 },
+        { x: width - 1, y: 0 },
+        { x: 0, y: height - 1 },
+        { x: width - 1, y: height - 1 },
+      ];
+      // Find a pair of open corners
+      let found = false;
+      for (const c1 of corners) {
+        if (!isOpen(c1.x, c1.y)) continue;
+        // Ensure corner cell is open; if not, make it open
+        for (const c2 of corners) {
+          if (c1.x === c2.x && c1.y === c2.y) continue;
+          if (!isOpen(c2.x, c2.y)) continue;
+          const manhattan = Math.abs(c1.x - c2.x) + Math.abs(c1.y - c2.y);
+          if (manhattan >= Math.floor((width + height) * 0.6)) {
+            start = c1;
+            goal = c2;
+            found = true;
+            break;
           }
         }
-        break;
+        if (found) break;
       }
-
-      case 'SERPENTINE': {
-        // S-curve guide walls
-        for (let y = 1; y < height - 1; y += 2) {
-          const fromLeft = (y / 2) % 2 === 0;
-          const openX = fromLeft ? width - 1 : 0;
+      if (!found) {
+        // Last resort: open top-left and bottom-right corners
+        wallGrid[0][0] = false;
+        wallGrid[height - 1][width - 1] = false;
+        start = { x: 0, y: 0 };
+        goal = { x: width - 1, y: height - 1 };
+        // Rebuild walls array
+        walls.length = 0;
+        for (let y = 0; y < height; y++) {
           for (let x = 0; x < width; x++) {
-            if (x !== openX) addWall({ x, y });
+            if (wallGrid[y][x]) walls.push({ x, y });
           }
         }
-        break;
-      }
-
-      case 'ASYMMETRIC_MAZE':
-      default: {
-        // Cluster-based obstacle generation
-        const clusterCenters = Math.floor(targetWallsCount / 3);
-        for (let c = 0; c < clusterCenters; c++) {
-          const cx = rng.range(1, width - 2);
-          const cy = rng.range(1, height - 2);
-          addWall({ x: cx, y: cy });
-          if (rng.chance(0.6)) addWall({ x: cx + 1, y: cy });
-          if (rng.chance(0.6)) addWall({ x: cx, y: cy + 1 });
-        }
-        break;
       }
     }
 
-    // Fill remaining walls up to target count randomly
-    let scatterTries = 0;
-    while (walls.length < targetWallsCount && scatterTries < targetWallsCount * 3) {
-      scatterTries++;
-      const wx = rng.range(0, width - 1);
-      const wy = rng.range(0, height - 1);
-      addWall({ x: wx, y: wy });
-    }
+    // Guarantee start and goal cells are open
+    const removeWall = (pos: Position) => {
+      const key = `${pos.x},${pos.y}`;
+      if (wallSet.has(key)) {
+        wallSet.delete(key);
+        const idx = walls.findIndex(w => w.x === pos.x && w.y === pos.y);
+        if (idx >= 0) walls.splice(idx, 1);
+      }
+    };
+    removeWall(start!);
+    removeWall(goal!);
 
     return {
       id,
@@ -385,12 +456,130 @@ export class LevelGenerator {
       name: `${preset.name} ${id}`,
       width,
       height,
-      start,
-      goal,
+      start: start!,
+      goal: goal!,
       walls,
       challenge: { ...preset.challenge }
     };
   }
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // SPATIAL BALANCE VALIDATOR
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  /**
+   * Checks that walls are spread throughout the board, not clustered on one side.
+   *
+   * Divides the board into a 3×3 grid of 9 zones. Counts the number of OPEN cells
+   * in each zone. Rejects if any single zone contains more than 45% of all open cells
+   * (meaning the rest of the board is packed with walls while one zone is empty).
+   *
+   * Also checks path coverage: the solution must traverse at least 3 distinct zones.
+   */
+  private static isSpatiallyBalanced(level: LevelData, solution: SolverResult): boolean {
+    const { width, height, walls } = level;
+    const wallSet = new Set(walls.map(w => `${w.x},${w.y}`));
+
+    // Count open cells per zone
+    const openPerZone = new Array(9).fill(0);
+    let totalOpen = 0;
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        if (!wallSet.has(`${x},${y}`)) {
+          const zx = Math.floor((x / width) * 3);
+          const zy = Math.floor((y / height) * 3);
+          openPerZone[zy * 3 + zx]++;
+          totalOpen++;
+        }
+      }
+    }
+
+    if (totalOpen === 0) return false;
+
+    // Reject if any single zone hogs more than 45% of all open cells
+    const maxFraction = 0.45;
+    for (const count of openPerZone) {
+      if (count / totalOpen > maxFraction) return false;
+    }
+
+    // Check that solution path traverses at least 3 different zones
+    const solutionPath = solution.shortestPath;
+    if (solutionPath.length === 0) return false;
+
+    const zonesTraversed = new Set<number>();
+    for (const pos of solutionPath) {
+      const zx = Math.floor((pos.x / width) * 3);
+      const zy = Math.floor((pos.y / height) * 3);
+      zonesTraversed.add(zy * 3 + zx);
+    }
+
+    const minZonesRequired = width >= 12 ? 4 : 3;
+    if (zonesTraversed.size < minZonesRequired) return false;
+
+    return true;
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // BOUNDARY BYPASS DETECTOR
+  // ─────────────────────────────────────────────────────────────────────────────
+
+  /**
+   * Detects if a player can easily bypass the puzzle by running along the outer edge.
+   *
+   * Uses a simplified BFS restricted to boundary cells (x=0, x=W-1, y=0, y=H-1).
+   * If start→goal can be reached using ONLY boundary cells, the level is rejected
+   * because a player would never need to engage with the interior puzzle.
+   */
+  private static hasBoundaryBypass(level: LevelData, _solution: SolverResult): boolean {
+    const { width, height, walls, start, goal } = level;
+    const wallSet = new Set(walls.map(w => `${w.x},${w.y}`));
+
+    const isBoundary = (x: number, y: number) =>
+      x === 0 || x === width - 1 || y === 0 || y === height - 1;
+
+    const isOpen = (x: number, y: number) => !wallSet.has(`${x},${y}`);
+
+    // Only check bypass if both start and goal are near the boundary
+    const startOnBoundary = isBoundary(start.x, start.y);
+    const goalOnBoundary = isBoundary(goal.x, goal.y);
+    if (!startOnBoundary || !goalOnBoundary) return false;
+
+    // BFS along boundary only
+    const visited = new Set<string>();
+    const queue: Position[] = [start];
+    visited.add(`${start.x},${start.y}`);
+
+    const dirs = [
+      { dx: 0, dy: -1 },
+      { dx: 1, dy: 0 },
+      { dx: 0, dy: 1 },
+      { dx: -1, dy: 0 },
+    ];
+
+    while (queue.length > 0) {
+      const cur = queue.shift()!;
+      if (cur.x === goal.x && cur.y === goal.y) return true; // bypass found!
+
+      for (const { dx, dy } of dirs) {
+        const nx = cur.x + dx;
+        const ny = cur.y + dy;
+        const key = `${nx},${ny}`;
+        if (
+          nx >= 0 && nx < width && ny >= 0 && ny < height &&
+          isBoundary(nx, ny) && isOpen(nx, ny) && !visited.has(key)
+        ) {
+          visited.add(key);
+          queue.push({ x: nx, y: ny });
+        }
+      }
+    }
+
+    return false; // no boundary bypass
+  }
+
+  // ─────────────────────────────────────────────────────────────────────────────
+  // EXISTING VALIDATORS (unchanged)
+  // ─────────────────────────────────────────────────────────────────────────────
 
   /**
    * Validate that start and goal are inside bounds, not walls, and not trapped.

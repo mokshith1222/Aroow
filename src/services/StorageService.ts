@@ -315,6 +315,10 @@ export class StorageService {
 
   /**
    * Refresh unlockedLevel by evaluating completion history and world requirements.
+   * We take the maximum of:
+   *   (a) the computed level from completed records, and
+   *   (b) the value already stored in data (e.g. migrated from legacy save).
+   * This ensures legacy progress is never lost.
    */
   public refreshUnlockedLevel(): void {
     let lvl = 1;
@@ -326,7 +330,8 @@ export class StorageService {
       }
       lvl = nextLvl;
     }
-    this.data.unlockedLevel = Math.max(1, lvl);
+    // Preserve any higher value that came from a legacy migration
+    this.data.unlockedLevel = Math.max(1, lvl, this.data.unlockedLevel ?? 1);
   }
 
   public saveLevelCompletion(
