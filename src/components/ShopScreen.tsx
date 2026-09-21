@@ -191,7 +191,7 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
         background: 'var(--bg-surface)',
         borderRadius: '16px',
         padding: '12px 14px',
-        border: '1px solid rgba(255, 255, 255, 0.08)',
+        border: '1px solid var(--border-subtle)',
         boxShadow: '0 4px 16px rgba(0, 0, 0, 0.2)'
       }}>
         <div style={{
@@ -218,7 +218,7 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
             onClick={() => setSelectedCategory('CHARACTERS')}
             style={{
               background: selectedCategory === 'CHARACTERS' ? 'rgba(234, 179, 8, 0.15)' : 'var(--bg-surface-elevated)',
-              border: selectedCategory === 'CHARACTERS' ? '1px solid var(--accent-gold)' : '1px solid rgba(255, 255, 255, 0.06)',
+              border: selectedCategory === 'CHARACTERS' ? '1px solid var(--accent-gold)' : '1px solid var(--border-subtle)',
               borderRadius: '10px',
               padding: '6px 4px',
               display: 'flex',
@@ -241,7 +241,7 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
             onClick={() => setSelectedCategory('GATES')}
             style={{
               background: selectedCategory === 'GATES' ? 'rgba(234, 179, 8, 0.15)' : 'var(--bg-surface-elevated)',
-              border: selectedCategory === 'GATES' ? '1px solid var(--accent-gold)' : '1px solid rgba(255, 255, 255, 0.06)',
+              border: selectedCategory === 'GATES' ? '1px solid var(--accent-gold)' : '1px solid var(--border-subtle)',
               borderRadius: '10px',
               padding: '6px 4px',
               display: 'flex',
@@ -264,7 +264,7 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
             onClick={() => setSelectedCategory('BACKGROUNDS')}
             style={{
               background: selectedCategory === 'BACKGROUNDS' ? 'rgba(234, 179, 8, 0.15)' : 'var(--bg-surface-elevated)',
-              border: selectedCategory === 'BACKGROUNDS' ? '1px solid var(--accent-gold)' : '1px solid rgba(255, 255, 255, 0.06)',
+              border: selectedCategory === 'BACKGROUNDS' ? '1px solid var(--accent-gold)' : '1px solid var(--border-subtle)',
               borderRadius: '10px',
               padding: '6px 4px',
               display: 'flex',
@@ -287,7 +287,7 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
             onClick={() => setSelectedCategory('THEMES')}
             style={{
               background: selectedCategory === 'THEMES' ? 'rgba(234, 179, 8, 0.15)' : 'var(--bg-surface-elevated)',
-              border: selectedCategory === 'THEMES' ? '1px solid var(--accent-gold)' : '1px solid rgba(255, 255, 255, 0.06)',
+              border: selectedCategory === 'THEMES' ? '1px solid var(--accent-gold)' : '1px solid var(--border-subtle)',
               borderRadius: '10px',
               padding: '6px 4px',
               display: 'flex',
@@ -442,7 +442,7 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
                     ? '2px solid var(--accent-gold)' 
                     : isPreviewing 
                       ? '2px dashed var(--accent-primary)' 
-                      : '2px solid rgba(255,255,255,0.06)',
+                      : '2px solid var(--border-subtle)',
                   boxShadow: isEquipped ? '0 0 16px rgba(234, 179, 8, 0.25)' : 'none',
                   opacity: (!isOwned && !canAfford) ? 0.75 : 1,
                   position: 'relative',
@@ -505,7 +505,7 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
                       width: '56px',
                       height: '56px',
                       borderRadius: '10px',
-                      border: '1px solid rgba(255,255,255,0.15)',
+                      border: '1px solid var(--border-active)',
                       display: 'flex',
                       alignItems: 'center',
                       justifyContent: 'center',
@@ -528,9 +528,9 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
                       border: `1px solid ${item.metadata.colors.accent}44`,
                       boxShadow: `0 2px 8px ${item.metadata.colors.accent}22`
                     }}>
-                      <span title="Surface" style={{ width: '12px', height: '12px', borderRadius: '50%', background: item.metadata.colors.surface, border: '1px solid rgba(255,255,255,0.2)' }} />
-                      <span title="Cell" style={{ width: '12px', height: '12px', borderRadius: '50%', background: item.metadata.colors.cell, border: '1px solid rgba(255,255,255,0.2)' }} />
-                      <span title="Wall" style={{ width: '12px', height: '12px', borderRadius: '50%', background: item.metadata.colors.wall, border: '1px solid rgba(255,255,255,0.2)' }} />
+                      <span title="Surface" style={{ width: '12px', height: '12px', borderRadius: '50%', background: item.metadata.colors.surface, border: '1px solid var(--border-active)' }} />
+                      <span title="Cell" style={{ width: '12px', height: '12px', borderRadius: '50%', background: item.metadata.colors.cell, border: '1px solid var(--border-active)' }} />
+                      <span title="Wall" style={{ width: '12px', height: '12px', borderRadius: '50%', background: item.metadata.colors.wall, border: '1px solid var(--border-active)' }} />
                       <span title="Accent" style={{ width: '12px', height: '12px', borderRadius: '50%', background: item.metadata.colors.accent, boxShadow: `0 0 6px ${item.metadata.colors.accent}` }} />
                     </div>
                   )}
