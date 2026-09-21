@@ -154,7 +154,7 @@ export class GameEngine {
   }
 
   public canUndo(): boolean {
-    if (!this.stateMachine.isPlaying() || this.undoStack.length === 0) return false;
+    if (!(this.stateMachine.isPlaying() || this.stateMachine.is('GAME_OVER')) || this.undoStack.length === 0) return false;
     const challenge = this.currentLevel?.challenge;
     if (challenge && !challenge.allowUndo) return false;
     return this.undosRemaining > 0;
@@ -528,6 +528,10 @@ export class GameEngine {
     }
 
     this.lastMoveResult = null;
+
+    if (this.stateMachine.is('GAME_OVER')) {
+      this.stateMachine.transitionTo('PLAYING');
+    }
 
     this.audio.playUndo();
     this.haptics.light();

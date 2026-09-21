@@ -220,7 +220,7 @@ export const GameBoard: React.FC<GameBoardProps> = ({
         aria-label={`Puzzle grid ${level.width} by ${level.height}`}
       >
         {/* SVG Animated Path Overlay — segmented, portal-jump aware */}
-        {pathSegments.length > 0 && (
+        {isWon && pathSegments.length > 0 && (
           <svg
             className="path-svg-overlay"
             viewBox={`0 0 ${level.width * 100} ${level.height * 100}`}
