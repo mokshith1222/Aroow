@@ -311,20 +311,19 @@ export class AdService {
       this.logEvent('rewarded_started');
       this.analytics.track('ad_impression', { type: 'rewarded', placement });
 
-      let rewarded = false;
       const listener = await AdMob.addListener(RewardAdPluginEvents.Rewarded, () => {
-        rewarded = true;
+        if (!this.pendingRewardGranted) {
+          this.pendingRewardGranted = true;
+          this.logEvent('reward_granted', { placement });
+          this.analytics.track('rewarded_ad_completed', { placement });
+          onRewarded();
+        }
       });
 
       await AdMob.showRewardVideoAd();
       await listener.remove();
 
-      if (rewarded && !this.pendingRewardGranted) {
-        this.pendingRewardGranted = true;
-        this.logEvent('reward_granted', { placement });
-        this.analytics.track('rewarded_ad_completed', { placement });
-        onRewarded();
-      } else if (!rewarded) {
+      if (!this.pendingRewardGranted) {
         this._handleRewardedFailed(onRewarded, onFailed, placement, 'not_rewarded');
       }
     } catch (err) {
