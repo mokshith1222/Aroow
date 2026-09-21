@@ -187,9 +187,11 @@ export class LevelSolver {
           }
 
           const nextVisited = new VisitedMask(node.visited.mask);
-          if (portalDest === null) {
-            nextVisited.set(getIndex(rawNext));
-          }
+          // ALWAYS mark the cell we physically stepped into (rawNext).
+          // Previously portal entries were skipped (only marked when portalDest === null),
+          // which let the solver find fictitious paths that re-enter the portal entry.
+          // The actual game never allows revisiting any cell, including portal entries.
+          nextVisited.set(getIndex(rawNext));
           for (const sp of slideIntermediates) {
             nextVisited.set(getIndex(sp));
           }

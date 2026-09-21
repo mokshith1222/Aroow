@@ -164,10 +164,43 @@ export const GameBoard: React.FC<GameBoardProps> = ({
   );
   const hintLookup = new Set(activeHintCells.map(h => `${h.x},${h.y}`));
 
-  // Generate SVG polyline points for completed path
-  const polylinePoints = completedPath.length > 1
-    ? completedPath.map(p => `${p.x * 100 + 50},${p.y * 100 + 50}`).join(' ')
-    : '';
+  // Build SVG path segments — split at portal teleports (non-adjacent positions).
+  // A portal jump is detected when two consecutive path positions are more than 1
+  // cell apart (Manhattan distance > 1). We render each segment as a separate
+  // polyline so we never draw a giant line traversing the board.
+  const buildPathSegments = (path: Position[]): string[][] => {
+    if (path.length < 2) return [];
+    const segments: string[][] = [];
+    let current: string[] = [`${path[0].x * 100 + 50},${path[0].y * 100 + 50}`];
+    for (let i = 1; i < path.length; i++) {
+      const prev = path[i - 1];
+      const cur = path[i];
+      const manhattan = Math.abs(cur.x - prev.x) + Math.abs(cur.y - prev.y);
+      if (manhattan > 1) {
+        // Portal jump — close current segment and start a new one
+        if (current.length >= 2) segments.push(current);
+        current = [`${cur.x * 100 + 50},${cur.y * 100 + 50}`];
+      } else {
+        current.push(`${cur.x * 100 + 50},${cur.y * 100 + 50}`);
+      }
+    }
+    if (current.length >= 2) segments.push(current);
+    return segments;
+  };
+
+  // Portal jump cells — cells where the path teleports from/to.
+  // We render a subtle glow on these instead of a line.
+  const portalJumpCells = new Set<string>();
+  for (let i = 1; i < completedPath.length; i++) {
+    const prev = completedPath[i - 1];
+    const cur = completedPath[i];
+    if (Math.abs(cur.x - prev.x) + Math.abs(cur.y - prev.y) > 1) {
+      portalJumpCells.add(`${prev.x},${prev.y}`);
+      portalJumpCells.add(`${cur.x},${cur.y}`);
+    }
+  }
+
+  const pathSegments = buildPathSegments(completedPath);
 
   return (
     <div className={`game-board-wrapper ${isWon ? 'board-won' : ''} ${hitVisitedCell ? 'board-flash-red' : (invalidAttempt ? 'board-shake' : '')}`}>
@@ -186,18 +219,21 @@ export const GameBoard: React.FC<GameBoardProps> = ({
         role="grid"
         aria-label={`Puzzle grid ${level.width} by ${level.height}`}
       >
-        {/* SVG Animated Path Overlay */}
-        {polylinePoints && (
+        {/* SVG Animated Path Overlay — segmented, portal-jump aware */}
+        {pathSegments.length > 0 && (
           <svg
             className="path-svg-overlay"
             viewBox={`0 0 ${level.width * 100} ${level.height * 100}`}
             preserveAspectRatio="none"
             aria-hidden="true"
           >
-            <polyline
-              points={polylinePoints}
-              className={`path-polyline ${isWon ? 'path-polyline-won' : ''}`}
-            />
+            {pathSegments.map((seg, i) => (
+              <polyline
+                key={i}
+                points={seg.join(' ')}
+                className={`path-polyline ${isWon ? 'path-polyline-won' : ''}`}
+              />
+            ))}
           </svg>
         )}
 
@@ -213,6 +249,8 @@ export const GameBoard: React.FC<GameBoardProps> = ({
             const isGate = gateLookup.has(key);
             const isKey = keyLookup.has(key);
             const isFailedTarget = !!lastFailedTargetPos && lastFailedTargetPos.x === x && lastFailedTargetPos.y === y;
+            // Mark portal jump entry/exit cells with a special teleport glow
+            const isPortalJump = portalJumpCells.has(key);
 
             return (
               <GridCell
@@ -235,6 +273,7 @@ export const GameBoard: React.FC<GameBoardProps> = ({
                 equippedGate={equippedGate}
                 gateState={isGoal ? gateAnimationState : 'idle'}
                 isHinted={hintLookup.has(key)}
+                isPortalJump={isPortalJump}
               />
             );
           })

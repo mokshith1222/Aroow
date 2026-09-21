@@ -24,6 +24,7 @@ interface GridCellProps {
   equippedGate?: string;
   gateState?: 'idle' | 'activating' | 'entering' | 'completed';
   isHinted?: boolean;
+  isPortalJump?: boolean;
 }
 
 export const GridCell: React.FC<GridCellProps> = React.memo(({
@@ -44,7 +45,8 @@ export const GridCell: React.FC<GridCellProps> = React.memo(({
   equippedCharacter,
   equippedGate = 'classic_gate',
   gateState = 'idle',
-  isHinted = false
+  isHinted = false,
+  isPortalJump = false
 }) => {
   const [isSpikeActive, setIsSpikeActive] = useState(false);
 
@@ -81,6 +83,11 @@ export const GridCell: React.FC<GridCellProps> = React.memo(({
       {/* Hint visual highlight */}
       {isHinted && !isPlayer && !isWall && (
         <div className="hint-overlay" />
+      )}
+
+      {/* Portal jump teleport glow — shown on the path cells where a portal was used */}
+      {isPortalJump && !isWall && (
+        <div className="portal-jump-glow" />
       )}
 
       {isGoal && <Goal isWon={isWon} gateId={equippedGate} gateState={gateState} />}
