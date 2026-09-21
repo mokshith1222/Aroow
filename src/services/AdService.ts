@@ -239,7 +239,7 @@ export class AdService {
       this.logEvent('ad_failed', { type: 'interstitial', error: err });
     } finally {
       this.releaseAdGuard();
-      if (!this.appIsInBackground) onComplete();
+      onComplete();
       
       // Preload next interstitial immediately after closing
       if (Capacitor.isNativePlatform() && this.initializedNative) {
@@ -319,7 +319,7 @@ export class AdService {
       await AdMob.showRewardVideoAd();
       await listener.remove();
 
-      if (rewarded && !this.pendingRewardGranted && !this.appIsInBackground) {
+      if (rewarded && !this.pendingRewardGranted) {
         this.pendingRewardGranted = true;
         this.logEvent('reward_granted', { placement });
         this.analytics.track('rewarded_ad_completed', { placement });
