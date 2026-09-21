@@ -1359,12 +1359,14 @@
   overflow-x: auto;
   padding-bottom: 4px;
   scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 .world-tabs::-webkit-scrollbar {
   display: none;
 }
 
 .world-tab {
+  flex-shrink: 0;
   min-height: 40px;
   padding: 8px 14px;
   background: var(--bg-surface);

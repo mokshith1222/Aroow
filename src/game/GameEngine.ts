@@ -155,6 +155,7 @@ export class GameEngine {
 
   public canUndo(): boolean {
     if (!(this.stateMachine.isPlaying() || this.stateMachine.is('GAME_OVER')) || this.undoStack.length === 0) return false;
+    if (this.gateAnimationState !== 'idle') return false; // Prevent desync during animations
     const challenge = this.currentLevel?.challenge;
     if (challenge && !challenge.allowUndo) return false;
     return this.undosRemaining > 0;

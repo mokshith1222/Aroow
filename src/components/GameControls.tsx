@@ -77,7 +77,7 @@ export const GameControls: React.FC<GameControlsProps> = ({
         {onRequestHint && (
           <button
             className="control-icon-btn hint-btn"
-            onClick={handleHint}
+            onPointerDown={(e) => { e.preventDefault(); handleHint(); }}
             disabled={hintAdLoading || hintUsed}
             aria-label="Get a hint (watch ad)"
             title="Hint (watch a short ad)"
@@ -112,7 +112,7 @@ export const GameControls: React.FC<GameControlsProps> = ({
         {undosRemaining > 0 ? (
           <button
             className="control-icon-btn undo-btn"
-            onClick={handleUndo}
+            onPointerDown={(e) => { e.preventDefault(); handleUndo(); }}
             disabled={!canUndo}
             aria-label="Undo move"
             title="Undo (Z)"
@@ -127,7 +127,7 @@ export const GameControls: React.FC<GameControlsProps> = ({
         ) : (
           <button
             className="control-icon-btn undo-ad-btn"
-            onClick={onWatchAdForUndo}
+            onPointerDown={(e) => { e.preventDefault(); onWatchAdForUndo && onWatchAdForUndo(); }}
             aria-label="Watch ad for 3 more undo moves"
             title="Watch ad for +3 Undos"
             style={{
@@ -156,7 +156,7 @@ export const GameControls: React.FC<GameControlsProps> = ({
 
         <button
           className="control-icon-btn restart-btn"
-          onClick={handleRestart}
+          onPointerDown={(e) => { e.preventDefault(); handleRestart(); }}
           aria-label="Restart level"
           title="Restart (R)"
         >

@@ -402,3 +402,8 @@ html[data-color-mode="light"] :root {
   justify-content: center;
   touch-action: manipulation;
 }
+
+.control-icon-btn > svg,
+.control-icon-btn > span {
+  pointer-events: none;
+}

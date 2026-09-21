@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ProgressionManager, Stage } from '../game/ProgressionManager';
 import { AudioService } from '../services/AudioService';
 import { HapticService } from '../services/HapticService';
@@ -19,6 +19,18 @@ export const LevelSelector: React.FC<LevelSelectorProps> = ({
 
   const [stages, setStages] = useState<Stage[]>([]);
   const [selectedStageId, setSelectedStageId] = useState<number>(1);
+  const activeTabRef = useRef<HTMLButtonElement>(null);
+
+  // Auto-scroll active tab into view
+  useEffect(() => {
+    if (activeTabRef.current) {
+      activeTabRef.current.scrollIntoView({
+        behavior: 'smooth',
+        inline: 'center',
+        block: 'nearest'
+      });
+    }
+  }, [selectedStageId]);
 
   useEffect(() => {
     const loadedStages = ProgressionManager.getProgressionTree();
@@ -93,6 +105,7 @@ export const LevelSelector: React.FC<LevelSelectorProps> = ({
           return (
             <button
               key={stage.stageId}
+              ref={isSelected ? activeTabRef : null}
               role="tab"
               aria-selected={isSelected}
               className={`world-tab ${isSelected ? 'active' : ''} ${!stage.unlockedStatus ? 'world-locked' : ''}`}
@@ -104,10 +117,10 @@ export const LevelSelector: React.FC<LevelSelectorProps> = ({
                   <span className="world-tab-icon">
                     {stage.unlockedStatus ? stage.icon : '🔒'}
                   </span>
-                  <span className="world-tab-name">{stage.stageName}</span>
+                  <span className="world-tab-name" style={{ whiteSpace: 'nowrap' }}>{stage.stageName}</span>
                 </div>
                 {stage.unlockedStatus ? (
-                  <span style={{ fontSize: '0.75rem', opacity: 0.8 }}>
+                  <span style={{ fontSize: '0.75rem', opacity: 0.8, whiteSpace: 'nowrap' }}>
                     ★ {stage.totalStarsEarned}/{stage.totalStarsAvailable}
                   </span>
                 ) : (
