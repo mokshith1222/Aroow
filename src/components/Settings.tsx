@@ -20,17 +20,7 @@ export const Settings: React.FC<SettingsProps> = ({ onClose, onResetProgress }) 
   const [hapticsOn, setHapticsOn] = useState<boolean>(haptics.isEnabled());
   const [showConfirmReset, setShowConfirmReset] = useState<boolean>(false);
   const [showMetrics, setShowMetrics] = useState<boolean>(false);
-  const [colorMode, setColorMode] = useState<'light' | 'dark'>(storage.getColorMode());
-
   const metrics = analytics.getMetrics();
-
-  const handleToggleColorMode = () => {
-    const newMode = colorMode === 'dark' ? 'light' : 'dark';
-    setColorMode(newMode);
-    storage.setColorMode(newMode);
-    audio.playButton();
-    haptics.button();
-  };
 
   const handleToggleSound = () => {
     const isSoundActive = !soundOn;
@@ -114,18 +104,6 @@ export const Settings: React.FC<SettingsProps> = ({ onClose, onResetProgress }) 
               <div className="toggle-thumb" />
             </button>
           </div>
-
-          <div className="setting-item">
-            <span className="setting-label">Light Mode</span>
-            <button
-              className={`toggle-btn ${colorMode === 'light' ? 'active' : ''}`}
-              onClick={handleToggleColorMode}
-              aria-pressed={colorMode === 'light'}
-            >
-              <div className="toggle-thumb" />
-            </button>
-          </div>
-        </div>
 
         {/* Analytics & Commercial KPI Telemetry */}
         <div className="settings-analytics-section">

@@ -60,14 +60,14 @@ export const GameControls: React.FC<GameControlsProps> = ({
     <footer className="game-bottom-bar" role="region" aria-label="Game controls">
       {/* Target & Move count */}
       <div className="bottom-moves-text" style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
-        <div style={{ fontSize: '0.65rem', color: 'var(--color-text-dim)', letterSpacing: '0.05em', fontWeight: 600 }}>
+        <div style={{ fontSize: '0.65rem', color: 'var(--text-muted)', letterSpacing: '0.05em', fontWeight: 600 }}>
           TARGET: {targetMoves}
         </div>
         <div>
-          <span className="moves-count" style={{ color: isOptimal ? 'var(--color-primary)' : 'var(--accent-amber)' }}>
+          <span className="moves-count" style={{ color: isOptimal ? 'var(--accent-primary)' : 'var(--accent-gold)' }}>
             {moves}
           </span>
-          <span style={{ fontSize: '0.8rem', marginLeft: '4px', color: 'var(--color-text-dim)' }}>MOVES</span>
+          <span style={{ fontSize: '0.8rem', marginLeft: '4px', color: 'var(--text-muted)' }}>MOVES</span>
         </div>
       </div>
 

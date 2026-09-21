@@ -127,14 +127,14 @@ export const LevelComplete: React.FC<LevelCompleteProps> = ({
               : `LEVEL ${level?.id || 1} CLEARED`}
         </span>
         {hintsUsedLevel > 0 && (
-          <span className="completion-level-tag" style={{ color: 'var(--accent-amber)', marginTop: '4px', background: 'rgba(251, 191, 36, 0.1)' }}>
+          <span className="completion-level-tag" style={{ color: 'var(--accent-gold)', marginTop: '4px', background: 'rgba(251, 191, 36, 0.1)' }}>
             HINT PENALTY APPLIED (-{hintsUsedLevel === 1 ? 10 : hintsUsedLevel === 2 ? 25 : 50}%)
           </span>
         )}
         
         {/* Phase 3 Route UI Feedback */}
         {level?.longRouteMinMoves && moves >= level.longRouteMinMoves && stars <= 2 && (
-          <span className="completion-level-tag" style={{ color: 'var(--accent-amber)', marginTop: '4px', background: 'rgba(251, 191, 36, 0.1)' }}>
+          <span className="completion-level-tag" style={{ color: 'var(--accent-gold)', marginTop: '4px', background: 'rgba(251, 191, 36, 0.1)' }}>
             SAFE ROUTE TAKEN (MAX 2★)
           </span>
         )}
@@ -198,21 +198,21 @@ export const LevelComplete: React.FC<LevelCompleteProps> = ({
           marginTop: '20px',
           padding: '12px',
           fontStyle: 'italic',
-          color: 'var(--color-text)',
+          color: 'var(--text-primary)',
           textAlign: 'center',
-          borderTop: '1px solid var(--color-border)',
-          borderBottom: '1px solid var(--color-border)',
+          borderTop: '1px solid var(--border-subtle)',
+          borderBottom: '1px solid var(--border-subtle)',
           backgroundColor: 'rgba(0,0,0,0.1)'
         }}>
           "{getMotivationalQuote(level?.id || 1, stars)}"
         </div>
 
         {pointsEarned !== undefined && pointsEarned > 0 && (
-          <div className="completion-points-banner" style={{ marginTop: '16px', padding: '12px', background: 'var(--color-surface-dim)', borderRadius: '8px', textAlign: 'center', border: '1px solid var(--color-border)' }}>
-            <div style={{ fontSize: '12px', color: 'var(--color-text-dim)', letterSpacing: '1px', marginBottom: '4px' }}>POINTS EARNED</div>
-            <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--color-primary)' }}>+{pointsEarned}</div>
+          <div className="completion-points-banner" style={{ marginTop: '16px', padding: '12px', background: 'var(--bg-surface-elevated)', borderRadius: '8px', textAlign: 'center', border: '1px solid var(--border-subtle)' }}>
+            <div style={{ fontSize: '12px', color: 'var(--text-muted)', letterSpacing: '1px', marginBottom: '4px' }}>POINTS EARNED</div>
+            <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--accent-primary)' }}>+{pointsEarned}</div>
             {isDaily && dailyBonusPoints && dailyBonusPoints > 0 && (
-              <div style={{ fontSize: '12px', color: 'var(--color-accent)', marginTop: '4px', fontWeight: 'bold' }}>INCLUDES {dailyBonusPoints} DAILY BONUS!</div>
+              <div style={{ fontSize: '12px', color: 'var(--accent-primary)', marginTop: '4px', fontWeight: 'bold' }}>INCLUDES {dailyBonusPoints} DAILY BONUS!</div>
             )}
           </div>
         )}
