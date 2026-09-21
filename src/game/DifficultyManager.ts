@@ -33,7 +33,7 @@ export class DifficultyManager {
     moves: number,
     parMoves: number,
     mistakes: number = 0,
-    elapsedSeconds: number = 0,
+    _elapsedSeconds: number = 0,
     level?: LevelData | null
   ): number {
     const thresholds = this.getThresholds(parMoves, level);
