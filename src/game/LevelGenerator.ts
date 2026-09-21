@@ -258,7 +258,7 @@ export class LevelGenerator {
   private static generateCandidate(
     id: number,
     preset: LevelPresetConfig,
-    layout: LayoutStyle,
+    _layout: LayoutStyle,
     rng: PRNG
   ): LevelData {
     const width = preset.gridWidth;
