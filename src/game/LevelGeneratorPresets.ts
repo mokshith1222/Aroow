@@ -52,7 +52,7 @@ const CLASSIC_CHALLENGE: ChallengePolicy = {
 };
 
 const STRICT_CHALLENGE: ChallengePolicy = {
-  maxLives: 2,
+  maxLives: 3,
   allowUndo: true,
   maxUndoUses: 3,
   hazardSpeedMultiplier: 1.15,
@@ -61,7 +61,7 @@ const STRICT_CHALLENGE: ChallengePolicy = {
 };
 
 const EXTREME_CHALLENGE: ChallengePolicy = {
-  maxLives: 1,
+  maxLives: 3,
   allowUndo: false,
   maxUndoUses: 0,
   hazardSpeedMultiplier: 1.35,

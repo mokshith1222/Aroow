@@ -560,9 +560,25 @@ export class GameEngine {
       this.lives = 1;
       this.lastFailedTargetPos = null;
       this.lastMoveResult = null;
-      this.lastInvalidMoveTime = 0;
+      
+      // Give temporary immunity so they don't instantly die to a hazard
+      this.lastInvalidMoveTime = Date.now();
+
+      // Ensure they have at least 15 seconds remaining if there is a time limit
+      if (this.currentLevel?.timeLimit) {
+        this.elapsedSeconds = Math.min(this.elapsedSeconds, Math.max(0, this.currentLevel.timeLimit - 15));
+      }
+
+      // Grant one extra undo if they have none left, so they can escape a wrong path
+      const challenge = this.currentLevel?.challenge;
+      if (challenge?.allowUndo && challenge.maxUndoUses !== undefined && this.undoUses >= challenge.maxUndoUses) {
+        this.undoUses = challenge.maxUndoUses - 1;
+      }
+
       this.stateMachine.transitionTo('PLAYING');
       this.startTimer();
+      // Also restart hazard timer so they can be hit again after immunity expires
+      this.startHazardTimer();
       this.notify();
       return true;
     }
