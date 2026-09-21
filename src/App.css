@@ -1355,11 +1355,10 @@
 /* World Tabs */
 .world-tabs {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 8px;
-  overflow-x: auto;
-  padding-bottom: 4px;
-  scrollbar-width: none;
-  scroll-behavior: smooth;
+  padding-bottom: 8px;
 }
 .world-tabs::-webkit-scrollbar {
   display: none;

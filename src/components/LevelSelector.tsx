@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ProgressionManager, Stage } from '../game/ProgressionManager';
 import { AudioService } from '../services/AudioService';
 import { HapticService } from '../services/HapticService';
@@ -19,18 +19,6 @@ export const LevelSelector: React.FC<LevelSelectorProps> = ({
 
   const [stages, setStages] = useState<Stage[]>([]);
   const [selectedStageId, setSelectedStageId] = useState<number>(1);
-  const activeTabRef = useRef<HTMLButtonElement>(null);
-
-  // Auto-scroll active tab into view
-  useEffect(() => {
-    if (activeTabRef.current) {
-      activeTabRef.current.scrollIntoView({
-        behavior: 'smooth',
-        inline: 'center',
-        block: 'nearest'
-      });
-    }
-  }, [selectedStageId]);
 
   useEffect(() => {
     const loadedStages = ProgressionManager.getProgressionTree();
@@ -105,7 +93,6 @@ export const LevelSelector: React.FC<LevelSelectorProps> = ({
           return (
             <button
               key={stage.stageId}
-              ref={isSelected ? activeTabRef : null}
               role="tab"
               aria-selected={isSelected}
               className={`world-tab ${isSelected ? 'active' : ''} ${!stage.unlockedStatus ? 'world-locked' : ''}`}
