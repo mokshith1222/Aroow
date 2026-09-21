@@ -30,6 +30,7 @@ function App() {
   const [previewTheme, setPreviewTheme] = useState<string | null>(null);
   const [previewBackground, setPreviewBackground] = useState<string | null>(null);
   const [showHintModal, setShowHintModal] = useState<boolean>(false);
+  const [pendingHintLevel, setPendingHintLevel] = useState<1 | 2 | 3 | null>(null);
 
   const activeTheme = previewTheme || snapshot.equippedTheme || 'theme_classic';
   const activeBackground = previewBackground || snapshot.equippedBackground || 'bg_clean';
@@ -129,6 +130,14 @@ function App() {
   const handleHintClick = useCallback(() => {
     setShowHintModal(true);
   }, []);
+
+  // Apply the pending hint AFTER the modal has fully unmounted
+  useEffect(() => {
+    if (!showHintModal && pendingHintLevel !== null) {
+      engine.requestHint(pendingHintLevel);
+      setPendingHintLevel(null);
+    }
+  }, [showHintModal, pendingHintLevel, engine]);
 
   const [undoAdLoading, setUndoAdLoading] = useState(false);
 
@@ -364,7 +373,10 @@ function App() {
             {showHintModal && (
               <HintModal 
                 onClose={() => setShowHintModal(false)}
-                onApplyHint={(level) => engine.requestHint(level)}
+                onApplyHint={(level) => {
+                  setPendingHintLevel(level);
+                  setShowHintModal(false);
+                }}
               />
             )}
           </div>
