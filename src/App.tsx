@@ -133,9 +133,22 @@ function App() {
     AdService.getInstance().showRewardedAd(
       () => engine.addUndos(3),
       undefined,
-      'generic' // We don't have a specific placement for undo yet, but generic is fine, or we can use 'hint' conceptually, but let's just use generic. Wait, the type is AdPlacement. 'generic' is valid.
+      'generic'
     );
   }, [engine]);
+
+  // Global hotkeys for Undo (Z) and Restart (R)
+  useEffect(() => {
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'z' || e.key === 'Z') {
+        handleUndo();
+      } else if (e.key === 'r' || e.key === 'R') {
+        handleRestart();
+      }
+    };
+    window.addEventListener('keydown', handleGlobalKeyDown);
+    return () => window.removeEventListener('keydown', handleGlobalKeyDown);
+  }, [handleUndo, handleRestart]);
 
   return (
     <div className={`app-viewport bg-pattern-${activeBackground}`} data-theme={activeTheme}>
