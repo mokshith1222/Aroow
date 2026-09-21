@@ -218,10 +218,7 @@ export class GameEngine {
     const solution = LevelSolver.solve(level);
     this.optimalMoves = solution.solvable ? solution.optimalMoves : (level.parMoves || 0);
 
-    // Max moves is strictly the optimal solution
-    if (this.currentLevel) {
-      this.currentLevel.maxMoves = this.optimalMoves;
-    }
+    // Max moves constraint removed to allow human leeway (parMoves handles scoring)
 
     this.stopTimer();
     this.stopHazardTimer();
