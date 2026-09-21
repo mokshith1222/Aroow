@@ -168,7 +168,7 @@ export const LevelComplete: React.FC<LevelCompleteProps> = ({
         {/* Stats Summary: Moves, Time, Remaining Lives */}
         <div className="completion-stats-grid">
           <div className="completion-stat-item">
-            <span className="completion-stat-num" style={{ color: moves <= (level?.targetMoves ?? level?.parMoves ?? 0) ? 'var(--accent-green)' : 'inherit' }}>{moves}</span>
+            <span className="completion-stat-num" style={{ color: moves <= (level?.targetMoves ?? level?.parMoves ?? 0) ? 'var(--accent-primary)' : 'inherit' }}>{moves}</span>
             <span className="completion-stat-label">MOVES</span>
             <span className="completion-stat-sub">Target: {level?.targetMoves ?? level?.parMoves ?? 0}</span>
           </div>
@@ -208,7 +208,7 @@ export const LevelComplete: React.FC<LevelCompleteProps> = ({
         </div>
 
         {pointsEarned !== undefined && pointsEarned > 0 && (
-          <div className="completion-points-banner" style={{ marginTop: '16px', padding: '12px', background: 'var(--bg-surface-elevated)', borderRadius: '8px', textAlign: 'center', border: '1px solid var(--border-subtle)' }}>
+          <div className="completion-points-banner" style={{ marginTop: '12px', padding: '8px', background: 'var(--bg-surface-elevated)', borderRadius: '8px', textAlign: 'center', border: '1px solid var(--border-subtle)' }}>
             <div style={{ fontSize: '12px', color: 'var(--text-muted)', letterSpacing: '1px', marginBottom: '4px' }}>POINTS EARNED</div>
             <div style={{ fontSize: '24px', fontWeight: 'bold', color: 'var(--accent-primary)' }}>+{pointsEarned}</div>
             {isDaily && dailyBonusPoints && dailyBonusPoints > 0 && (
