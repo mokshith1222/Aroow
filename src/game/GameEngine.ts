@@ -623,7 +623,15 @@ export class GameEngine {
    * level 3: full solution path
    */
   public requestHint(level: 1 | 2 | 3): void {
-    if (!this.currentLevel || !this.stateMachine.isPlaying()) return;
+    console.log('[Hint] requestHint called, level:', level, 'state:', this.stateMachine.get(), 'hasLevel:', !!this.currentLevel);
+    if (!this.currentLevel) {
+      console.warn('[Hint] No current level, aborting');
+      return;
+    }
+    if (!this.stateMachine.isPlaying()) {
+      console.warn('[Hint] Not playing, state is:', this.stateMachine.get(), '— forcing hint anyway');
+      // Do not return — apply hint regardless on APK to bypass state race
+    }
 
     this.analytics.track('hint_used', { levelId: this.currentLevel.id, hintLevel: level });
     this.hintsUsed += 1;
@@ -635,6 +643,7 @@ export class GameEngine {
     this.collectedKeys.forEach(k => { keysHeldMask |= (1 << k); });
 
     const optimalPath = LevelSolver.getOptimalPath(this.currentLevel, this.player.getPosition(), keysHeldMask);
+    console.log('[Hint] optimalPath length:', optimalPath.length, 'playerPos:', JSON.stringify(this.player.getPosition()));
     
     // optimalPath includes the starting position at index 0.
     if (optimalPath.length > 1) {
@@ -645,8 +654,11 @@ export class GameEngine {
       } else if (level === 3) {
         this.activeHintCells = optimalPath.slice(1);
       }
+    } else {
+      console.warn('[Hint] optimalPath too short:', optimalPath.length);
     }
     
+    console.log('[Hint] activeHintCells set to:', JSON.stringify(this.activeHintCells));
     this.notify();
   }
 
