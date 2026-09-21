@@ -80,9 +80,24 @@ export const GridCell: React.FC<GridCellProps> = React.memo(({
       data-x={x}
       data-y={y}
     >
-      {/* Hint visual highlight */}
-      {isHinted && !isPlayer && !isWall && (
-        <div className="hint-overlay" />
+      {/* Hint visual highlight — inline styles for guaranteed Android WebView compatibility */}
+      {isHinted && !isWall && (
+        <div
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'rgba(250, 204, 21, 0.45)',
+            border: '3px solid #facc15',
+            borderRadius: '6px',
+            zIndex: 20,
+            pointerEvents: 'none',
+            animation: 'pulse-hint 1.2s ease-in-out infinite',
+            boxSizing: 'border-box',
+          }}
+        />
       )}
 
       {/* Portal jump teleport glow — shown on the path cells where a portal was used */}
