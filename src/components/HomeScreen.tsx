@@ -117,9 +117,9 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         </button>
 
         <div className="daily-puzzle-section" style={{
-          background: 'var(--surface-color)',
-          border: '1px solid var(--border-color)',
-          borderRadius: '12px',
+          background: 'var(--bg-surface)',
+          border: '1px solid var(--border-subtle)',
+          borderRadius: 'var(--radius-lg)',
           padding: '16px',
           display: 'flex',
           flexDirection: 'column',
@@ -127,7 +127,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           width: '100%'
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--text-color)' }}>DAILY PUZZLE</span>
+            <span style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--text-primary)' }}>DAILY PUZZLE</span>
             <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', textTransform: 'uppercase' }}>TODAY</span>
           </div>
           {isDailyComplete ? (
@@ -142,9 +142,9 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
         </div>
 
         <div className="endless-mode-section" style={{
-          background: 'var(--surface-color)',
-          border: '1px solid var(--border-color)',
-          borderRadius: '12px',
+          background: 'var(--bg-surface)',
+          border: '1px solid var(--border-subtle)',
+          borderRadius: 'var(--radius-lg)',
           padding: '16px',
           display: 'flex',
           flexDirection: 'column',
@@ -152,7 +152,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
           width: '100%'
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-            <span style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--text-color)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <span style={{ fontWeight: 600, fontSize: '0.9rem', color: 'var(--text-primary)', display: 'flex', alignItems: 'center', gap: '8px' }}>
               <span>∞</span> ENDLESS MODE
             </span>
             {endlessStats.highestLevel > 0 && (
@@ -165,7 +165,7 @@ export const HomeScreen: React.FC<HomeScreenProps> = ({
               <span>Best Moves: {endlessStats.bestMoves === 9999 ? '-' : endlessStats.bestMoves}</span>
             </div>
           )}
-          <button className="btn-primary" style={{ minHeight: '44px', background: 'var(--primary-color)' }} onClick={handlePlayEndlessClick}>
+          <button className="btn-primary" style={{ minHeight: '44px' }} onClick={handlePlayEndlessClick}>
             PLAY ENDLESS (LVL {nextEndlessLevel})
           </button>
         </div>
