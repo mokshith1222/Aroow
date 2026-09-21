@@ -104,6 +104,7 @@ export const Settings: React.FC<SettingsProps> = ({ onClose, onResetProgress }) 
               <div className="toggle-thumb" />
             </button>
           </div>
+        </div>
 
         {/* Analytics & Commercial KPI Telemetry */}
         <div className="settings-analytics-section">
