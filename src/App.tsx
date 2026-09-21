@@ -237,6 +237,7 @@ function App() {
                 completedPath={snapshot.completedPath}
                 activeGates={snapshot.activeGates}
                 collectedKeys={snapshot.collectedKeys}
+                activeHintCells={snapshot.activeHintCells}
                 equippedCharacter={snapshot.equippedCharacter}
                 equippedGate={snapshot.equippedGate}
                 gateAnimationState={snapshot.gateAnimationState}

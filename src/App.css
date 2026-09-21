@@ -1774,3 +1774,19 @@
     linear-gradient(45deg, rgba(234, 179, 8, 0.04) 0%, transparent 40%),
     radial-gradient(circle at 50% 12%, var(--bg-surface) 0%, transparent 85%);
 }
+
+/* --- Hint System --- */
+.hint-overlay {
+  position: absolute;
+  inset: 15%;
+  background: var(--accent-gold);
+  opacity: 0.3;
+  border-radius: 8px;
+  animation: pulse-hint 1.5s infinite;
+  pointer-events: none;
+  z-index: 10;
+}
+@keyframes pulse-hint {
+  0%, 100% { opacity: 0.2; transform: scale(0.95); }
+  50% { opacity: 0.5; transform: scale(1.05); }
+}
