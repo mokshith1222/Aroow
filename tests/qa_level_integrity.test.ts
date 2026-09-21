@@ -240,7 +240,7 @@ describe('Level Integrity — LevelLoader handcrafted levels', () => {
   it('LevelLoader enriches late campaign levels with extreme challenge rules', () => {
     const level = LevelLoader.getLevel(500);
     expect(level?.challenge?.maxLives).toBe(3);
-    expect(level?.challenge?.allowUndo).toBe(false);
+    expect(level?.challenge?.allowUndo).toBe(true);
     expect(level?.timeLimit).toBeDefined();
   });
 

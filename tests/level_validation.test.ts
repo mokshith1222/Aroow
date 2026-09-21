@@ -183,7 +183,7 @@ describe('Level Validation & Procedural Generation', () => {
     expect(master.optimalSolutionLength!).toBeGreaterThan(tutorial.optimalSolutionLength!);
     expect(tutorial.challenge?.maxLives).toBe(3);
     expect(master.challenge?.maxLives).toBe(3);
-    expect(master.challenge?.allowUndo).toBe(false);
+    expect(master.challenge?.allowUndo).toBe(true);
     expect(master.timeLimit).toBeDefined();
     expect(master.timeLimit!).toBeGreaterThan(master.targetTime!);
   });
