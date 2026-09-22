@@ -35,7 +35,7 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 24px 20px;
+  padding: max(48px, calc(24px + env(safe-area-inset-top))) 20px max(32px, calc(16px + env(safe-area-inset-bottom)));
   height: 100%;
   overflow-y: auto;
   scrollbar-width: none;
@@ -51,7 +51,7 @@
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  padding: 56px 24px 36px;
+  padding: max(64px, calc(40px + env(safe-area-inset-top))) 24px max(48px, calc(32px + env(safe-area-inset-bottom)));
 }
 
 .home-brand {
@@ -256,7 +256,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 20px 20px 24px;
+  padding: max(48px, calc(24px + env(safe-area-inset-top))) 20px max(32px, calc(20px + env(safe-area-inset-bottom)));
   height: 100%;
   position: relative;
   overflow: hidden;
