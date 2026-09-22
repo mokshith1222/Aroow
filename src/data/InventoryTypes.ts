@@ -1,6 +1,6 @@
 import type { ThemeColors } from './Themes';
 
-export type CosmeticCategory = 'CHARACTERS' | 'GATES' | 'BACKGROUNDS' | 'THEMES';
+export type CosmeticCategory = 'CHARACTERS' | 'GATES' | 'BACKGROUNDS' | 'THEMES' | 'TOUCHPADS';
 
 export type CosmeticRarity = 'Common' | 'Uncommon' | 'Rare' | 'Epic' | 'Legendary';
 
@@ -26,4 +26,5 @@ export interface EquippedLoadout {
   gate: string;
   background: string;
   theme: string;
+  touchpad: string;
 }

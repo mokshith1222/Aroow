@@ -3,6 +3,7 @@ import { COSMETICS } from './Cosmetics';
 import { GATES } from './Gates';
 import { BACKGROUNDS } from './Backgrounds';
 import { THEMES } from './Themes';
+import { TOUCHPADS } from './Touchpads';
 
 export const UNIFIED_COSMETICS: CosmeticItem[] = [
   // 1. CHARACTERS
@@ -52,6 +53,18 @@ export const UNIFIED_COSMETICS: CosmeticItem[] = [
     icon: '🎨',
     themeColor: t.colors.accent,
     metadata: { colors: t.colors }
+  })),
+
+  // 5. TOUCHPADS
+  ...TOUCHPADS.map(tp => ({
+    id: tp.id,
+    category: 'TOUCHPADS' as CosmeticCategory,
+    name: tp.name,
+    rarity: tp.rarity,
+    price: tp.price,
+    description: tp.description,
+    icon: tp.icon,
+    themeColor: tp.themeColor
   }))
 ];
 
@@ -71,5 +84,6 @@ export const COSMETIC_CATEGORIES: CosmeticCategory[] = [
   'CHARACTERS',
   'GATES',
   'BACKGROUNDS',
-  'THEMES'
+  'THEMES',
+  'TOUCHPADS'
 ];

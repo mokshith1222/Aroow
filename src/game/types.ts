@@ -184,6 +184,8 @@ export interface GameSnapshot {
   equippedTheme: string;
   /** Currently equipped cosmetic background pattern id */
   equippedBackground: string;
+  /** Currently equipped cosmetic touchpad id */
+  equippedTouchpad: string;
   /** Theatrical gate animation sequence state on goal reach */
   gateAnimationState: 'idle' | 'activating' | 'entering' | 'completed';
   /** True if the current level is the daily puzzle */

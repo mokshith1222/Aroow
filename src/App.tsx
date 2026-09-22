@@ -14,6 +14,7 @@ import { AchievementToast } from './components/AchievementToast';
 import { AchievementsModal } from './components/AchievementsModal';
 import { AdBanner } from './components/AdBanner';
 import { HintModal } from './components/HintModal';
+import { Touchpad } from './components/Touchpad';
 import { StorageService } from './services/StorageService';
 import { AdService } from './services/AdService';
 import { AudioService } from './services/AudioService';
@@ -34,6 +35,7 @@ function App() {
 
   const activeTheme = previewTheme || snapshot.equippedTheme || 'theme_classic';
   const activeBackground = previewBackground || snapshot.equippedBackground || 'bg_clean';
+  const activeTouchpad = snapshot.equippedTouchpad || 'touchpad_default';
 
   // Initialize analytics session and lifecycle
   useEffect(() => {
@@ -253,6 +255,13 @@ function App() {
                 onMove={handleMove}
               />
             </main>
+
+            {/* Touchpad Area - placed exactly between GameBoard and GameControls */}
+            <Touchpad
+              onMove={handleMove}
+              levelId={snapshot.level.id}
+              equippedSkin={activeTouchpad}
+            />
 
             {/* Bottom: Moves, Undo, Restart, optional Hint */}
             <GameControls

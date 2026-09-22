@@ -45,6 +45,9 @@ export interface PlayerData {
   equippedTheme: string;
   ownedBackgrounds: string[];
   equippedBackground: string;
+  ownedTouchpads: string[];
+  equippedTouchpad: string;
+  touchpadTutorialSeen: boolean;
   lastDailyCompletionDate?: string;
   unlockedAchievements: string[];
   achievementStats: AchievementStats;
@@ -75,6 +78,9 @@ export const createDefaultData = (): PlayerData => ({
   equippedTheme: 'theme_classic',
   ownedBackgrounds: ['bg_clean'],
   equippedBackground: 'bg_clean',
+  ownedTouchpads: ['touchpad_default'],
+  equippedTouchpad: 'touchpad_default',
+  touchpadTutorialSeen: false,
   lastDailyCompletionDate: undefined,
   unlockedAchievements: [],
   achievementStats: {
@@ -199,6 +205,15 @@ export class StorageService {
     }
     if (typeof data.equippedBackground !== 'string') {
       data.equippedBackground = 'bg_clean';
+    }
+    if (!Array.isArray(data.ownedTouchpads)) {
+      data.ownedTouchpads = ['touchpad_default'];
+    }
+    if (typeof data.equippedTouchpad !== 'string') {
+      data.equippedTouchpad = 'touchpad_default';
+    }
+    if (typeof data.touchpadTutorialSeen !== 'boolean') {
+      data.touchpadTutorialSeen = false;
     }
     delete data.totalPoints;
 
@@ -588,6 +603,43 @@ export class StorageService {
     return false;
   }
 
+  public getOwnedTouchpads(): string[] {
+    return this.data.ownedTouchpads || ['touchpad_default'];
+  }
+
+  public getEquippedTouchpad(): string {
+    return this.data.equippedTouchpad || 'touchpad_default';
+  }
+
+  public equipTouchpad(id: string): void {
+    if ((this.data.ownedTouchpads || []).includes(id)) {
+      this.data.equippedTouchpad = id;
+      this.saveData();
+    }
+  }
+
+  public unlockTouchpad(id: string, price: number): boolean {
+    if ((this.data.ownedTouchpads || []).includes(id)) return false;
+
+    const success = this.spendPoints(price, `UNLOCK_TOUCHPAD_${id.toUpperCase()}`);
+    if (success) {
+      if (!this.data.ownedTouchpads) this.data.ownedTouchpads = ['touchpad_default'];
+      this.data.ownedTouchpads.push(id);
+      this.saveData();
+      return true;
+    }
+    return false;
+  }
+
+  public getTouchpadTutorialSeen(): boolean {
+    return this.data.touchpadTutorialSeen || false;
+  }
+
+  public setTouchpadTutorialSeen(): void {
+    this.data.touchpadTutorialSeen = true;
+    this.saveData();
+  }
+
   // --- Unified Inventory Generic Methods (Phase 32) ---
   public getOwnedItems(category: CosmeticCategory): string[] {
     switch (category) {
@@ -595,6 +647,7 @@ export class StorageService {
       case 'GATES': return this.getOwnedGates();
       case 'BACKGROUNDS': return this.getOwnedBackgrounds();
       case 'THEMES': return this.getOwnedThemes();
+      case 'TOUCHPADS': return this.getOwnedTouchpads();
     }
   }
 
@@ -604,6 +657,7 @@ export class StorageService {
       case 'GATES': return this.getEquippedGate();
       case 'BACKGROUNDS': return this.getEquippedBackground();
       case 'THEMES': return this.getEquippedTheme();
+      case 'TOUCHPADS': return this.getEquippedTouchpad();
     }
   }
 
@@ -614,6 +668,7 @@ export class StorageService {
       case 'GATES': this.equipGate(id); break;
       case 'BACKGROUNDS': this.equipBackground(id); break;
       case 'THEMES': this.equipTheme(id); break;
+      case 'TOUCHPADS': this.equipTouchpad(id); break;
     }
     return true;
   }
@@ -624,6 +679,7 @@ export class StorageService {
       case 'GATES': return this.unlockGate(id, price);
       case 'BACKGROUNDS': return this.unlockBackground(id, price);
       case 'THEMES': return this.unlockTheme(id, price);
+      case 'TOUCHPADS': return this.unlockTouchpad(id, price);
     }
   }
 

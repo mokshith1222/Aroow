@@ -40,6 +40,7 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
   const [equippedGates, setEquippedGates] = useState<string>(storage.getEquippedGate());
   const [equippedBackgrounds, setEquippedBackgrounds] = useState<string>(storage.getEquippedBackground());
   const [equippedThemes, setEquippedThemes] = useState<string>(storage.getEquippedTheme());
+  const [equippedTouchpads, setEquippedTouchpads] = useState<string>(storage.getEquippedTouchpad());
 
   // Owned tracking version to trigger re-renders on purchases/equips
   const [ownedVersion, setOwnedVersion] = useState<number>(0);
@@ -50,6 +51,7 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
       case 'GATES': return equippedGates;
       case 'BACKGROUNDS': return equippedBackgrounds;
       case 'THEMES': return equippedThemes;
+      case 'TOUCHPADS': return equippedTouchpads;
     }
   };
 
@@ -70,6 +72,7 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
           setEquippedThemes(item.id);
           if (onPreviewTheme) onPreviewTheme(null);
           break;
+        case 'TOUCHPADS': setEquippedTouchpads(item.id); break;
       }
       setOwnedVersion(v => v + 1);
     }
@@ -128,6 +131,7 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
   const equippedGateItem = getCosmeticById(equippedGates);
   const equippedBgItem = getCosmeticById(equippedBackgrounds);
   const equippedThemeItem = getCosmeticById(equippedThemes);
+  const equippedTouchpadItem = getCosmeticById(equippedTouchpads);
 
   return (
     <div className="screen-container shop-screen" key={ownedVersion}>
@@ -210,7 +214,7 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
 
         <div style={{
           display: 'grid',
-          gridTemplateColumns: 'repeat(4, 1fr)',
+          gridTemplateColumns: 'repeat(5, 1fr)',
           gap: '8px'
         }}>
           {/* Slot 1: Character */}
@@ -309,6 +313,29 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
               {equippedThemeItem?.name || 'Classic'}
             </span>
           </div>
+
+          {/* Slot 5: Touchpad */}
+          <div
+            onClick={() => setSelectedCategory('TOUCHPADS')}
+            style={{
+              background: selectedCategory === 'TOUCHPADS' ? 'rgba(234, 179, 8, 0.15)' : 'var(--bg-surface-elevated)',
+              border: selectedCategory === 'TOUCHPADS' ? '1px solid var(--accent-gold)' : '1px solid var(--border-subtle)',
+              borderRadius: '10px',
+              padding: '6px 4px',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease'
+            }}
+          >
+            <span style={{ fontSize: '16px', height: '22px', display: 'flex', alignItems: 'center' }}>
+              {equippedTouchpadItem?.icon || '⬜'}
+            </span>
+            <span style={{ fontSize: '9px', fontWeight: '600', marginTop: '2px', textAlign: 'center', whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis', maxWidth: '100%' }}>
+              {equippedTouchpadItem?.name || 'Pad'}
+            </span>
+          </div>
         </div>
       </div>
 
@@ -378,7 +405,7 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
         padding: '0 16px 12px',
         flexWrap: 'wrap'
       }}>
-        {(['ALL', 'CHARACTERS', 'GATES', 'BACKGROUNDS', 'THEMES'] as const).map(cat => (
+        {(['ALL', 'CHARACTERS', 'GATES', 'BACKGROUNDS', 'THEMES', 'TOUCHPADS'] as const).map(cat => (
           <button
             key={cat}
             className={`shop-tab-btn ${selectedCategory === cat ? 'active' : ''}`}

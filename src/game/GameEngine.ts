@@ -1051,6 +1051,7 @@ export class GameEngine {
       equippedGate: StorageService.getInstance().getEquippedGate(),
       equippedTheme: StorageService.getInstance().getEquippedTheme(),
       equippedBackground: StorageService.getInstance().getEquippedBackground(),
+      equippedTouchpad: StorageService.getInstance().getEquippedTouchpad(),
       gateAnimationState: this.gateAnimationState,
       isDailyMode: this.isDailyMode,
       justUnlockedStage: this.justUnlockedStage,

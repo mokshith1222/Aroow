@@ -22,16 +22,17 @@ describe('Phase 32 — Unified Inventory System', () => {
   });
 
   describe('Unified Cosmetic Data Structure & Registry', () => {
-    it('defines the 4 required categories', () => {
+    it('defines the 5 required categories', () => {
       expect(COSMETIC_CATEGORIES).toEqual([
         'CHARACTERS',
         'GATES',
         'BACKGROUNDS',
-        'THEMES'
+        'THEMES',
+        'TOUCHPADS'
       ]);
     });
 
-    it('aggregates cosmetics across all 4 categories', () => {
+    it('aggregates cosmetics across all 5 categories', () => {
       const all = getAllCosmetics();
       expect(all.length).toBeGreaterThan(25);
 
@@ -39,12 +40,14 @@ describe('Phase 32 — Unified Inventory System', () => {
       const gates = getCosmeticsByCategory('GATES');
       const bgs = getCosmeticsByCategory('BACKGROUNDS');
       const themes = getCosmeticsByCategory('THEMES');
+      const touchpads = getCosmeticsByCategory('TOUCHPADS');
 
       expect(chars.length).toBe(10);
       expect(gates.length).toBe(10);
       expect(bgs.length).toBe(10);
       expect(themes.length).toBe(10);
-      expect(all.length).toBe(chars.length + gates.length + bgs.length + themes.length);
+      expect(touchpads.length).toBe(9);
+      expect(all.length).toBe(chars.length + gates.length + bgs.length + themes.length + touchpads.length);
     });
 
     it('validates each cosmetic has required unified properties', () => {
