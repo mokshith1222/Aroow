@@ -199,6 +199,7 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
 
       {/* EQUIPPED LOADOUT SHOWCASE BAR */}
       <div style={{
+        flexShrink: 0,
         margin: '0 20px 0',
         background: 'var(--bg-surface)',
         borderRadius: '16px',
@@ -420,6 +421,7 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
       {/* Category Filter Pills */}
       <div className="shop-tabs-nav" style={{
         display: 'flex',
+        flexShrink: 0,
         gap: '6px',
         padding: '12px 16px 12px',
         overflowX: 'auto',

@@ -35,7 +35,10 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding: max(48px, calc(24px + env(safe-area-inset-top))) 20px max(32px, calc(16px + env(safe-area-inset-bottom)));
+  padding-top: calc(48px + env(safe-area-inset-top, 0px));
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
   height: 100%;
   overflow-y: auto;
   scrollbar-width: none;
@@ -51,7 +54,10 @@
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  padding: max(64px, calc(40px + env(safe-area-inset-top))) 24px max(48px, calc(32px + env(safe-area-inset-bottom)));
+  padding-top: calc(64px + env(safe-area-inset-top, 0px));
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-bottom: calc(48px + env(safe-area-inset-bottom, 0px));
 }
 
 .home-brand {
@@ -256,7 +262,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: max(48px, calc(24px + env(safe-area-inset-top))) 20px max(32px, calc(20px + env(safe-area-inset-bottom)));
+  padding-top: calc(48px + env(safe-area-inset-top, 0px));
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
   height: 100%;
   position: relative;
   overflow: hidden;
