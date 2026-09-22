@@ -136,7 +136,13 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
   return (
     <div className="screen-container shop-screen" key={ownedVersion}>
       {/* Settings / Screen Header */}
-      <div className="settings-header">
+      <div className="settings-header" style={{
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        padding: '0 20px 20px',
+        gap: '12px'
+      }}>
         <button
           className="btn-icon"
           onClick={() => {
@@ -152,7 +158,9 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
             <path d="M19 12H5M5 12L12 19M5 12L12 5" strokeLinecap="round" strokeLinejoin="round"/>
           </svg>
         </button>
-        <h1 className="settings-title">{viewMode === 'SHOP' ? 'COSMETIC SHOP' : 'INVENTORY'}</h1>
+        <h1 className="settings-title" style={{ margin: 0, fontSize: '22px', flex: 1, textAlign: 'left', lineHeight: 1.1 }}>
+          {viewMode === 'SHOP' ? 'COSMETIC SHOP' : 'INVENTORY'}
+        </h1>
         <div className="shop-points" style={{ display: 'flex', alignItems: 'center', background: 'var(--bg-surface-elevated)', padding: '4px 12px', borderRadius: '16px', fontWeight: 'bold' }}>
           <span className="star-char" style={{marginRight: '6px'}}>💎</span>
           <span>{points}</span>
@@ -213,14 +221,18 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
         </div>
 
         <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(5, 1fr)',
-          gap: '8px'
+          display: 'flex',
+          overflowX: 'auto',
+          gap: '8px',
+          paddingBottom: '8px',
+          scrollbarWidth: 'none'
         }}>
           {/* Slot 1: Character */}
           <div
             onClick={() => setSelectedCategory('CHARACTERS')}
             style={{
+              flex: '0 0 auto',
+              width: '64px',
               background: selectedCategory === 'CHARACTERS' ? 'rgba(234, 179, 8, 0.15)' : 'var(--bg-surface-elevated)',
               border: selectedCategory === 'CHARACTERS' ? '1px solid var(--accent-gold)' : '1px solid var(--border-subtle)',
               borderRadius: '10px',
@@ -244,6 +256,8 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
           <div
             onClick={() => setSelectedCategory('GATES')}
             style={{
+              flex: '0 0 auto',
+              width: '64px',
               background: selectedCategory === 'GATES' ? 'rgba(234, 179, 8, 0.15)' : 'var(--bg-surface-elevated)',
               border: selectedCategory === 'GATES' ? '1px solid var(--accent-gold)' : '1px solid var(--border-subtle)',
               borderRadius: '10px',
@@ -267,6 +281,8 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
           <div
             onClick={() => setSelectedCategory('BACKGROUNDS')}
             style={{
+              flex: '0 0 auto',
+              width: '64px',
               background: selectedCategory === 'BACKGROUNDS' ? 'rgba(234, 179, 8, 0.15)' : 'var(--bg-surface-elevated)',
               border: selectedCategory === 'BACKGROUNDS' ? '1px solid var(--accent-gold)' : '1px solid var(--border-subtle)',
               borderRadius: '10px',
@@ -290,6 +306,8 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
           <div
             onClick={() => setSelectedCategory('THEMES')}
             style={{
+              flex: '0 0 auto',
+              width: '64px',
               background: selectedCategory === 'THEMES' ? 'rgba(234, 179, 8, 0.15)' : 'var(--bg-surface-elevated)',
               border: selectedCategory === 'THEMES' ? '1px solid var(--accent-gold)' : '1px solid var(--border-subtle)',
               borderRadius: '10px',
@@ -318,6 +336,8 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
           <div
             onClick={() => setSelectedCategory('TOUCHPADS')}
             style={{
+              flex: '0 0 auto',
+              width: '64px',
               background: selectedCategory === 'TOUCHPADS' ? 'rgba(234, 179, 8, 0.15)' : 'var(--bg-surface-elevated)',
               border: selectedCategory === 'TOUCHPADS' ? '1px solid var(--accent-gold)' : '1px solid var(--border-subtle)',
               borderRadius: '10px',
@@ -400,10 +420,11 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
       {/* Category Filter Pills */}
       <div className="shop-tabs-nav" style={{
         display: 'flex',
-        justifyContent: 'center',
         gap: '6px',
         padding: '0 16px 12px',
-        flexWrap: 'wrap'
+        overflowX: 'auto',
+        scrollbarWidth: 'none',
+        whiteSpace: 'nowrap'
       }}>
         {(['ALL', 'CHARACTERS', 'GATES', 'BACKGROUNDS', 'THEMES', 'TOUCHPADS'] as const).map(cat => (
           <button
