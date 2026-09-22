@@ -57,7 +57,7 @@ export const LEGACY_STORAGE_KEY = 'arrow_puzzle_save_v1';
 
 export const createDefaultData = (): PlayerData => ({
   schemaVersion: CURRENT_SCHEMA_VERSION,
-  colorMode: 'dark',
+  colorMode: 'light',
   unlockedLevel: 1,
   levelRecords: {},
   soundEnabled: true,
@@ -160,7 +160,7 @@ export class StorageService {
     const data = { ...parsed };
     
     // Validate and fix structure to handle missing/bad fields
-    if (data.colorMode !== 'light' && data.colorMode !== 'dark') data.colorMode = 'dark';
+    if (data.colorMode !== 'light' && data.colorMode !== 'dark') data.colorMode = 'light';
     if (typeof data.unlockedLevel !== 'number') data.unlockedLevel = 1;
     if (typeof data.levelRecords !== 'object' || data.levelRecords === null) data.levelRecords = {};
     if (typeof data.soundEnabled !== 'boolean') data.soundEnabled = true;
@@ -279,7 +279,7 @@ export class StorageService {
   }
 
   public getColorMode(): 'light' | 'dark' {
-    return this.data.colorMode || 'dark';
+    return this.data.colorMode || 'light';
   }
 
   public setColorMode(mode: 'light' | 'dark'): void {
