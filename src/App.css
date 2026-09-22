@@ -285,6 +285,7 @@
   width: 100%;
   min-height: 52px;
   padding: 4px 0;
+  flex-shrink: 0;
 }
 
 .header-left,
@@ -969,6 +970,7 @@
   width: 100%;
   gap: 16px;
   padding: 8px 0 16px;
+  flex-shrink: 0;
 }
 
 .bottom-moves-text {
