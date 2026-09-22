@@ -423,7 +423,9 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
         display: 'flex',
         flexShrink: 0,
         gap: '6px',
-        padding: '12px 16px 12px',
+        padding: '0 16px 12px',
+        marginTop: '16px',
+        alignItems: 'center',
         overflowX: 'auto',
         scrollbarWidth: 'none',
         whiteSpace: 'nowrap'
