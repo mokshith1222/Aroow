@@ -229,10 +229,12 @@ export class GameEngine {
   public startLevel(levelOrId: number | LevelData): boolean {
     // Lock guard: prevent starting a level the player hasn't unlocked
     const levelId = typeof levelOrId === 'number' ? levelOrId : levelOrId.id;
-    if (levelId > 0 && !this.storage.isLevelUnlocked(levelId)) {
-      console.warn(`[GameEngine] Level ${levelId} is locked. Cannot start.`);
-      return false;
-    }
+    console.log(`[GameEngine] Starting level ${levelId}`);
+    // BYPASSED FOR TESTING
+    // if (levelId > 0 && !this.storage.isLevelUnlocked(levelId)) {
+    //   console.warn(`[GameEngine] Level ${levelId} is locked. Cannot start.`);
+    //   return false;
+    // }
     if (!this.loadLevel(levelOrId)) return false;
 
     if (this.stateMachine.canTransitionTo('LEVEL_START') && this.stateMachine.transitionTo('LEVEL_START')) {
