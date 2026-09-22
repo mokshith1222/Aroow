@@ -49,7 +49,7 @@ export class ProgressionManager {
       let completedLevelsCount = 0;
       
       // Determine if this stage itself is unlocked
-      const isStageUnlocked = true; // WorldManager.isWorldUnlocked(world.id, levelRecords);
+      const isStageUnlocked = WorldManager.isWorldUnlocked(world.id, levelRecords);
 
       for (let i = 0; i < worldLevels.length; i++) {
         const lvl = worldLevels[i];
@@ -60,7 +60,7 @@ export class ProgressionManager {
         // A level is unlocked only if:
         // 1. Its stage is unlocked, AND
         // 2. It passes the individual sequential unlock check (Level N-1 completed)
-        const isLevelUnlocked = isStageUnlocked; // true
+        const isLevelUnlocked = isStageUnlocked && storage.isLevelUnlocked(lvl.id);
         
         levels.push({
           levelId: lvl.id,
@@ -85,7 +85,7 @@ export class ProgressionManager {
       
       // Calculate unlock requirement text
       let unlockRequirement = null;
-      const isUnlocked = true; // WorldManager.isWorldUnlocked(world.id, levelRecords);
+      const isUnlocked = WorldManager.isWorldUnlocked(world.id, levelRecords);
       if (!isUnlocked) {
         const prevWorld = WorldManager.getWorld(world.id - 1);
         if (prevWorld) {
