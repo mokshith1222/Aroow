@@ -12,6 +12,7 @@ const config: CapacitorConfig = {
     allowMixedContent: false,
     captureInput: true,
     webContentsDebuggingEnabled: false,
+    statusBarTranslucent: true,
   },
   plugins: {
     // AdMob plugin configuration
