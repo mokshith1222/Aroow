@@ -35,8 +35,8 @@
   flex: 1;
   display: flex;
   flex-direction: column;
-  padding-top: 48px; /* Fallback for old WebViews */
-  padding-top: calc(48px + env(safe-area-inset-top, 0px));
+  padding-top: 72px; /* Massive fallback for large Android punch-holes */
+  padding-top: calc(72px + env(safe-area-inset-top, 0px));
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 32px;
@@ -56,8 +56,8 @@
   justify-content: space-between;
   align-items: center;
   text-align: center;
-  padding-top: 64px;
-  padding-top: calc(64px + env(safe-area-inset-top, 0px));
+  padding-top: 72px;
+  padding-top: calc(72px + env(safe-area-inset-top, 0px));
   padding-left: 24px;
   padding-right: 24px;
   padding-bottom: 48px;
@@ -266,8 +266,8 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-top: 48px;
-  padding-top: calc(48px + env(safe-area-inset-top, 0px));
+  padding-top: 72px;
+  padding-top: calc(72px + env(safe-area-inset-top, 0px));
   padding-left: 20px;
   padding-right: 20px;
   padding-bottom: 32px;
@@ -878,6 +878,7 @@
   justify-content: center;
   gap: 12px;
   width: 100%;
+  min-height: 48px;
 }
 
 .shop-tab-btn {
