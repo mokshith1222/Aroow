@@ -199,7 +199,7 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
 
       {/* EQUIPPED LOADOUT SHOWCASE BAR */}
       <div style={{
-        margin: '0 20px 12px',
+        margin: '0 20px 0',
         background: 'var(--bg-surface)',
         borderRadius: '16px',
         padding: '12px 14px',
@@ -421,7 +421,7 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
       <div className="shop-tabs-nav" style={{
         display: 'flex',
         gap: '6px',
-        padding: '0 16px 12px',
+        padding: '12px 16px 12px',
         overflowX: 'auto',
         scrollbarWidth: 'none',
         whiteSpace: 'nowrap'
@@ -462,7 +462,7 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
       ) : (
         <div className="shop-grid" style={{
           display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', 
+          gridTemplateColumns: 'repeat(auto-fit, minmax(120px, 1fr))', 
           gap: '14px', 
           padding: '4px 20px 24px', 
           overflowY: 'auto',
