@@ -741,16 +741,28 @@ export class GameEngine {
     let totalPoints = rewardBreakdown.totalPoints;
 
     // Apply Hint Penalties
-    if (this.hintsUsedLevel === 1) {
+    // maxStarsAllowed tracks the most restrictive star cap from any hint used this level.
+    // hintsUsedLevel only ever increases (set in requestHint), so the highest used hint always wins.
+    // NEXT_STEP (-10% points, max 3 stars — intentionally no star reduction)
+    // NEXT_FEW_STEPS (-25% points, max 2 stars)
+    // FULL_PATH (-50% points, max 1 star)
+    let maxStarsAllowed = 3;
+    if (this.hintsUsedLevel >= 1) {
       totalPoints = Math.floor(totalPoints * 0.90);
-      stars = Math.min(stars, 3);
-    } else if (this.hintsUsedLevel === 2) {
-      totalPoints = Math.floor(totalPoints * 0.75);
-      stars = Math.min(stars, 2);
-    } else if (this.hintsUsedLevel === 3) {
-      totalPoints = Math.floor(totalPoints * 0.50);
-      stars = Math.min(stars, 1);
+      maxStarsAllowed = Math.min(maxStarsAllowed, 3); // intentional no-op for hint level 1
     }
+    if (this.hintsUsedLevel >= 2) {
+      // The additional penalty over level-1 (total 0.90 * (0.75/0.90) = 0.75 effective)
+      totalPoints = Math.floor(totalPoints * (0.75 / 0.90));
+      maxStarsAllowed = Math.min(maxStarsAllowed, 2);
+    }
+    if (this.hintsUsedLevel >= 3) {
+      // The additional penalty over level-2 (total 0.75 * (0.50/0.75) = 0.50 effective)
+      totalPoints = Math.floor(totalPoints * (0.50 / 0.75));
+      maxStarsAllowed = Math.min(maxStarsAllowed, 1);
+    }
+    // Apply the star cap AFTER all normal star calculations are complete
+    stars = Math.min(stars, maxStarsAllowed);
 
     if (this.isDailyMode) {
       const today = new Date().toISOString().split('T')[0];
@@ -981,7 +993,7 @@ export class GameEngine {
 
   public getSnapshot(): GameSnapshot {
     const par = this.currentLevel?.parMoves || this.optimalMoves || 0;
-    const stars = this.currentLevel
+    let stars = this.currentLevel
       ? DifficultyManager.calculateStars(
           this.moves,
           par,
@@ -990,6 +1002,10 @@ export class GameEngine {
           this.currentLevel
         )
       : 0;
+    // Apply live hint star cap to the preview so the UI shows the correct max during play
+    if (this.hintsUsedLevel >= 3) stars = Math.min(stars, 1);
+    else if (this.hintsUsedLevel >= 2) stars = Math.min(stars, 2);
+    // hintsUsedLevel >= 1 does not reduce stars (NEXT_STEP allows up to 3 stars)
 
     // Collect unique mechanic types present in this level
     const activeMechanics: TileType[] = [];

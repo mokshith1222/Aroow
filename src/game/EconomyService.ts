@@ -28,6 +28,8 @@ export class EconomyService {
     VERY_HARD: 175,
     EXPERT: 200,
     MASTER: 300,
+    EXTREME: 400,
+    BRUTAL: 500,
   };
 
   /**
