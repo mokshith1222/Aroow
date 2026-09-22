@@ -422,11 +422,13 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
       <div className="shop-tabs-nav" style={{
         display: 'flex',
         flexShrink: 0,
-        gap: '6px',
-        padding: '0 16px 12px',
+        justifyContent: 'flex-start',
+        gap: '8px',
+        padding: '0 20px 12px',
         marginTop: '16px',
         alignItems: 'center',
         overflowX: 'auto',
+        WebkitOverflowScrolling: 'touch',
         scrollbarWidth: 'none',
         whiteSpace: 'nowrap'
       }}>
@@ -434,7 +436,7 @@ export const ShopScreen: React.FC<ShopScreenProps> = ({
           <button
             key={cat}
             className={`shop-tab-btn ${selectedCategory === cat ? 'active' : ''}`}
-            style={{ padding: '6px 14px', fontSize: '11px' }}
+            style={{ padding: '8px 16px', fontSize: '11px', flexShrink: 0, minWidth: 'max-content' }}
             onClick={() => {
               audio.playButton();
               haptics.light();

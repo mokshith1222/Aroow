@@ -875,13 +875,17 @@
 /* --- GATE SHOP STYLES --- */
 .shop-tabs-nav {
   display: flex;
-  justify-content: center;
-  gap: 12px;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
   width: 100%;
   min-height: 48px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 .shop-tab-btn {
+  flex-shrink: 0;
   background: transparent;
   color: var(--text-muted);
   border: 1.5px solid var(--border-subtle);
@@ -892,6 +896,7 @@
   letter-spacing: 0.05em;
   cursor: pointer;
   transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .shop-tab-btn:hover {
@@ -1646,7 +1651,12 @@
 /* Very small mobile (< 380px, e.g. iPhone SE / older devices) */
 @media (max-width: 379px) {
   .game-screen {
-    padding: 14px 12px 16px;
+    padding-top: 72px;
+    padding-top: calc(72px + env(safe-area-inset-top, 0px));
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-bottom: 24px;
+    padding-bottom: calc(24px + env(safe-area-inset-bottom, 0px));
   }
   .level-badge {
     font-size: 14px;

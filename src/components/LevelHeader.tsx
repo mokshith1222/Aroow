@@ -45,7 +45,7 @@ export const LevelHeader: React.FC<LevelHeaderProps> = ({
   };
 
   return (
-    <header className="level-header">
+    <header className="level-header" style={{ paddingTop: '10px' }}>
       <div className="header-left">
         <button
           className="icon-btn header-nav-btn"
