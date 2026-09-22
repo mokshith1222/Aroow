@@ -7,6 +7,8 @@ export interface World {
   endLevel: number;
 }
 
+import { DEV_UNLOCK_ALL_LEVELS } from '../config';
+
 export const initialWorlds: World[] = [
   {
     id: 1,
@@ -160,6 +162,7 @@ export class WorldManager {
    * Subsequent worlds unlock only when the player has earned ALL available stars from the previous world.
    */
   public static isWorldUnlocked(worldId: number, levelRecords: Record<number, { stars: number }>): boolean {
+    if (DEV_UNLOCK_ALL_LEVELS) return true;
     if (worldId === 1) return true;
     
     // Check previous world's completion

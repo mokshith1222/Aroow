@@ -1,5 +1,6 @@
 import type { CosmeticCategory } from '../data/InventoryTypes';
 import { WorldManager } from '../data/worlds';
+import { DEV_UNLOCK_ALL_LEVELS } from '../config';
 
 export interface LevelRecord {
   completed: boolean;
@@ -304,6 +305,7 @@ export class StorageService {
    * Level N is unlocked only if its World is unlocked AND Level N-1 has been COMPLETED.
    */
   public isLevelUnlocked(levelId: number): boolean {
+    if (DEV_UNLOCK_ALL_LEVELS) return true;
     if (levelId <= 1) return true;
     const world = WorldManager.getWorldForLevel(levelId);
     if (world && !WorldManager.isWorldUnlocked(world.id, this.data.levelRecords)) {
