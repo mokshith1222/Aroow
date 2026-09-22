@@ -63,6 +63,36 @@ export class LevelSolver {
     const keys: Position[] = level.keys ?? [];
     const resolver = new MechanicResolver(tiles);
 
+    const unsafeStoppingCells = new Set<string>();
+    for (const t of tiles) {
+      if (t.type === 'SPIKE_TRAP') {
+        unsafeStoppingCells.add(`${t.pos.x},${t.pos.y}`);
+      } else if (t.type === 'MOVING_SAW') {
+        const isHorizontal = t.axis === 'HORIZONTAL';
+        let minCoord = isHorizontal ? t.pos.x : t.pos.y;
+        let maxCoord = minCoord;
+        let cur = { ...t.pos };
+        while (true) {
+          const next = isHorizontal ? { x: cur.x - 1, y: cur.y } : { x: cur.x, y: cur.y - 1 };
+          if (next.x < 0 || next.y < 0 || level.walls.some(w => w.x === next.x && w.y === next.y)) break;
+          minCoord = isHorizontal ? next.x : next.y;
+          cur = next;
+        }
+        cur = { ...t.pos };
+        while (true) {
+          const next = isHorizontal ? { x: cur.x + 1, y: cur.y } : { x: cur.x, y: cur.y + 1 };
+          if (next.x >= level.width || next.y >= level.height || level.walls.some(w => w.x === next.x && w.y === next.y)) break;
+          maxCoord = isHorizontal ? next.x : next.y;
+          cur = next;
+        }
+        for (let i = minCoord; i <= maxCoord; i++) {
+          const sx = isHorizontal ? i : t.pos.x;
+          const sy = isHorizontal ? t.pos.y : i;
+          unsafeStoppingCells.add(`${sx},${sy}`);
+        }
+      }
+    }
+
     const totalCells = level.width * level.height;
     const totalFreeCells = totalCells - level.walls.length;
 
@@ -179,6 +209,11 @@ export class LevelSolver {
 
           const effIndex = getIndex(effectivePos);
           if (node.visited.has(effIndex)) continue;
+
+          // If the resting position is a spike trap or saw track, this path is deadly if stopped on
+          if (unsafeStoppingCells.has(`${effectivePos.x},${effectivePos.y}`)) {
+             continue; 
+          }
 
           let nextKeysHeld = node.keysHeld;
           const keyIdx = keys.findIndex(k => k.x === effectivePos.x && k.y === effectivePos.y);
