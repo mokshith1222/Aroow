@@ -9,7 +9,5 @@
 // levels without needing to play through the game.
 // When false: Standard strict progression locking applies (Level N requires N-1).
 // Set this to false before production releases.
-// (Automatically disabled during tests so progression tests still pass)
-// @ts-ignore
-export const DEV_UNLOCK_ALL_LEVELS = typeof process !== 'undefined' && process.env.NODE_ENV !== 'test' && true;
+export const DEV_UNLOCK_ALL_LEVELS = true;
 // ============================================================================
