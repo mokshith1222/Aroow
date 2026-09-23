@@ -4,6 +4,8 @@ import { HapticService } from '../services/HapticService';
 import { StorageService } from '../services/StorageService';
 import { AnalyticsService } from '../services/AnalyticsService';
 import { AdService } from '../services/AdService';
+import { NotificationService } from '../services/NotificationService';
+import { DEV_NOTIFICATIONS } from '../config';
 
 interface SettingsProps {
   onClose: () => void;
@@ -16,6 +18,7 @@ export const Settings: React.FC<SettingsProps> = ({ onClose, onResetProgress }) 
   const storage = StorageService.getInstance();
   const analytics = AnalyticsService.getInstance();
   const adService = AdService.getInstance();
+  const notifService = NotificationService.getInstance();
 
   const [soundOn, setSoundOn] = useState<boolean>(!audio.isMuted());
   const [musicOn, setMusicOn] = useState<boolean>(storage.getMusicEnabled());
@@ -23,6 +26,10 @@ export const Settings: React.FC<SettingsProps> = ({ onClose, onResetProgress }) 
   const [showConfirmReset, setShowConfirmReset] = useState<boolean>(false);
   const [showMetrics, setShowMetrics] = useState<boolean>(false);
   const [colorMode, setColorMode] = useState<'light' | 'dark'>(storage.getColorMode());
+
+  // Notification preferences state
+  const [notifPrefs, setNotifPrefs] = useState(storage.getNotificationPrefs());
+  const [showNotifSection, setShowNotifSection] = useState<boolean>(false);
 
   const metrics = analytics.getMetrics();
 
@@ -69,6 +76,37 @@ export const Settings: React.FC<SettingsProps> = ({ onClose, onResetProgress }) 
     setShowConfirmReset(false);
     onResetProgress?.();
     onClose();
+  };
+
+  // Notification preference helpers
+  const updateNotifPref = <K extends keyof typeof notifPrefs>(key: K, value: typeof notifPrefs[K]) => {
+    const updated = { ...notifPrefs, [key]: value };
+    setNotifPrefs(updated);
+    storage.setNotificationPrefs({ [key]: value });
+
+    // Side effects on toggle changes
+    if (key === 'enabled' && !value) {
+      notifService.cancelAll();
+    } else if (key === 'enabled' && value) {
+      notifService.scheduleDailyPuzzleNotification();
+      notifService.scheduleComebackReminder();
+    } else if (key === 'dailyPuzzle') {
+      if (value) notifService.scheduleDailyPuzzleNotification();
+      else notifService.cancelDailyPuzzleNotification();
+    } else if (key === 'comeback') {
+      if (value) notifService.scheduleComebackReminder();
+      else notifService.cancelComebackReminder();
+    } else if (key === 'dailyPuzzleHour' || key === 'dailyPuzzleMinute') {
+      notifService.scheduleDailyPuzzleNotification();
+    }
+    audio.playButton();
+    haptics.button();
+  };
+
+  const formatHour = (h: number) => {
+    const ampm = h >= 12 ? 'PM' : 'AM';
+    const displayH = h % 12 === 0 ? 12 : h % 12;
+    return `${displayH}:${notifPrefs.dailyPuzzleMinute.toString().padStart(2, '0')} ${ampm}`;
   };
 
   return (
@@ -156,6 +194,116 @@ export const Settings: React.FC<SettingsProps> = ({ onClose, onResetProgress }) 
               </button>
             )}
           </div>
+        </div>
+
+        {/* Notifications Section */}
+        <div className="settings-analytics-section" style={{ marginTop: '0', marginBottom: '1rem' }}>
+          <button
+            className="btn-secondary metrics-toggle-btn"
+            onClick={() => {
+              setShowNotifSection(!showNotifSection);
+              audio.playButton();
+              haptics.button();
+            }}
+          >
+            {showNotifSection ? '▲ Notifications' : '▼ Notifications'}
+          </button>
+
+          {showNotifSection && (
+            <div style={{ marginTop: '0.75rem', display: 'flex', flexDirection: 'column', gap: '0.6rem' }}>
+
+              {/* Master toggle */}
+              <div className="setting-item">
+                <span className="setting-label">Notifications</span>
+                <button
+                  className={`toggle-btn ${notifPrefs.enabled ? 'active' : ''}`}
+                  onClick={() => updateNotifPref('enabled', !notifPrefs.enabled)}
+                  aria-pressed={notifPrefs.enabled}
+                >
+                  <div className="toggle-thumb" />
+                </button>
+              </div>
+
+              {notifPrefs.enabled && (
+                <>
+                  <div className="setting-item" style={{ opacity: 0.9 }}>
+                    <span className="setting-label" style={{ fontSize: '0.85rem' }}>Unfinished Levels</span>
+                    <button className={`toggle-btn ${notifPrefs.unfinishedLevels ? 'active' : ''}`}
+                      onClick={() => updateNotifPref('unfinishedLevels', !notifPrefs.unfinishedLevels)}
+                      aria-pressed={notifPrefs.unfinishedLevels}><div className="toggle-thumb" /></button>
+                  </div>
+
+                  <div className="setting-item" style={{ opacity: 0.9 }}>
+                    <span className="setting-label" style={{ fontSize: '0.85rem' }}>Daily Puzzle</span>
+                    <button className={`toggle-btn ${notifPrefs.dailyPuzzle ? 'active' : ''}`}
+                      onClick={() => updateNotifPref('dailyPuzzle', !notifPrefs.dailyPuzzle)}
+                      aria-pressed={notifPrefs.dailyPuzzle}><div className="toggle-thumb" /></button>
+                  </div>
+
+                  {notifPrefs.dailyPuzzle && (
+                    <div className="setting-item" style={{ opacity: 0.85, flexDirection: 'column', alignItems: 'flex-start', gap: '0.3rem' }}>
+                      <span className="setting-label" style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Daily Puzzle Time</span>
+                      <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+                        <select
+                          value={notifPrefs.dailyPuzzleHour}
+                          onChange={e => updateNotifPref('dailyPuzzleHour', parseInt(e.target.value))}
+                          style={{ background: 'var(--bg-secondary)', color: 'var(--text-primary)', border: '1px solid var(--border)', borderRadius: '6px', padding: '0.25rem 0.5rem', fontSize: '0.85rem' }}
+                        >
+                          {Array.from({ length: 24 }, (_, i) => (
+                            <option key={i} value={i}>{i.toString().padStart(2,'0')}:00</option>
+                          ))}
+                        </select>
+                        <span style={{ color: 'var(--text-secondary)', fontSize: '0.8rem' }}>{formatHour(notifPrefs.dailyPuzzleHour)}</span>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="setting-item" style={{ opacity: 0.9 }}>
+                    <span className="setting-label" style={{ fontSize: '0.85rem' }}>Comeback Reminders</span>
+                    <button className={`toggle-btn ${notifPrefs.comeback ? 'active' : ''}`}
+                      onClick={() => updateNotifPref('comeback', !notifPrefs.comeback)}
+                      aria-pressed={notifPrefs.comeback}><div className="toggle-thumb" /></button>
+                  </div>
+
+                  <div className="setting-item" style={{ opacity: 0.9 }}>
+                    <span className="setting-label" style={{ fontSize: '0.85rem' }}>Achievements</span>
+                    <button className={`toggle-btn ${notifPrefs.achievements ? 'active' : ''}`}
+                      onClick={() => updateNotifPref('achievements', !notifPrefs.achievements)}
+                      aria-pressed={notifPrefs.achievements}><div className="toggle-thumb" /></button>
+                  </div>
+
+                  <div className="setting-item" style={{ opacity: 0.9 }}>
+                    <span className="setting-label" style={{ fontSize: '0.85rem' }}>New Content</span>
+                    <button className={`toggle-btn ${notifPrefs.newContent ? 'active' : ''}`}
+                      onClick={() => updateNotifPref('newContent', !notifPrefs.newContent)}
+                      aria-pressed={notifPrefs.newContent}><div className="toggle-thumb" /></button>
+                  </div>
+
+                  <div className="setting-item" style={{ opacity: 0.9 }}>
+                    <span className="setting-label" style={{ fontSize: '0.85rem' }}>Shop &amp; Rewards</span>
+                    <button className={`toggle-btn ${notifPrefs.shopRewards ? 'active' : ''}`}
+                      onClick={() => updateNotifPref('shopRewards', !notifPrefs.shopRewards)}
+                      aria-pressed={notifPrefs.shopRewards}><div className="toggle-thumb" /></button>
+                  </div>
+                </>
+              )}
+
+              {/* DEV test panel — only visible when DEV_NOTIFICATIONS === true */}
+              {DEV_NOTIFICATIONS && (
+                <div style={{ marginTop: '0.5rem', padding: '0.5rem', border: '1px dashed var(--border)', borderRadius: '8px' }}>
+                  <p style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', margin: '0 0 0.5rem' }}>⚙️ DEV: Test Notifications (30s)</p>
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.3rem' }}>
+                    <button className="btn-secondary" style={{ fontSize: '0.75rem', padding: '0.3rem 0.5rem' }}
+                      onClick={() => notifService.devTestUnfinishedReminder(1)}>Test Unfinished Level</button>
+                    <button className="btn-secondary" style={{ fontSize: '0.75rem', padding: '0.3rem 0.5rem' }}
+                      onClick={() => notifService.devTestDailyPuzzle()}>Test Daily Puzzle</button>
+                    <button className="btn-secondary" style={{ fontSize: '0.75rem', padding: '0.3rem 0.5rem' }}
+                      onClick={() => notifService.devTestComeback()}>Test Comeback</button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
         </div>
 
         {/* Analytics & Commercial KPI Telemetry */}

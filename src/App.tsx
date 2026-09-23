@@ -20,6 +20,11 @@ import { AdService } from './services/AdService';
 import { AudioService } from './services/AudioService';
 import { HapticService } from './services/HapticService';
 import { AnalyticsService } from './services/AnalyticsService';
+import { NotificationService } from './services/NotificationService';
+import { AchievementService } from './services/AchievementService';
+import { WorldManager } from './data/worlds';
+import { Capacitor } from '@capacitor/core';
+import { LocalNotifications } from '@capacitor/local-notifications';
 import './App.css';
 
 function App() {
@@ -32,24 +37,84 @@ function App() {
   const [previewBackground, setPreviewBackground] = useState<string | null>(null);
   const [showHintModal, setShowHintModal] = useState<boolean>(false);
   const [pendingHintLevel, setPendingHintLevel] = useState<1 | 2 | 3 | null>(null);
+  const [showNotifExplainer, setShowNotifExplainer] = useState<boolean>(false);
 
   const activeTheme = previewTheme || snapshot.equippedTheme || 'theme_classic';
   const activeBackground = previewBackground || snapshot.equippedBackground || 'bg_clean';
   const activeTouchpad = snapshot.equippedTouchpad || 'touchpad_default';
 
+  // Initialize NotificationService on mount
+  useEffect(() => {
+    const notifService = NotificationService.getInstance();
+    notifService.initialize();
+
+    // Subscribe to achievement unlocks — fire notifications
+    const achievementService = AchievementService.getInstance();
+    const unsubAchievement = achievementService.subscribe((achievement) => {
+      notifService.notifyAchievement(achievement);
+    });
+
+    // Handle notification taps (when app is open or woken from notification)
+    let notifListener: { remove: () => void } | null = null;
+    if (Capacitor.isNativePlatform()) {
+      LocalNotifications.addListener('localNotificationActionPerformed', (action) => {
+        const extra = (action.notification.extra || {}) as Record<string, unknown>;
+        const nav = notifService.handleNotificationTap(extra);
+        switch (nav.action) {
+          case 'start_level':
+            if (nav.levelId && nav.levelId > 0) engine.startLevel(nav.levelId);
+            break;
+          case 'open_daily': {
+            const today = new Date().toISOString().split('T')[0];
+            engine.startDailyLevel(today);
+            break;
+          }
+          case 'open_achievements':
+            setShowAchievements(true);
+            break;
+          case 'open_level_select':
+            engine.goToLevelSelect();
+            break;
+          case 'open_home':
+          default:
+            engine.goToMenu();
+            break;
+        }
+      }).then(l => { notifListener = l; });
+    }
+
+    return () => {
+      unsubAchievement();
+      notifListener?.remove();
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // Initialize analytics session and lifecycle
   useEffect(() => {
     const analytics = AnalyticsService.getInstance();
     const adService = AdService.getInstance();
+    const notifService = NotificationService.getInstance();
     analytics.startSession();
 
     const handleVisibilityChange = () => {
       if (document.visibilityState === 'hidden') {
         analytics.endSession();
         adService.handleAppBackground();
+        // Schedule unfinished-level reminder if mid-level
+        const state = snapshot.state;
+        if ((state === 'PLAYING' || state === 'PAUSED' || state === 'LEVEL_START' || state === 'GAME_OVER')
+            && snapshot.level && !snapshot.isWon) {
+          notifService.scheduleUnfinishedLevelReminder(snapshot.level.id);
+        }
       } else if (document.visibilityState === 'visible') {
         analytics.startSession();
         adService.handleAppForeground();
+        // Re-evaluate pending notifications now that app is visible
+        notifService.onAppForeground(
+          snapshot.level?.id ?? null,
+          snapshot.state
+        );
       }
     };
 
@@ -66,7 +131,39 @@ function App() {
       window.removeEventListener('beforeunload', handleBeforeUnload);
       analytics.endSession();
     };
-  }, []);
+  }, [snapshot.state, snapshot.level, snapshot.isWon]);
+
+  // Handle stage unlock notifications
+  useEffect(() => {
+    if (snapshot.state === 'LEVEL_COMPLETE' && snapshot.justUnlockedStage && snapshot.level) {
+      const notifService = NotificationService.getInstance();
+      const currentWorld = WorldManager.getWorldForLevel(snapshot.level.id);
+      const nextWorld = WorldManager.getWorld(currentWorld?.id + 1);
+      if (nextWorld) {
+        notifService.notifyStageUnlocked(nextWorld.id, nextWorld.name);
+      }
+    }
+  }, [snapshot.justUnlockedStage, snapshot.state, snapshot.level]);
+
+  // Permission explainer: shown after first level completion if not yet asked
+  useEffect(() => {
+    if (snapshot.state === 'LEVEL_COMPLETE') {
+      const storage = StorageService.getInstance();
+      const prefs = storage.getNotificationPrefs();
+      if (!prefs.permissionExplainerSeen && !prefs.permissionRequested && storage.hasEverPlayed()) {
+        // Show our friendly explainer AFTER the level complete overlay renders
+        const timer = setTimeout(() => setShowNotifExplainer(true), 1800);
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [snapshot.state]);
+
+  // Cancel unfinished-level reminder on level completion
+  useEffect(() => {
+    if (snapshot.state === 'LEVEL_COMPLETE' && snapshot.level) {
+      NotificationService.getInstance().cancelUnfinishedLevelReminder(snapshot.level.id);
+    }
+  }, [snapshot.state, snapshot.level]);
 
   // Initialize storage preferences with audio/haptics services on mount
   useEffect(() => {
@@ -406,6 +503,41 @@ function App() {
         <AchievementsModal
           onClose={() => setShowAchievements(false)}
         />
+      )}
+
+      {/* Notification Permission Explainer */}
+      {showNotifExplainer && (
+        <div className="modal-overlay" role="dialog" aria-labelledby="notif-explainer-title">
+          <div className="modal-card">
+            <h2 id="notif-explainer-title" className="modal-title" style={{ fontSize: '1.1rem' }}>
+              🔔 Stay in the loop
+            </h2>
+            <p style={{ color: 'var(--text-secondary)', fontSize: '0.9rem', margin: '0.75rem 0 1.25rem' }}>
+              Want reminders when you leave a puzzle unfinished?
+            </p>
+            <div className="modal-actions">
+              <button
+                className="btn-primary"
+                onClick={async () => {
+                  setShowNotifExplainer(false);
+                  StorageService.getInstance().setNotificationPrefs({ permissionExplainerSeen: true });
+                  await NotificationService.getInstance().requestPermission();
+                }}
+              >
+                Enable Notifications
+              </button>
+              <button
+                className="btn-secondary"
+                onClick={() => {
+                  setShowNotifExplainer(false);
+                  StorageService.getInstance().setNotificationPrefs({ permissionExplainerSeen: true });
+                }}
+              >
+                Not Now
+              </button>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Subtle floating Achievement Toast */}

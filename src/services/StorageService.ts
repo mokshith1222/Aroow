@@ -26,6 +26,36 @@ export interface EndlessStats {
   totalCompleted: number;
 }
 
+export interface NotificationPrefs {
+  enabled: boolean;
+  unfinishedLevels: boolean;
+  dailyPuzzle: boolean;
+  comeback: boolean;
+  achievements: boolean;
+  newContent: boolean;
+  shopRewards: boolean;
+  dailyPuzzleHour: number;    // 0-23
+  dailyPuzzleMinute: number;  // 0-59
+  lastComebackNotifTime: number; // timestamp ms, 0 if never
+  permissionRequested: boolean;
+  permissionExplainerSeen: boolean;
+}
+
+export const createDefaultNotificationPrefs = (): NotificationPrefs => ({
+  enabled: true,
+  unfinishedLevels: true,
+  dailyPuzzle: true,
+  comeback: true,
+  achievements: true,
+  newContent: true,
+  shopRewards: false,
+  dailyPuzzleHour: 9,
+  dailyPuzzleMinute: 0,
+  lastComebackNotifTime: 0,
+  permissionRequested: false,
+  permissionExplainerSeen: false,
+});
+
 export interface PlayerData {
   schemaVersion: number;
   colorMode: 'light' | 'dark';
@@ -53,6 +83,7 @@ export interface PlayerData {
   achievementStats: AchievementStats;
   endlessStats: EndlessStats;
   endlessRecords: Record<number, LevelRecord>;
+  notificationPrefs: NotificationPrefs;
 }
 
 export const CURRENT_SCHEMA_VERSION = 2;
@@ -97,6 +128,7 @@ export const createDefaultData = (): PlayerData => ({
     totalCompleted: 0,
   },
   endlessRecords: {},
+  notificationPrefs: createDefaultNotificationPrefs(),
 });
 
 export class StorageService {
@@ -275,6 +307,19 @@ export class StorageService {
        // Upgrade to version 2
        // Give 0 points retroactively for safety, to avoid weird economy bugs. Players start fresh on points.
        data.schemaVersion = 2;
+    }
+
+    // Migrate: add notificationPrefs if missing (added in schema v3+ logic, additive-only)
+    if (!data.notificationPrefs || typeof data.notificationPrefs !== 'object') {
+      data.notificationPrefs = createDefaultNotificationPrefs();
+    } else {
+      // Patch any individual missing fields to ensure forward compatibility
+      const def = createDefaultNotificationPrefs();
+      for (const key of Object.keys(def) as Array<keyof NotificationPrefs>) {
+        if (data.notificationPrefs[key] === undefined || data.notificationPrefs[key] === null) {
+          (data.notificationPrefs as any)[key] = def[key];
+        }
+      }
     }
 
     data.schemaVersion = CURRENT_SCHEMA_VERSION;
@@ -846,5 +891,48 @@ export class StorageService {
     }
 
     this.saveData();
+  }
+
+  // ── Notification Preferences ────────────────────────────────────────────────
+
+  public getNotificationPrefs(): NotificationPrefs {
+    if (!this.data.notificationPrefs) {
+      this.data.notificationPrefs = createDefaultNotificationPrefs();
+    }
+    return { ...this.data.notificationPrefs };
+  }
+
+  public setNotificationPrefs(prefs: Partial<NotificationPrefs>): void {
+    if (!this.data.notificationPrefs) {
+      this.data.notificationPrefs = createDefaultNotificationPrefs();
+    }
+    this.data.notificationPrefs = { ...this.data.notificationPrefs, ...prefs };
+    this.saveData();
+  }
+
+  /** Records the timestamp of the last fired comeback notification */
+  public recordComebackNotifSent(): void {
+    if (!this.data.notificationPrefs) {
+      this.data.notificationPrefs = createDefaultNotificationPrefs();
+    }
+    this.data.notificationPrefs.lastComebackNotifTime = Date.now();
+    this.saveData();
+  }
+
+  /** Returns the last active session timestamp (based on existing analytics data) */
+  public getLastSessionTimestamp(): number {
+    // Use the most recent reward history timestamp as a proxy for last activity.
+    // Falls back to 0 if no history exists yet.
+    const history = this.data.rewardHistory;
+    if (history && history.length > 0) {
+      const last = history[history.length - 1];
+      return last ? new Date(last.timestamp).getTime() : 0;
+    }
+    return 0;
+  }
+
+  /** Returns true if the user has ever played (completed at least one level) */
+  public hasEverPlayed(): boolean {
+    return this.getCompletedLevelsCount() > 0;
   }
 }
