@@ -24,6 +24,7 @@ import { LocalNotifications, type PermissionStatus } from '@capacitor/local-noti
 import { StorageService, type NotificationPrefs } from './StorageService';
 import type { Achievement } from '../data/achievements';
 import { DEV_NOTIFICATIONS } from '../config';
+import { NotificationCopyService } from './NotificationCopyService';
 
 // ── Notification ID constants ─────────────────────────────────────────────────
 const NOTIF_UNFINISHED_BASE = 1000;
@@ -167,11 +168,12 @@ export class NotificationService {
 
     const notifId = NOTIF_UNFINISHED_BASE + levelId;
     const fireAt = new Date(Date.now() + UNFINISHED_DELAY_MS);
+    const copy = NotificationCopyService.getInstance().getUnfinishedMessage(levelId);
 
     await this.schedule({
       id: notifId,
-      title: this.unfinishedTitle(levelId),
-      body: 'Your puzzle is waiting for you. Can you solve it?',
+      title: copy.title,
+      body: copy.body,
       channelId: CHANNEL_PUZZLE_REMINDERS,
       at: fireAt,
       extra: { type: 'unfinished_level', levelId },
@@ -223,11 +225,12 @@ export class NotificationService {
     if (fireAt <= now || lastCompleted === today) {
       fireAt.setDate(fireAt.getDate() + 1);
     }
+    const copy = NotificationCopyService.getInstance().getDailyMessage();
 
     await this.schedule({
       id: NOTIF_DAILY_PUZZLE,
-      title: "Today's puzzle is ready 🧩",
-      body: "Can you solve today's Aroow challenge?",
+      title: copy.title,
+      body: copy.body,
       channelId: CHANNEL_DAILY_PUZZLE,
       at: fireAt,
       extra: { type: 'daily_puzzle' },
@@ -268,11 +271,12 @@ export class NotificationService {
 
     // Only schedule if the fire time is still in the future
     if (fireAt <= new Date() && !DEV_NOTIFICATIONS) return;
+    const copy = NotificationCopyService.getInstance().getComebackMessage();
 
     await this.schedule({
       id: NOTIF_COMEBACK,
-      title: 'Aroow misses you 👀',
-      body: 'More puzzles are waiting for you.',
+      title: copy.title,
+      body: copy.body,
       channelId: CHANNEL_PUZZLE_REMINDERS,
       at: fireAt,
       extra: { type: 'comeback' },
@@ -305,11 +309,12 @@ export class NotificationService {
 
     // Achievement notifications fire immediately (slight delay so UI can settle)
     const fireAt = new Date(Date.now() + 2000);
+    const copy = NotificationCopyService.getInstance().getAchievementMessage(achievement.title);
 
     await this.schedule({
       id: notifId,
-      title: 'Achievement unlocked! 🏆',
-      body: `You earned: ${achievement.title}`,
+      title: copy.title,
+      body: copy.body,
       channelId: CHANNEL_ACHIEVEMENTS,
       at: fireAt,
       extra: { type: 'achievement', achievementId: achievement.id },
@@ -328,11 +333,12 @@ export class NotificationService {
 
     const notifId = NOTIF_STAGE_BASE + stageId;
     const fireAt = new Date(Date.now() + 3000);
+    const copy = NotificationCopyService.getInstance().getStageMessage(stageName);
 
     await this.schedule({
       id: notifId,
-      title: 'New challenges unlocked! 🔓',
-      body: `${stageName} is now available.`,
+      title: copy.title,
+      body: copy.body,
       channelId: CHANNEL_UPDATES,
       at: fireAt,
       extra: { type: 'stage_unlocked', stageId },
@@ -422,10 +428,11 @@ export class NotificationService {
   /** Test: fires unfinished-level notification in 30 seconds. */
   public async devTestUnfinishedReminder(levelId: number): Promise<void> {
     if (!DEV_NOTIFICATIONS) return;
+    const copy = NotificationCopyService.getInstance().getUnfinishedMessage(levelId);
     await this.schedule({
       id: NOTIF_UNFINISHED_BASE + levelId,
-      title: this.unfinishedTitle(levelId),
-      body: 'Your puzzle is waiting for you. Can you solve it?',
+      title: copy.title,
+      body: copy.body,
       channelId: CHANNEL_PUZZLE_REMINDERS,
       at: new Date(Date.now() + 30_000),
       extra: { type: 'unfinished_level', levelId },
@@ -435,10 +442,11 @@ export class NotificationService {
   /** Test: fires daily puzzle notification in 30 seconds. */
   public async devTestDailyPuzzle(): Promise<void> {
     if (!DEV_NOTIFICATIONS) return;
+    const copy = NotificationCopyService.getInstance().getDailyMessage();
     await this.schedule({
       id: NOTIF_DAILY_PUZZLE,
-      title: "Today's puzzle is ready 🧩",
-      body: "Can you solve today's Aroow challenge?",
+      title: copy.title,
+      body: copy.body,
       channelId: CHANNEL_DAILY_PUZZLE,
       at: new Date(Date.now() + 30_000),
       extra: { type: 'daily_puzzle' },
@@ -448,10 +456,11 @@ export class NotificationService {
   /** Test: fires comeback notification in 30 seconds. */
   public async devTestComeback(): Promise<void> {
     if (!DEV_NOTIFICATIONS) return;
+    const copy = NotificationCopyService.getInstance().getComebackMessage();
     await this.schedule({
       id: NOTIF_COMEBACK,
-      title: 'Aroow misses you 👀',
-      body: 'More puzzles are waiting for you.',
+      title: copy.title,
+      body: copy.body,
       channelId: CHANNEL_PUZZLE_REMINDERS,
       at: new Date(Date.now() + 30_000),
       extra: { type: 'comeback' },
@@ -468,12 +477,6 @@ export class NotificationService {
     const prefs = this.storage.getNotificationPrefs();
     if (!prefs.enabled) return false;
     return !!prefs[category];
-  }
-
-  private unfinishedTitle(levelId: number): string {
-    return levelId > 0
-      ? `Still thinking about Level ${levelId}?`
-      : 'Your puzzle is waiting for you!';
   }
 
   private async schedule(opts: {
