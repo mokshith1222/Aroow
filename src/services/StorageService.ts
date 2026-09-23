@@ -1,6 +1,7 @@
 import type { CosmeticCategory } from '../data/InventoryTypes';
 import { WorldManager } from '../data/worlds';
 import { DEV_UNLOCK_ALL_LEVELS } from '../config';
+import { Preferences } from '@capacitor/preferences';
 
 export interface LevelRecord {
   completed: boolean;
@@ -326,10 +327,40 @@ export class StorageService {
     return data as PlayerData;
   }
 
+  public async initializeAndRestoreIfNeeded(): Promise<boolean> {
+    if (typeof window === 'undefined' || !window.localStorage) return false;
+
+    const hasLocalSave = !!window.localStorage.getItem(STORAGE_KEY) || !!window.localStorage.getItem(LEGACY_STORAGE_KEY);
+    if (hasLocalSave) return false;
+
+    try {
+      const { value } = await Preferences.get({ key: STORAGE_KEY });
+      if (value) {
+        const parsed = JSON.parse(value);
+        if (parsed && typeof parsed === 'object') {
+          window.localStorage.setItem(STORAGE_KEY, value);
+          this.data = this.loadData();
+          this.refreshUnlockedLevel();
+          return true;
+        }
+      }
+    } catch (e) {
+      console.error('Failed to restore save data from Preferences', e);
+    }
+    return false;
+  }
+
   public saveData(): void {
     if (typeof window === 'undefined' || !window.localStorage) return;
     try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(this.data));
+      const dataString = JSON.stringify(this.data);
+      window.localStorage.setItem(STORAGE_KEY, dataString);
+      
+      // Mirror to native Preferences for Android Auto Backup
+      // We do this asynchronously so it doesn't block the game loop
+      Preferences.set({ key: STORAGE_KEY, value: dataString }).catch(e => {
+        console.error('Failed to mirror save data to Preferences', e);
+      });
     } catch (e) {
       console.error('Failed to save game data', e);
     }

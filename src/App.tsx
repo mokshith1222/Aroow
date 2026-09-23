@@ -145,6 +145,25 @@ function App() {
     }
   }, [snapshot.justUnlockedStage, snapshot.state, snapshot.level]);
 
+  // Handle Cloud Restore Toast
+  useEffect(() => {
+    if ((window as any).__AROOW_RESTORED) {
+      const el = document.createElement('div');
+      el.textContent = "Welcome back! Your progress has been restored.";
+      el.className = 'restore-toast';
+      document.body.appendChild(el);
+      
+      // Trigger entrance animation
+      requestAnimationFrame(() => el.style.opacity = '1');
+
+      setTimeout(() => {
+        el.style.opacity = '0';
+        setTimeout(() => el.remove(), 500);
+      }, 4000);
+      (window as any).__AROOW_RESTORED = false;
+    }
+  }, []);
+
   // Permission explainer: shown after first level completion if not yet asked
   useEffect(() => {
     if (snapshot.state === 'LEVEL_COMPLETE') {
