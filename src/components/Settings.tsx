@@ -3,6 +3,7 @@ import { AudioService } from '../services/AudioService';
 import { HapticService } from '../services/HapticService';
 import { StorageService } from '../services/StorageService';
 import { AnalyticsService } from '../services/AnalyticsService';
+import { AdService } from '../services/AdService';
 
 interface SettingsProps {
   onClose: () => void;
@@ -14,6 +15,7 @@ export const Settings: React.FC<SettingsProps> = ({ onClose, onResetProgress }) 
   const haptics = HapticService.getInstance();
   const storage = StorageService.getInstance();
   const analytics = AnalyticsService.getInstance();
+  const adService = AdService.getInstance();
 
   const [soundOn, setSoundOn] = useState<boolean>(!audio.isMuted());
   const [musicOn, setMusicOn] = useState<boolean>(storage.getMusicEnabled());
@@ -124,6 +126,35 @@ export const Settings: React.FC<SettingsProps> = ({ onClose, onResetProgress }) 
             >
               <div className="toggle-thumb" />
             </button>
+          </div>
+        </div>
+
+        {/* Privacy Section */}
+        <div className="settings-analytics-section" style={{ marginTop: '1rem', marginBottom: '1rem' }}>
+          <h3 style={{ fontSize: '0.9rem', color: 'var(--text-secondary)', marginBottom: '0.5rem', textTransform: 'uppercase' }}>Privacy</h3>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
+            <button
+              className="btn-secondary"
+              onClick={() => {
+                audio.playButton();
+                haptics.button();
+                window.open('https://aroow.vercel.app/privacy', '_blank');
+              }}
+            >
+              Privacy Policy
+            </button>
+            {adService.isPrivacyOptionsRequired() && (
+              <button
+                className="btn-secondary"
+                onClick={() => {
+                  audio.playButton();
+                  haptics.button();
+                  adService.showPrivacyChoices();
+                }}
+              >
+                Privacy Choices
+              </button>
+            )}
           </div>
         </div>
 

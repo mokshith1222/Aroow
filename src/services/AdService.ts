@@ -14,7 +14,13 @@
  */
 
 import { Capacitor } from '@capacitor/core';
-import { AdMob, RewardAdPluginEvents } from '@capacitor-community/admob';
+import { 
+  AdMob, 
+  RewardAdPluginEvents,
+  AdmobConsentDebugGeography,
+  ConsentStatus,
+  PrivacyOptionsRequirementStatus
+} from '@capacitor-community/admob';
 import { CURRENT_AD_CONFIG, USE_TEST_ADS } from './AdConfig';
 import { AnalyticsService } from './AnalyticsService';
 
@@ -70,6 +76,11 @@ export class AdService {
   private adsEnabled: boolean = true;
   private initializedNative: boolean = false;
 
+  // ── UMP & Initialization State
+  private initializationPromise: Promise<void> | null = null;
+  private canRequestAds: boolean = false;
+  private privacyOptionsRequired: boolean = false;
+
   // ── Frequency controller state
   private lastInterstitialTime: number = 0;
   private levelsSinceLastAd: number = 0;
@@ -110,17 +121,59 @@ export class AdService {
 
   // ─── Lifecycle ─────────────────────────────────────────────────────────
 
-  private async initNativeAdMob(): Promise<void> {
-    if (!Capacitor.isNativePlatform()) return;
-    try {
-      await AdMob.initialize({
-        testingDevices: [],
-        initializeForTesting: USE_TEST_ADS,
-      });
-      this.initializedNative = true;
-      this.logEvent('ad_init', { platform: 'native', testMode: USE_TEST_ADS });
-    } catch (err) {
-      console.warn('[AdService] Native AdMob init failed, falling back to web simulation:', err);
+  private initNativeAdMob(): Promise<void> {
+    if (this.initializationPromise) return this.initializationPromise;
+
+    this.initializationPromise = (async () => {
+      if (!Capacitor.isNativePlatform()) {
+        this.canRequestAds = true; // Web simulation defaults to allowed
+        return;
+      }
+      try {
+        // 1. Initialize AdMob (required before UMP in some capacitor versions, 
+        // though conceptually UMP should gate ad loading, not SDK init itself).
+        await AdMob.initialize({
+          testingDevices: CURRENT_AD_CONFIG.testDeviceIdentifiers,
+          initializeForTesting: USE_TEST_ADS,
+        });
+
+        // 2. Request Consent Info
+        const debugGeography = USE_TEST_ADS ? AdmobConsentDebugGeography.EEA : AdmobConsentDebugGeography.DISABLED;
+        const initialConsentInfo = await AdMob.requestConsentInfo({ debugGeography });
+
+        // 3. Show consent form if required
+        if (
+          initialConsentInfo.isConsentFormAvailable &&
+          initialConsentInfo.status === ConsentStatus.REQUIRED
+        ) {
+          await AdMob.showConsentForm();
+        }
+
+        // 4. Re-request to get the final resolved status
+        const finalConsentInfo = await AdMob.requestConsentInfo({ debugGeography });
+        
+        this.canRequestAds = finalConsentInfo.canRequestAds;
+        this.privacyOptionsRequired = finalConsentInfo.privacyOptionsRequirementStatus === PrivacyOptionsRequirementStatus.REQUIRED;
+
+        this.initializedNative = true;
+        this.logEvent('ad_init', { 
+          platform: 'native', 
+          testMode: USE_TEST_ADS,
+          canRequestAds: this.canRequestAds,
+          privacyRequired: this.privacyOptionsRequired
+        });
+      } catch (err) {
+        console.warn('[AdService] Native AdMob init / UMP failed, falling back to web simulation:', err);
+        // On failure (e.g. adblocker, network issue), we degrade gracefully
+      }
+    })();
+
+    return this.initializationPromise;
+  }
+
+  private async ensureInitialized(): Promise<void> {
+    if (this.initializationPromise) {
+      await this.initializationPromise;
     }
   }
 
@@ -161,6 +214,26 @@ export class AdService {
 
   public isEnabled(): boolean {
     return this.adsEnabled;
+  }
+
+  public isPrivacyOptionsRequired(): boolean {
+    return this.privacyOptionsRequired;
+  }
+
+  /** Expose the Privacy Choices form to the user (e.g. from Settings) */
+  public async showPrivacyChoices(): Promise<void> {
+    if (!Capacitor.isNativePlatform() || !this.initializedNative) return;
+    try {
+      await AdMob.showPrivacyOptionsForm();
+      
+      // Update state after user potentially changes consent
+      const debugGeography = USE_TEST_ADS ? AdmobConsentDebugGeography.EEA : AdmobConsentDebugGeography.DISABLED;
+      const updatedConsent = await AdMob.requestConsentInfo({ debugGeography });
+      this.canRequestAds = updatedConsent.canRequestAds;
+      this.privacyOptionsRequired = updatedConsent.privacyOptionsRequirementStatus === PrivacyOptionsRequirementStatus.REQUIRED;
+    } catch (err) {
+      console.warn('[AdService] Failed to show privacy options form:', err);
+    }
   }
 
   // ─── Public API: Level tracking ────────────────────────────────────────
@@ -207,23 +280,31 @@ export class AdService {
    * Safe to call without `await`; never blocks gameplay.
    */
   public tryShowInterstitial(onComplete: () => void): void {
-    if (!this.canShowInterstitial()) {
-      onComplete();
-      return;
-    }
+    this.ensureInitialized().then(() => {
+      // Graceful fallback if consent denied
+      if (!this.canRequestAds && Capacitor.isNativePlatform() && this.initializedNative) {
+        onComplete();
+        return;
+      }
 
-    // Commit the frequency state immediately to prevent double-shows
-    this.lastInterstitialTime = Date.now();
-    this.winCounter = 0;
-    this.lossCounter = 0;
-    this.levelsSinceLastAd = 0;
-    this.acquireAdGuard('level_transition');
+      if (!this.canShowInterstitial()) {
+        onComplete();
+        return;
+      }
 
-    if (Capacitor.isNativePlatform() && this.initializedNative) {
-      this._showNativeInterstitial(onComplete);
-    } else {
-      this._showSimulatedInterstitial(onComplete);
-    }
+      // Commit the frequency state immediately to prevent double-shows
+      this.lastInterstitialTime = Date.now();
+      this.winCounter = 0;
+      this.lossCounter = 0;
+      this.levelsSinceLastAd = 0;
+      this.acquireAdGuard('level_transition');
+
+      if (Capacitor.isNativePlatform() && this.initializedNative) {
+        this._showNativeInterstitial(onComplete);
+      } else {
+        this._showSimulatedInterstitial(onComplete);
+      }
+    });
   }
 
   private async _showNativeInterstitial(onComplete: () => void): Promise<void> {
@@ -276,28 +357,36 @@ export class AdService {
   ): void {
     this.analytics.track('rewarded_ad_opportunity', { placement });
 
-    // If ads globally disabled, do NOT auto-grant — let the caller decide
-    if (!this.adsEnabled) {
-      this.logEvent('ad_failed', { type: 'rewarded', reason: 'ads_disabled', placement });
-      onFailed?.();
-      return;
-    }
+    this.ensureInitialized().then(() => {
+      // Graceful fallback if consent is denied
+      if (!this.canRequestAds && Capacitor.isNativePlatform() && this.initializedNative) {
+        this._handleRewardedFailed(onRewarded, onFailed, placement, 'consent_denied');
+        return;
+      }
 
-    // Concurrency guard
-    if (this.isAdCurrentlyShowing) {
-      this.logEvent('ad_failed', { type: 'rewarded', reason: 'already_showing', placement });
-      onFailed?.();
-      return;
-    }
+      // If ads globally disabled, do NOT auto-grant — let the caller decide
+      if (!this.adsEnabled) {
+        this.logEvent('ad_failed', { type: 'rewarded', reason: 'ads_disabled', placement });
+        onFailed?.();
+        return;
+      }
 
-    this.acquireAdGuard(placement);
-    this.pendingRewardGranted = false;
+      // Concurrency guard
+      if (this.isAdCurrentlyShowing) {
+        this.logEvent('ad_failed', { type: 'rewarded', reason: 'already_showing', placement });
+        onFailed?.();
+        return;
+      }
 
-    if (Capacitor.isNativePlatform() && this.initializedNative) {
-      this._showNativeRewardedAd(onRewarded, onFailed, placement);
-    } else {
-      this._showSimulatedRewardedAd(onRewarded, onFailed, placement);
-    }
+      this.acquireAdGuard(placement);
+      this.pendingRewardGranted = false;
+
+      if (Capacitor.isNativePlatform() && this.initializedNative) {
+        this._showNativeRewardedAd(onRewarded, onFailed, placement);
+      } else {
+        this._showSimulatedRewardedAd(onRewarded, onFailed, placement);
+      }
+    });
   }
 
   private async _showNativeRewardedAd(
@@ -432,6 +521,9 @@ export class AdService {
    * Should only be called on non-gameplay screens (HomeScreen, LevelSelect).
    */
   public async showBannerAd(): Promise<void> {
+    await this.ensureInitialized();
+    if (!this.canRequestAds && Capacitor.isNativePlatform() && this.initializedNative) return;
+    
     if (!this.adsEnabled) return;
     this.logEvent('banner_shown');
     this.analytics.track('ad_impression', { type: 'banner' });
