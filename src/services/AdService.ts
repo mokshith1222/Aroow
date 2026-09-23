@@ -18,8 +18,7 @@ import {
   AdMob, 
   RewardAdPluginEvents,
   AdmobConsentDebugGeography,
-  ConsentStatus,
-  PrivacyOptionsRequirementStatus
+  AdmobConsentStatus
 } from '@capacitor-community/admob';
 import { CURRENT_AD_CONFIG, USE_TEST_ADS } from './AdConfig';
 import { AnalyticsService } from './AnalyticsService';
@@ -144,7 +143,7 @@ export class AdService {
         // 3. Show consent form if required
         if (
           initialConsentInfo.isConsentFormAvailable &&
-          initialConsentInfo.status === ConsentStatus.REQUIRED
+          initialConsentInfo.status === AdmobConsentStatus.REQUIRED
         ) {
           await AdMob.showConsentForm();
         }
@@ -153,7 +152,7 @@ export class AdService {
         const finalConsentInfo = await AdMob.requestConsentInfo({ debugGeography });
         
         this.canRequestAds = finalConsentInfo.canRequestAds;
-        this.privacyOptionsRequired = finalConsentInfo.privacyOptionsRequirementStatus === PrivacyOptionsRequirementStatus.REQUIRED;
+        this.privacyOptionsRequired = finalConsentInfo.privacyOptionsRequirementStatus === 'REQUIRED';
 
         this.initializedNative = true;
         this.logEvent('ad_init', { 
@@ -230,7 +229,7 @@ export class AdService {
       const debugGeography = USE_TEST_ADS ? AdmobConsentDebugGeography.EEA : AdmobConsentDebugGeography.DISABLED;
       const updatedConsent = await AdMob.requestConsentInfo({ debugGeography });
       this.canRequestAds = updatedConsent.canRequestAds;
-      this.privacyOptionsRequired = updatedConsent.privacyOptionsRequirementStatus === PrivacyOptionsRequirementStatus.REQUIRED;
+      this.privacyOptionsRequired = updatedConsent.privacyOptionsRequirementStatus === 'REQUIRED';
     } catch (err) {
       console.warn('[AdService] Failed to show privacy options form:', err);
     }

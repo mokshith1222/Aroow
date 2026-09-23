@@ -24,8 +24,8 @@ export const ADMOB_TEST_CONFIG = {
   bannerId:      'ca-app-pub-3940256099942544/6300978111',
   interstitialId:'ca-app-pub-3940256099942544/1033173712',
   rewardedId:    'ca-app-pub-3940256099942544/5224354917',
-  testDeviceIdentifiers: ['EMULATOR'], // Add specific device IDs here if testing on a real device
-} as const;
+  testDeviceIdentifiers: ['EMULATOR'] as string[], // Add specific device IDs here if testing on a real device
+};
 
 // ─── Production Ad Unit IDs ────────────────────────────────────────────────
 // Replace placeholder values with real IDs from AdMob Console before release.
@@ -34,8 +34,8 @@ export const ADMOB_PROD_CONFIG = {
   bannerId:      'ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX',
   interstitialId:'ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX',
   rewardedId:    'ca-app-pub-XXXXXXXXXXXXXXXX/XXXXXXXXXX',
-  testDeviceIdentifiers: [], // Never hardcode test device IDs in production
-} as const;
+  testDeviceIdentifiers: [] as string[], // Never hardcode test device IDs in production
+};
 
 /** Active config chosen by environment flag */
 export const CURRENT_AD_CONFIG = USE_TEST_ADS ? ADMOB_TEST_CONFIG : ADMOB_PROD_CONFIG;
