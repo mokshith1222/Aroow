@@ -1516,12 +1516,40 @@
 /* ==========================================================================
    7. SETTINGS MODAL
    ========================================================================== */
+.settings-card {
+  max-height: 90vh; /* Prevent modal from exceeding viewport */
+  padding-bottom: 16px; /* Slightly reduce bottom padding to give scroll area more room */
+}
+
+.settings-scroll-area {
+  width: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+  display: flex;
+  flex-direction: column;
+  padding-right: 4px; /* Room for scrollbar */
+}
+
+/* Custom scrollbar for settings */
+.settings-scroll-area::-webkit-scrollbar {
+  width: 4px;
+}
+.settings-scroll-area::-webkit-scrollbar-track {
+  background: transparent;
+}
+.settings-scroll-area::-webkit-scrollbar-thumb {
+  background-color: var(--border-subtle);
+  border-radius: 4px;
+}
+
 .settings-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   margin-bottom: 20px;
+  flex-shrink: 0;
 }
 
 .close-btn {

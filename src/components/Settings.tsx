@@ -121,8 +121,9 @@ export const Settings: React.FC<SettingsProps> = ({ onClose, onResetProgress }) 
           </button>
         </header>
 
-        <div className="settings-list">
-          <div className="setting-item">
+        <div className="settings-scroll-area">
+          <div className="settings-list">
+            <div className="setting-item">
             <span className="setting-label">Sound Effects</span>
             <button
               className={`toggle-btn ${soundOn ? 'active' : ''}`}
@@ -363,13 +364,14 @@ export const Settings: React.FC<SettingsProps> = ({ onClose, onResetProgress }) 
               </div>
             </div>
           ) : (
-            <button
-              className="btn-text-danger"
-              onClick={() => setShowConfirmReset(true)}
-            >
-              Reset Progress
-            </button>
-          )}
+              <button
+                className="btn-text-danger"
+                onClick={() => setShowConfirmReset(true)}
+              >
+                Reset Progress
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </div>

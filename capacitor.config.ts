@@ -16,6 +16,11 @@ const config: CapacitorConfig = {
   },
   plugins: {
     // AdMob plugin configuration
+    LocalNotifications: {
+      smallIcon: "ic_stat_icon_config_sample",
+      iconColor: "#FBBF24",
+      sound: "beep.wav",
+    },
   },
 };
 
