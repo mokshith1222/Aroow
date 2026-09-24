@@ -47,6 +47,14 @@ export class GameEngine {
   private mistakes: number = 0;
   private hintsUsed: number = 0;
   private hintsUsedLevel: 0 | 1 | 2 | 3 = 0;
+  /**
+   * Number of lives lost (collisions) in the current level attempt.
+   * Incremented on every wall-hit / hazard-death that costs a life.
+   * Snapshotted in UndoState so that a successful Undo restores it,
+   * ensuring an undone collision is never counted against the player.
+   * Reset to 0 on loadLevel() and restart().
+   */
+  private livesLost: number = 0;
   private activeHintCells: Position[] = [];
   private lastMoveResult: MoveResult | null = null;
   private lastFailedTargetPos: Position | null = null;
@@ -194,6 +202,7 @@ export class GameEngine {
     this.lastPointsEarned = 0;
     this.moves = 0;
     this.lives = this.getMaxLives();
+    this.livesLost = 0;
     this.undosRemaining = 3;
     this.elapsedSeconds = 0;
     this.levelStartTime = Date.now();
@@ -311,6 +320,7 @@ export class GameEngine {
     this.player.reset(this.currentLevel.start);
     this.moves = 0;
     this.lives = this.getMaxLives();
+    this.livesLost = 0;
     this.undosRemaining = 3;
     this.elapsedSeconds = 0;
     this.levelStartTime = Date.now();
@@ -397,6 +407,7 @@ export class GameEngine {
       // Invalid movement — lose exactly one life
       this.lives = Math.max(0, this.lives - 1);
       this.mistakes += 1;
+      this.livesLost += 1;
       
       this.analytics.track('life_lost', {
         levelId: this.currentLevel.id,
@@ -439,12 +450,15 @@ export class GameEngine {
     }
 
     // Valid movement — save undo snapshot BEFORE applying state changes
+    // livesLost is captured here so that restoring this snapshot also
+    // restores the life-loss count (undone collisions don't count).
     this.undoStack.push({
       position: currentPos,
       moves: this.moves,
       elapsedSeconds: this.elapsedSeconds,
       collectedKeys: keysBefore,
-      activeGates: gatesBefore
+      activeGates: gatesBefore,
+      livesLost: this.livesLost
     });
 
     // Apply position (final pos after slide/portal)
@@ -496,6 +510,8 @@ export class GameEngine {
 
     this.player.setPosition(previous.position);
     this.moves = previous.moves;
+    // Restore the life-loss counter so undone collisions don't penalise stars
+    this.livesLost = previous.livesLost;
 
     // Remove last path entries back to the previous position
     if (this.path.length > 1) {
@@ -761,7 +777,19 @@ export class GameEngine {
       totalPoints = Math.floor(totalPoints * (0.50 / 0.75));
       maxStarsAllowed = Math.min(maxStarsAllowed, 1);
     }
-    // Apply the star cap AFTER all normal star calculations are complete
+
+    // Apply Life-Loss Star Cap
+    // Lives lost during this attempt determine the maximum stars earnable.
+    // An undone collision is NOT counted (livesLost is restored by undo()).
+    //   0 lives lost → cap 3 stars
+    //   1 life  lost → cap 2 stars
+    //   ≥2 lives lost → cap 1 star
+    const lifeLossStarCap =
+      this.livesLost === 0 ? 3 :
+      this.livesLost === 1 ? 2 : 1;
+    maxStarsAllowed = Math.min(maxStarsAllowed, lifeLossStarCap);
+
+    // Apply the combined cap (most restrictive wins)
     stars = Math.min(stars, maxStarsAllowed);
 
     if (this.isDailyMode) {
@@ -964,6 +992,7 @@ export class GameEngine {
 
     this.lives = Math.max(0, this.lives - 1);
     this.mistakes += 1;
+    this.livesLost += 1;
     
     this.analytics.track('hazard_death', {
       levelId: this.currentLevel.id,
@@ -1006,6 +1035,12 @@ export class GameEngine {
     if (this.hintsUsedLevel >= 3) stars = Math.min(stars, 1);
     else if (this.hintsUsedLevel >= 2) stars = Math.min(stars, 2);
     // hintsUsedLevel >= 1 does not reduce stars (NEXT_STEP allows up to 3 stars)
+
+    // Apply live life-loss star cap so in-game star preview updates in real time
+    const liveLifeLossStarCap =
+      this.livesLost === 0 ? 3 :
+      this.livesLost === 1 ? 2 : 1;
+    stars = Math.min(stars, liveLifeLossStarCap);
 
     // Collect unique mechanic types present in this level
     const activeMechanics: TileType[] = [];

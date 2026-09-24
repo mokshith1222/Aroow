@@ -140,6 +140,12 @@ export interface UndoState {
   collectedKeys: number[];
   /** Snapshot of gate positions still locked before this move */
   activeGates: Position[];
+  /**
+   * Lives lost up to (but not including) this move.
+   * Stored so that undoing the move restores the life-loss counter
+   * and prevents penalising a collision that was cleanly undone.
+   */
+  livesLost: number;
 }
 
 export interface GameSnapshot {
